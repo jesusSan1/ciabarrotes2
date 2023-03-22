@@ -33,6 +33,8 @@ $routes->get('/', 'Home::index');
 $routes->post('/', 'Home::index');
 $routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 $routes->get('salir', 'Dashboard::salir');
+$routes->get('recuperacion', 'Recuperacion::index');
+$routes->post('recuperacion', 'Recuperacion::index');
 
 /*
  * --------------------------------------------------------------------

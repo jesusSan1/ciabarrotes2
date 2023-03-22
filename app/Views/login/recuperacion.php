@@ -15,30 +15,17 @@
                 <?php endif;?>
                 <div class="card fat shadow">
                     <div class="card-body">
-                        <h4 class="card-title">Inicio de Sesión</h4>
+                        <h4 class="card-title">Recuperacion de contraseña olvidada</h4>
                         <form method="POST" class="my-login-validation" novalidate="" autocomplete="off">
                             <div class="form-group">
-                                <label>Usuario o correo electronico</label>
-                                <input type="text" class="form-control" name="usuario-correo" value="" required
-                                    autofocus>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input id="password" type="password" class="form-control" name="password" required
-                                    data-eye>
-
+                                <label>Correo electronico</label>
+                                <input type="email" class="form-control" name="correo" value="" required autofocus>
                             </div>
                             <br>
                             <div class="form-group m-0">
                                 <button type="submit" class="btn btn-primary btn-block">
-                                    Iniciar Sesión
+                                    Recuperar
                                 </button>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-right">
-                                    <a href="recuperacion">¿Contraseña olvidada?</a>
-                                </div>
                             </div>
                         </form>
                     </div>
