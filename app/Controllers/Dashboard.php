@@ -10,4 +10,10 @@ class Dashboard extends BaseController
     {
         return view('dashboard');
     }
+    public function salir()
+    {
+        $session = \Config\Services::session();
+        $session->destroy();
+        return redirect()->to('/');
+    }
 }

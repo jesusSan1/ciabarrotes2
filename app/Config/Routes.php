@@ -32,6 +32,7 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->post('/', 'Home::index');
 $routes->get('dashboard', 'Dashboard::index');
+$routes->get('salir', 'Dashboard::salir');
 
 /*
  * --------------------------------------------------------------------
