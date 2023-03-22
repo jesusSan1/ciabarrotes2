@@ -33,7 +33,10 @@ class Home extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/layout', ['view' => 'login/login']);
+                return view('login/layout', [
+                    'view' => 'login/login',
+                    'errors' => \Config\Services::validation()->listErrors(),
+                ]);
             }
             $usuario = $request->getPost('usuario-correo');
             $password = $request->getPost('password');
@@ -53,13 +56,22 @@ class Home extends BaseController
                         $session->set($sess_data);
                         return redirect()->to('dashboard');
                     } else {
-                        echo 'El usuario no puede entrar al sistema';
+                        return view('login/layout', [
+                            'view' => 'login/login',
+                            'errors' => 'El usuario no puede ingresar al sistema',
+                        ]);
                     }
                 } else {
-                    echo 'Usuario y/o contraseña incorrectas';
+                    return view('login/layout', [
+                        'view' => 'login/login',
+                        'errors' => 'Usuario y/o contraseña incorrectas',
+                    ]);
                 }
             } else {
-                echo 'Usuario y/o contraseña incorrectas';
+                return view('login/layout', [
+                    'view' => 'login/login',
+                    'errors' => 'Usuario y/o contraseña incorrectas',
+                ]);
             }
         }
         return view('login/layout', ['view' => 'login/login']);

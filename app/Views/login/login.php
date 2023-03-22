@@ -5,12 +5,20 @@
                 <div class="brand">
                     <img src="images/shops.png" alt="logo">
                 </div>
+                <?php if (isset($errors)): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?=$errors?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php endif;?>
                 <div class="card fat shadow">
                     <div class="card-body">
                         <h4 class="card-title">Inicio de Sesión</h4>
                         <form method="POST" class="my-login-validation" novalidate="" autocomplete="off">
                             <div class="form-group">
-                                <label>Usuario</label>
+                                <label>Usuario o correo electronico</label>
                                 <input type="text" class="form-control" name="usuario-correo" value="" required
                                     autofocus>
                             </div>
