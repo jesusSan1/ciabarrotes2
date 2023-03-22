@@ -31,7 +31,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->post('/', 'Home::index');
-$routes->get('dashboard', 'Dashboard::index');
+$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 $routes->get('salir', 'Dashboard::salir');
 
 /*
