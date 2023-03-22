@@ -11,7 +11,8 @@
                         <form method="POST" class="my-login-validation" novalidate="" autocomplete="off">
                             <div class="form-group">
                                 <label>Usuario</label>
-                                <input type="text" class="form-control" name="user" value="" required autofocus>
+                                <input type="text" class="form-control" name="usuario-correo" value="" required
+                                    autofocus>
                             </div>
 
                             <div class="form-group">

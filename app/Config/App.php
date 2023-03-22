@@ -5,8 +5,7 @@ namespace Config;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Session\Handlers\FileHandler;
 
-class App extends BaseConfig
-{
+class App extends BaseConfig {
     /**
      * --------------------------------------------------------------------------
      * Base Site URL
@@ -42,7 +41,7 @@ class App extends BaseConfig
      * something else. If you are using mod_rewrite to remove the page set this
      * variable so that it is blank.
      */
-    public string $indexPage = 'index.php';
+    public string $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------
@@ -236,7 +235,7 @@ class App extends BaseConfig
      *
      * @deprecated use Config\Session::$DBGroup instead.
      */
-    public ?string $sessionDBGroup = null;
+    public  ? string $sessionDBGroup = null;
 
     /**
      * --------------------------------------------------------------------------
@@ -315,7 +314,7 @@ class App extends BaseConfig
      *
      * @deprecated use Config\Cookie::$samesite property instead.
      */
-    public ?string $cookieSameSite = 'Lax';
+    public  ? string $cookieSameSite = 'Lax';
 
     /**
      * --------------------------------------------------------------------------
