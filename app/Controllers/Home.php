@@ -16,6 +16,25 @@ class Home extends BaseController
             return redirect()->to('dashboard');
         }
         if ($request->getMethod() === 'post') {
+            $rules = [
+                'usuario-correo' => [
+                    'label' => 'usuario o correo electronico',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'El {field} debe ser llenado',
+                    ],
+                ],
+                'password' => [
+                    'label' => 'contraseña',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'La {field} debe ser llenada',
+                    ],
+                ],
+            ];
+            if (!$this->validate($rules)) {
+                return view('login/layout', ['view' => 'login/login']);
+            }
             $usuario = $request->getPost('usuario-correo');
             $password = $request->getPost('password');
             $existeUsuario = $usuarios->where('usuario', $usuario)->orWhere('correo', $usuario)->first();
