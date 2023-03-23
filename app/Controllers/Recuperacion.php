@@ -43,7 +43,14 @@ class Recuperacion extends BaseController {
             $existeCorreo = $this->usuarios->where('correo', $correo)->first();
             if ($existeCorreo) {
                 $token = random_string('nozero', 6);
-                echo "Tu token es $token";
+                $this->usuarios->where('correo', $existeCorreo['correo'])->set(['token' => $token])->update();
+                $this->enviarEmail($existeCorreo['correo'], $token);
+                $sess_data = [
+                    'correoExistente' => true,
+                    'correo' => $existeCorreo['correo'],
+                ];
+                $this->session->set($sess_data);
+                return redirect()->to('verificar-token');
             } else {
                 return view('login/layout', [
                     'view' => 'login/recuperacion',
@@ -57,12 +64,46 @@ class Recuperacion extends BaseController {
     }
     protected function enviarEmail(string $email = 'example@example.com', string $token = '000000') {
 
-        $email->setFrom('jjsanru3@gmail.com', 'Soporte tecnico');
-        $email->setTo($email);
+        $this->email->setFrom('jjsanru3@gmail.com', 'Soporte tecnico');
+        $this->email->setTo($email);
 
-        $email->setSubject('Recuperacion de contraseña');
-        $email->setMessage("Hola $email: <br> Hemos recibido tu solicitud de recuperacion de contraseña.<br> Tu codigo de recuperacion es: $token <br> Si no solicitaste este codigo, puedes hacer caso omiso de este mensaje de correo electronico. Otra persona puede haber escrito tu direccion de correo electronico por error. <br> Gracias.");
+        $this->email->setSubject('Recuperacion de contraseña');
+        $this->email->setMessage("Hola $email: <br><br> Hemos recibido tu solicitud de recuperacion de contraseña.<br><br> Tu codigo de recuperacion es: $token <br><br> Si no solicitaste este codigo, puedes hacer caso omiso de este mensaje de correo electronico. Otra persona puede haber escrito tu direccion de correo electronico por error. <br><br> Gracias.");
 
-        $email->send();
+        $this->email->send();
+    }
+
+    public function verificarToken() {
+        if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'token' => [
+                    'label' => 'token',
+                    'rules' => 'required|exact_length[6]',
+                    'errors' => [
+                        'required' => 'El {field} debe ser llenado',
+                        'exact_length' => 'El {field} debe tener 6 caracteres',
+                    ],
+                ],
+            ];
+            if (!$this->validate($rules)) {
+                return view('login/layout', [
+                    'view' => 'login/verificarToken',
+                    'errors' => \Config\Services::validation()->listErrors(),
+                ]);
+            }
+            $token = $this->request->getMethod('token');
+            $tokenGuardado = $this->usuarios->where('correo', $this->session->get('correo'))->first();
+            if ($token == $tokenGuardado['token']) {
+                echo 'Los token son iguales';
+            } else {
+                return view('login/layout', [
+                    'view' => 'login/verificarToken',
+                    'errors' => 'El token no coincide',
+                ]);
+            }
+        }
+        return view('login/layout', [
+            'view' => 'login/verificarToken',
+        ]);
     }
 }

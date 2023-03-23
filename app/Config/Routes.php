@@ -36,6 +36,11 @@ $routes->get('salir', 'Dashboard::salir');
 $routes->get('recuperacion', 'Recuperacion::index');
 $routes->post('recuperacion', 'Recuperacion::index');
 
+$routes->group('', ['filter' => 'token'], static function ($routes) {
+    $routes->get('verificar-token', 'Recuperacion::verificarToken');
+    $routes->post('verificar-token', 'Recuperacion::verificarToken');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
