@@ -107,6 +107,28 @@ class Recuperacion extends BaseController {
         ]);
     }
     public function crearPassword() {
+        if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'password' => [
+                    'label' => 'contraseña',
+                    'rules' => 'required|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/]',
+                    'errors' => [
+                        'required' => 'La {field} debe ser llenada',
+                        'regex_match' => 'La {field} debe tener 8 caracteres minimos, una letra mayuscula, una letra minuscula, un numero y un caracter especial',
+                    ],
+                ],
+            ];
+            if (!$this->validate($rules)) {
+                return view('login/layout', [
+                    'view' => 'login/crearPassword',
+                    'errors' => \Config\Services::validation()->listErrors(),
+                ]);
+            }
+            $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+            $this->usuarios->where('correo', $this->session->get('correo'))->set(['password' => $password])->update();
+            $this->session->destroy();
+            return redirect()->to('/');
+        }
         return view('login/layout', [
             'view' => 'login/crearPassword',
         ]);
