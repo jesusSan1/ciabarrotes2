@@ -91,10 +91,10 @@ class Recuperacion extends BaseController {
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
-            $token = $this->request->getMethod('token');
+            $token = $this->request->getPost('token');
             $tokenGuardado = $this->usuarios->where('correo', $this->session->get('correo'))->first();
-            if ($token == $tokenGuardado['token']) {
-                echo 'Los token son iguales';
+            if ($token === $tokenGuardado['token']) {
+                return redirect()->to('crear-password');
             } else {
                 return view('login/layout', [
                     'view' => 'login/verificarToken',
@@ -104,6 +104,11 @@ class Recuperacion extends BaseController {
         }
         return view('login/layout', [
             'view' => 'login/verificarToken',
+        ]);
+    }
+    public function crearPassword() {
+        return view('login/layout', [
+            'view' => 'login/crearPassword',
         ]);
     }
 }

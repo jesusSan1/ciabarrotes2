@@ -39,6 +39,8 @@ $routes->post('recuperacion', 'Recuperacion::index');
 $routes->group('', ['filter' => 'token'], static function ($routes) {
     $routes->get('verificar-token', 'Recuperacion::verificarToken');
     $routes->post('verificar-token', 'Recuperacion::verificarToken');
+    $routes->get('crear-password', 'Recuperacion::crearPassword');
+    $routes->post('crear-password', 'Recuperacion::crearPassword');
 });
 
 /*
