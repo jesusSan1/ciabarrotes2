@@ -21,12 +21,10 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="sweetalert/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="dataTable/css/datatables.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript-->
     <script src="popper/popper.min.js"></script>
     <script src="jquery/jquery-3.6.0.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
-    <script src="dataTable/js/datatables.min.js"></script>
     <script src="sweetalert/dist/sweetalert2.min.js"></script>
     <script src="fontawesome/js/all.js"></script>
     <script src="chartjs/chart.min.js"></script>
@@ -263,7 +261,6 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <h2><b id="titulo">
                             <!--Aqui poner un titulo-->
-                            Inicio
                         </b></h2>
 
                     <!-- Topbar Navbar -->
