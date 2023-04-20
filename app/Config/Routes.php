@@ -35,6 +35,8 @@ $routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 $routes->get('salir', 'Dashboard::salir');
 $routes->get('recuperacion', 'Recuperacion::index');
 $routes->post('recuperacion', 'Recuperacion::index');
+$routes->get('configuracion', 'Configuracion::index', ['filter' => 'auth']);
+$routes->post('configuracion', 'Configuracion::index', ['filter' => 'auth']);
 
 $routes->group('', ['filter' => 'token'], static function ($routes) {
     $routes->get('verificar-token', 'Recuperacion::verificarToken');
