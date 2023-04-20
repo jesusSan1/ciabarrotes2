@@ -38,7 +38,9 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             <a href="empleados">
                                 <a href="empleados">
-                                    <p class="text-warning">1 vendedores agregados</p>
+                                    <?php foreach($usuarios as $usuario): ?>
+                                    <p class="text-warning"><?= $usuario ?> vendedores agregados</p>
+                                    <?php endforeach; ?>
                                 </a>
                             </a>
                         </div>
