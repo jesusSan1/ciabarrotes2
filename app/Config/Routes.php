@@ -31,12 +31,16 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->post('/', 'Home::index');
-$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 $routes->get('salir', 'Dashboard::salir');
 $routes->get('recuperacion', 'Recuperacion::index');
 $routes->post('recuperacion', 'Recuperacion::index');
-$routes->get('configuracion', 'Configuracion::index', ['filter' => 'auth']);
-$routes->post('configuracion', 'Configuracion::index', ['filter' => 'auth']);
+$routes->group('', ['filter' => 'auth'], static function($routes){
+    $routes->get('dashboard', 'Dashboard::index');
+    $routes->group('', ['filter' => 'admin'], static function($routes){
+        $routes->get('configuracion', 'Configuracion::index');
+        $routes->post('configuracion', 'Configuracion::index');
+    });
+});
 
 $routes->group('', ['filter' => 'token'], static function ($routes) {
     $routes->get('verificar-token', 'Recuperacion::verificarToken');
