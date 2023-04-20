@@ -128,17 +128,39 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Abarrotes
+                Perfil de usuario
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThre"
                     aria-expanded="true" aria-controls="collapseThre">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil de usuario</span>
+                </a>
+                <div id="collapseThre" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="producto">Cambiar mi usuario</a>
+
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Abarrotes
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="true" aria-controls="collapseFour">
                     <i class="fas fa-boxes"></i>
                     <span>Productos</span>
                 </a>
-                <div id="collapseThre" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
+                <div id="collapseFour" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="producto">Agregar productos</a>
