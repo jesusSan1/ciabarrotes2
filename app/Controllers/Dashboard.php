@@ -8,7 +8,9 @@ class Dashboard extends BaseController
 {
     public function index()
     {
-        return view('dashboard');
+        return view('dashboard', [
+            'view' => 'modulos',
+        ]);
     }
     public function salir()
     {

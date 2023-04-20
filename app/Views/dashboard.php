@@ -311,7 +311,7 @@
 
 
                     <!-- Contenido -->
-
+                    <?=view($view)?>
 
                 </div>
                 <!-- /.container-fluid -->
