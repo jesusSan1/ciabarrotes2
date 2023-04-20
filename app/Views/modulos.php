@@ -66,7 +66,9 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             <a href="proveedores">
                                 <a href="proveedores">
-                                    <p class="text-danger">1 proveedores agregados</p>
+                                    <?php foreach($proveedores as $proveedor): ?>
+                                    <p class="text-danger"><?= $proveedor ?> proveedores agregados</p>
+                                    <?php endforeach; ?>
                                 </a>
                             </a>
                         </div>
