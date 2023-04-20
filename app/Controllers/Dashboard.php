@@ -3,14 +3,16 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CategoriaModel;
 
 class Dashboard extends BaseController
 {
     public function index()
     {
-        return view('dashboard', [
-            'view' => 'modulos',
-        ]);
+        $categoria = new CategoriaModel;
+        $data['view'] = 'modulos';
+        $data['categorias'] = $categoria->where('id !=', 1)->selectCount('nombre')->first();
+        return view('dashboard', $data);
     }
     public function salir()
     {

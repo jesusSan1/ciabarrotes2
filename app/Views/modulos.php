@@ -11,7 +11,9 @@
                         </a>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             <a href="categorias">
-                                <p class="text-primary">1 categorias agregadas</p>
+                                <?php foreach ($categorias as $categoria): ?>
+                                <p class="text-primary"><?=$categoria?> categorias agregadas</p>
+                                <?php endforeach;?>
                             </a>
                         </div>
                     </div>
