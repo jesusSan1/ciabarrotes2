@@ -22,14 +22,12 @@
                                 <input type="text" class="form-control" name="usuario-correo" value="" required
                                     autofocus>
                             </div>
-
                             <div class="form-group">
                                 <label for="password">Contraseña</label>
                                 <input id="password" type="password" class="form-control" name="password" required
                                     data-eye>
 
                             </div>
-                            <br>
                             <div class="form-group m-0">
                                 <button type="submit" class="btn btn-primary btn-block">
                                     Iniciar Sesión
