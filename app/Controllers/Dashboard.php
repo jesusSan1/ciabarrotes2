@@ -24,7 +24,6 @@ class Dashboard extends BaseController
             'usuarios' => $usuarios->where('rol_id !=', 1)->selectCount('id')->first(),
             'proveedores' => $proveedores->where('id !=', 1)->selectCount('id')->first(),
             'productos' => $productos->selectCount('id')->first(),
-            'datos' => $configuracion->findAll(),
         ]);
     }
     public function salir()

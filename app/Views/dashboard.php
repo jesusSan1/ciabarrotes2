@@ -1,3 +1,8 @@
+<?php
+use App\Models\ConfiguracionModel;
+$conf = new ConfiguracionModel;
+$name = $conf->findAll();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,7 +50,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-store"></i> <!-- Poner aqui el logo u otra cosa -->
                 </div>
-                <?php foreach ($datos as $empresa): ?>
+                <?php foreach ($name as $empresa): ?>
                 <div class="sidebar-brand-text mx-3">
                     <?=$empresa['nombre_empresa'] ? $empresa['nombre_empresa'] : 'Empresa sin nombre'?></div>
                 <?php endforeach;?>
@@ -345,7 +350,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <?php foreach ($datos as $empresa): ?>
+                        <?php foreach ($name as $empresa): ?>
                         <span>Copyright &copy;
                             <?=$empresa['nombre_empresa'] ? $empresa['nombre_empresa'] : 'Empresa sin nombre'?>
                             2023</span>

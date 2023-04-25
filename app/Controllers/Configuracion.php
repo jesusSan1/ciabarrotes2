@@ -18,7 +18,6 @@ class Configuracion extends BaseController
     {
         return view('dashboard', [
             'view' => 'configuracion/configuracion',
-            'datos' => $this->configuracion->findAll(),
             'configuraciones' => $this->configuracion->findAll(),
         ]);
     }
