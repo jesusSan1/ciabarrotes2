@@ -14,7 +14,7 @@ $name = $conf->findAll();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Abarrotes</title>
+    <title>CI Abarrotes 2</title>
 
     <!-- Custom fonts for this template-->
     <link rel="Shortcut Icon" type="image/x-icon" href="images/shops.png" /> <!-- Cambiar favicon -->
