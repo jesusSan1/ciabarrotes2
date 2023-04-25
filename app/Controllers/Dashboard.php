@@ -18,13 +18,14 @@ class Dashboard extends BaseController
         $proveedores = new ProveedorModel;
         $productos = new ProductosModel;
         $configuracion = new ConfiguracionModel;
-        $data['view'] = 'modulos';
-        $data['categorias'] = $categoria->where('id !=', 1)->selectCount('id')->first();
-        $data['usuarios'] = $usuarios->where('rol_id !=', 1)->selectCount('id')->first();
-        $data['proveedores'] = $proveedores->selectCount('id')->first();
-        $data['productos'] = $productos->selectCount('id')->first();
-        $data['datos'] = $configuracion->findAll();
-        return view('dashboard', $data);
+        return view('dashboard', [
+            'view' => 'modulos',
+            'categorias' => $categoria->where('id !=', 1)->selectCount('id')->first(),
+            'usuarios' => $usuarios->where('rol_id !=', 1)->selectCount('id')->first(),
+            'proveedores' => $proveedores->where('id !=', 1)->selectCount('id')->first(),
+            'productos' => $productos->selectCount('id')->first(),
+            'datos' => $configuracion->findAll(),
+        ]);
     }
     public function salir()
     {

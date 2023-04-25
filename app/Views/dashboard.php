@@ -345,7 +345,11 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Empresa sin nombre 2023</span>
+                        <?php foreach ($datos as $empresa): ?>
+                        <span>Copyright &copy;
+                            <?=$empresa['nombre_empresa'] ? $empresa['nombre_empresa'] : 'Empresa sin nombre'?>
+                            2023</span>
+                        <?php endforeach;?>
                     </div>
                 </div>
             </footer>

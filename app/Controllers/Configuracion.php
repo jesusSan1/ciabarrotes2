@@ -16,10 +16,11 @@ class Configuracion extends BaseController
 
     public function index()
     {
-        $data['view'] = 'configuracion/configuracion';
-        $data['datos'] = $this->configuracion->findAll();
-        $data['configuraciones'] = $this->configuracion->findAll();
-        return view('dashboard', $data);
+        return view('dashboard', [
+            'view' => 'configuracion/configuracion',
+            'datos' => $this->configuracion->findAll(),
+            'configuraciones' => $this->configuracion->findAll(),
+        ]);
     }
     public function configurar()
     {
