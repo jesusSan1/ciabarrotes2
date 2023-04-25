@@ -23,7 +23,7 @@ class Dashboard extends BaseController
         $data['usuarios'] = $usuarios->where('rol_id !=', 1)->selectCount('id')->first();
         $data['proveedores'] = $proveedores->selectCount('id')->first();
         $data['productos'] = $productos->selectCount('id')->first();
-        $dat['datos'] = $configuracion->findAll();
+        $data['datos'] = $configuracion->findAll();
         return view('dashboard', $data);
     }
     public function salir()
