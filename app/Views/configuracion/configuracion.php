@@ -13,33 +13,36 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form action="Configuracion/configurar" method="post" novalidate="" autocomplete="off">
+                <form action="configurar" method="post" novalidate="" autocomplete="off">
                     <div class="row">
                         <div class="col-md-12">
                             <h4><i class="fas fa-building"></i> Datos de la empresa</h4>
                         </div>
                     </div>
                     <br>
+                    <?php foreach ($configuraciones as $configuracion): ?>
                     <div class="row">
                         <div class="col-md-6">
                             <input type="text" name="nombre" class="form-control" placeholder="Nombre de la empresa"
-                                value="">
+                                value="<?=$configuracion['nombre_empresa']?>">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="direccion" class="form-control" placeholder="Dirección" value="">
+                            <input type="text" name="direccion" class="form-control" placeholder="Dirección"
+                                value="<?=$configuracion['direccion']?>">
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-6">
                             <input type="phone" name="telefono" class="form-control" placeholder="Numero de contacto"
-                                value="">
+                                value="<?=$configuracion['telefono']?>">
                         </div>
                         <div class="col-md-6">
                             <input type="email" name="correo" class="form-control" placeholder="Correo electronico"
-                                value="">
+                                value="<?=$configuracion['correo_electronico']?>">
                         </div>
                     </div>
+                    <?php endforeach;?>
                     <br>
                     <div class="row">
                         <div class="col-md-4"></div>
