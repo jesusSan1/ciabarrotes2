@@ -47,7 +47,10 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-store"></i> <!-- Poner aqui el logo u otra cosa -->
                 </div>
-                <div class="sidebar-brand-text mx-3">Empresa sin nombre</div>
+                <?php foreach ($datos as $empresa): ?>
+                <div class="sidebar-brand-text mx-3">
+                    <?=$empresa['nombre_empresa'] ? $empresa['nombre_empresa'] : 'Empresa sin nombre'?></div>
+                <?php endforeach;?>
             </a>
 
             <!-- Divider -->
