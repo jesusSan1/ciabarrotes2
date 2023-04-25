@@ -350,11 +350,7 @@ $name = $conf->findAll();
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <?php foreach ($name as $empresa): ?>
-                        <span>Copyright &copy;
-                            <?=$empresa['nombre_empresa'] ? $empresa['nombre_empresa'] : 'Empresa sin nombre'?>
-                            2023</span>
-                        <?php endforeach;?>
+                        <span>Copyright &copy;Novaritek <?=date('Y')?></span>
                     </div>
                 </div>
             </footer>
