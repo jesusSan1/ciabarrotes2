@@ -28,7 +28,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div id="home" class="tab-pane active"><br>
-                        Agregar empleados
+                        <?=view('empleados/agregarEmpleado')?>
                     </div>
                     <div id="menu1" class="tab-pane fade"><br>
                         Lista de empleados
