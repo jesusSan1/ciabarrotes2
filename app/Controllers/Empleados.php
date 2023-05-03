@@ -75,7 +75,12 @@ class Empleados extends BaseController
                 'foto_perfil' => $request->getPost('img'),
                 'fecha_creacion' => date('Y-m-d'),
             ];
-            $usuarios->insert($data);
+            if ($usuarios->insert($data)) {
+                return view('dashboard', [
+                    'view' => 'empleados/empleados',
+                    'exito' => 'Se ha guardado el empleado con exito',
+                ]);
+            }
         }
         return view('dashboard', [
             'view' => 'empleados/empleados',
