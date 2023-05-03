@@ -1,5 +1,5 @@
 <div class="card-body">
-    <form action="" method="post" autocomplete="off" id="form">
+    <form action="crearEmpleado" method="post" autocomplete="off" id="form">
         <div class="row">
             <div class="col-md-12">
                 <h4><i class="fa fa-user" aria-hidden="true"></i> Información Personal</h4>
@@ -14,10 +14,10 @@
                 <input type="text" name="apellido" class="form-control apellido" placeholder="Apellido Paterno">
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control telefono" placeholder="Telefono">
+                <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono">
             </div>
             <div class="col-md-3">
-                <select name="" class="form-control puesto">
+                <select name="puesto" class="form-control puesto">
                     <option value="puesto">Puesto</option>
                     <option value="1">Administrador</option>
                     <option value="2">Empleado</option>
@@ -56,19 +56,19 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="text" class="form-control usuario" placeholder="Nombre de usuario">
+                    <input type="text" name="usuario" class="form-control usuario" placeholder="Nombre de usuario">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control password" placeholder="Contraseña">
+                    <input type="password" name="password" class="form-control password" placeholder="Contraseña">
 
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="email" name="" class="form-control email" placeholder="Correo electronico">
+                    <input type="email" name="email" class="form-control email" placeholder="Correo electronico">
                 </div>
                 <div class="form-group">
-                    <select class="form-control estatus" name="" id="">
+                    <select class="form-control estatus" name="estatus" id="">
                         <option value="seleccionar">Estatus del usuario</option>
                         <option value="1">Activo</option>
                         <option value="0">Inactivo</option>
@@ -143,7 +143,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 text-center">
-                <button type="button" class="btn btn-primary guardar">Guardar</button>
+                <button type="submit" class="btn btn-primary guardar">Guardar</button>
             </div>
             <div class="col-md-4"></div>
         </div>
