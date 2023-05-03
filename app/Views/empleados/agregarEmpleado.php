@@ -1,5 +1,5 @@
 <div class="card-body">
-    <form action="crearEmpleado" method="post" autocomplete="off" id="form">
+    <form action="" method="post" autocomplete="off" id="form">
         <div class="row">
             <div class="col-md-12">
                 <h4><i class="fa fa-user" aria-hidden="true"></i> Información Personal</h4>
@@ -8,17 +8,18 @@
         <br>
         <div class="row">
             <div class="col-md-3">
-                <input type="text" name="nombre" class="form-control nombre" placeholder="Nombre">
+                <input type="text" name="nombre" class="form-control nombre" placeholder="Nombre" required>
             </div>
             <div class="col-md-3">
-                <input type="text" name="apellido" class="form-control apellido" placeholder="Apellido Paterno">
+                <input type="text" name="apellido" class="form-control apellido" placeholder="Apellido Paterno"
+                    required>
             </div>
             <div class="col-md-3">
                 <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono">
             </div>
             <div class="col-md-3">
-                <select name="puesto" class="form-control puesto">
-                    <option value="puesto">Puesto</option>
+                <select name="puesto" class="form-control puesto" required>
+                    <option value="">Puesto</option>
                     <option value="1">Administrador</option>
                     <option value="2">Empleado</option>
                 </select>
@@ -35,10 +36,12 @@
             <div class="col-md-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="sexo" id="" value="hombre"> Hombre
+                        <input class="form-check-input" type="radio" name="sexo" id="" value="hombre">
+                        Hombre
                     </label>
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="sexo" id="" value="Mujer"> Mujer
+                        <input class="form-check-input" type="radio" name="sexo" id="" value="Mujer">
+                        Mujer
                     </label>
                 </div>
             </div>
@@ -56,10 +59,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="text" name="usuario" class="form-control usuario" placeholder="Nombre de usuario">
+                    <input type="text" name="usuario" class="form-control usuario" placeholder="Nombre de usuario"
+                        required>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control password" placeholder="Contraseña">
+                    <input type="password" name="password" class="form-control password" placeholder="Contraseña"
+                        required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        title="La contraseña debe tener 8 caracteres minimos, una letra mayuscula, una letra minuscula, un numero y un caracter especial">
 
                 </div>
             </div>
@@ -68,8 +74,8 @@
                     <input type="email" name="email" class="form-control email" placeholder="Correo electronico">
                 </div>
                 <div class="form-group">
-                    <select class="form-control estatus" name="estatus" id="">
-                        <option value="seleccionar">Estatus del usuario</option>
+                    <select class="form-control estatus" name="estatus" id="" required>
+                        <option value="">Estatus del usuario</option>
                         <option value="1">Activo</option>
                         <option value="0">Inactivo</option>
                     </select>
