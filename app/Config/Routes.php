@@ -41,6 +41,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
     $routes->group('', ['filter' => 'admin'], static function ($routes) { //!autenticacion y admin
         $routes->get('configuracion', 'Configuracion::index');
         $routes->post('configurar', 'Configuracion::configurar');
+        $routes->get('empleados', 'Empleados::index');
     });
 });
 
