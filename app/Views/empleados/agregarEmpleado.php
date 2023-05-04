@@ -36,11 +36,11 @@
             <div class="col-md-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="sexo" id="" value="hombre">
+                        <input class="form-check-input" type="radio" name="sexo" value="hombre">
                         Hombre
                     </label>
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="sexo" id="" value="Mujer">
+                        <input class="form-check-input" type="radio" name="sexo" value="Mujer">
                         Mujer
                     </label>
                 </div>
@@ -74,7 +74,7 @@
                     <input type="email" name="email" class="form-control email" placeholder="Correo electronico">
                 </div>
                 <div class="form-group">
-                    <select class="form-control estatus" name="estatus" id="" required>
+                    <select class="form-control estatus" name="estatus" required>
                         <option value="">Estatus del usuario</option>
                         <option value="1">Activo</option>
                         <option value="0">Inactivo</option>
@@ -103,7 +103,7 @@
                 <div class="col-md-4">
                     <input type="radio" name="img" class="image" value="images/nina.png">
                     <label class="custom-control custom-radio">
-                        <input type="radio" name="img" id="img" value="checkedValue" class="custom-control-input">
+                        <input type="radio" name="img" value="checkedValue" class="custom-control-input">
                         <span class="custom-control-indicator"></span>
                         <img src="images/nina.png" alt="" class="img-fluid" width="150" height="150">
                     </label>
@@ -111,7 +111,7 @@
                 <div class="col-md-4">
                     <input type="radio" name="img" class="image" value="images/profile.png">
                     <label class="custom-control custom-radio">
-                        <input type="radio" name="img" id="img" value="checkedValue" class="custom-control-input">
+                        <input type="radio" name="img" value="checkedValue" class="custom-control-input">
                         <span class="custom-control-indicator"></span>
                         <img src="images/profile.png" alt="" class="img-fluid" width="150" height="150">
                     </label>
@@ -122,7 +122,7 @@
                 <div class="col-md-4">
                     <input type="radio" name="img" class="image" value="images/profile(1).png">
                     <label class="custom-control custom-radio">
-                        <input type="radio" name="img" id="img" value="checkedValue" class="custom-control-input">
+                        <input type="radio" name="img" value="checkedValue" class="custom-control-input">
                         <span class="custom-control-indicator"></span>
                         <img src="images/profile(1).png" alt="" class="img-fluid" width="150" height="150">
                     </label>
@@ -130,7 +130,7 @@
                 <div class="col-md-4">
                     <input type="radio" name="img" class="image" value="images/usuario.png">
                     <label class="custom-control custom-radio">
-                        <input type="radio" name="img" id="img" value="checkedValue" class="custom-control-input">
+                        <input type="radio" name="img" value="checkedValue" class="custom-control-input">
                         <span class="custom-control-indicator"></span>
                         <img src="images/usuario.png" alt="" class="img-fluid" width="150" height="150">
                     </label>

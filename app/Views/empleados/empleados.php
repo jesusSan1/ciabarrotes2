@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="resources/css/check.css">
-<link rel="stylesheet" href="resources/css/perfil.css">
 <div class="row">
 
     <!-- Area Chart -->
@@ -49,7 +47,7 @@
                         <?=view('empleados/agregarEmpleado')?>
                     </div>
                     <div id="menu1" class="tab-pane fade"><br>
-                            <?= view("empleados/listaEmpleados") ?>
+                        <?=view("empleados/listaEmpleados")?>
                     </div>
                 </div>
                 <br>
