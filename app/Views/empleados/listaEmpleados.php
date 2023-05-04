@@ -8,25 +8,52 @@
                 <th>Correo electronico</th>
                 <th>Telefono</th>
                 <th>Acceso al sistema</th>
+                <th>Habilitar / deshabilitar acceso</th>
                 <th>Fecha de creación</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach($empleados as $empleado): ?>
+            <?php foreach ($empleados as $empleado): ?>
             <tr>
-                <td scope="row"><?= $empleado['foto_perfil'] ?></td>
-                <td><?= $empleado['nombre'] ?></td>
-                <td><?= $empleado['usuario'] ?></td>
-                <td><?= $empleado['correo'] ?></td>
-                <td><?= $empleado['telefono'] ?></td>
-                <td><?= $empleado['habilitado'] ?></td>
-                <td><?= $empleado['fecha_creacion'] ?></td>
+                <td>
+                    <?php $img = $empleado['foto_perfil'] ? $empleado['foto_perfil'] : 'No tiene foto'?>
+                    <img src="<?=$img?>" height="50" alt="">
+                </td>
+                <td><?=$empleado['nombre']?></td>
+                <td><?=$empleado['usuario']?></td>
+                <td><?=$empleado['correo'] ? $empleado['correo'] : 'No tiene correo'?></td>
+                <td><?=$empleado['telefono'] ? $empleado['telefono'] : 'No tiene telefono'?></td>
+                <td>
+                    <?php if ($empleado['habilitado'] == 1): ?>
+                    <label class="text-success habilitar"><i class="fa fa-check-circle" aria-hidden="true"></i>
+                        Habilitado</label>
+
+                    <label class="text-danger deshabilitar" style="display:none"><i class="fas fa-user-lock"></i>
+                        Deshabilitado</label>
+                    <?php endif;?>
+                    <?php if ($empleado['habilitado'] != 1): ?>
+                    <label class="text-danger deshabilitar"><i class="fas fa-user-lock"></i>
+                        Deshabilitado</label>
+                    <label class="text-success habilitar" style="display:none"><i class="fa fa-check-circle"
+                            aria-hidden="true"></i>
+                        Habilitado</label>
+                    <?php endif;?>
+                </td>
+                <td>
+                    <?php if ($empleado['habilitado'] == 1): ?>
+                    <input type="checkbox" name="" id="" checked class="habilitar">
+                    <?php endif;?>
+                    <?php if ($empleado['habilitado'] != 1): ?>
+                    <input type="checkbox" name="" id="" class="habilitar">
+                    <?php endif;?>
+                </td>
+                <td><?=$empleado['fecha_creacion']?></td>
                 <td></td>
                 <td></td>
             </tr>
-            <?php endforeach; ?>
+            <?php endforeach;?>
         </tbody>
     </table>
 </div>
