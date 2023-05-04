@@ -49,7 +49,7 @@
                         <?=view('empleados/agregarEmpleado')?>
                     </div>
                     <div id="menu1" class="tab-pane fade"><br>
-                        Lista de empleados
+                            <?= view("empleados/listaEmpleados") ?>
                     </div>
                 </div>
                 <br>

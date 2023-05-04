@@ -84,6 +84,7 @@ class Empleados extends BaseController
         }
         return view('dashboard', [
             'view' => 'empleados/empleados',
+            'empleados' => $usuarios->where('rol_id !=', 1)->findAll(),
         ]);
     }
 }
