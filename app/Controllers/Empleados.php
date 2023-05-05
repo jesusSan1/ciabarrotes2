@@ -7,11 +7,18 @@ use App\Models\Usuarios;
 
 class Empleados extends BaseController
 {
+    protected $usuarios;
+    protected $request;
+
+    public function __construct()
+    {
+        $this->usuarios = new Usuarios;
+        $this->request = \Config\Services::request();
+    }
+
     public function index()
     {
-        $usuarios = new Usuarios;
-        $request = \Config\Services::request();
-        if ($request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'post') {
             $rules = [
                 'nombre' => [
                     'label' => 'nombre',
@@ -75,7 +82,7 @@ class Empleados extends BaseController
                 'foto_perfil' => $request->getPost('img'),
                 'fecha_creacion' => date('Y-m-d'),
             ];
-            if ($usuarios->insert($data)) {
+            if ($this->usuarios->insert($data)) {
                 return view('dashboard', [
                     'view' => 'empleados/empleados',
                     'exito' => 'Se ha guardado el empleado con exito',
@@ -84,17 +91,14 @@ class Empleados extends BaseController
         }
         return view('dashboard', [
             'view' => 'empleados/empleados',
-            'empleados' => $usuarios->where('rol_id !=', 1)->findAll(),
+            'empleados' => $this->usuarios->where('rol_id !=', 1)->findAll(),
         ]);
     }
 
     public function accesoEmpleado()
     {
-        $request = \Config\Services::request();
-        $usuarios = new Usuarios;
-        $id = $request->getPost('id');
-        $usuarioHabilitado = $request->getPost('habilitado');
-        $usuarios->where('id', $id)->set(['habilitado' => $usuarioHabilitado])->update();
-        echo $usuarioHabilitado;
+        $id = $this->request->getPost('id');
+        $usuarioHabilitado = $this->request->getPost('habilitado');
+        $this->usuarios->where('id', $id)->set(['habilitado' => $usuarioHabilitado])->update();
     }
 }
