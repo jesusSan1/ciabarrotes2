@@ -19,9 +19,9 @@
             <?php foreach ($empleados as $empleado): ?>
             <tr>
                 <td>
-                    <input type="hidden" value="<?= $empleado['id'] ?>" class="id-usuario">
+                    <input type="hidden" value="<?=$empleado['id']?>" class="id-usuario">
                     <?php $img = $empleado['foto_perfil'] ? $empleado['foto_perfil'] : 'No tiene foto'?>
-                    <img src="<?=$img?>" height="50" alt="">
+                    <img src="<?=$img?>" height="50" alt="" class="imagen">
                 </td>
                 <td><?=$empleado['nombre']?></td>
                 <td><?=$empleado['usuario']?></td>
@@ -64,3 +64,4 @@
     </table>
 </div>
 <script src="js/listaEmpleados.js"></script>
+<script src="js/zoom.js"></script>
