@@ -21,7 +21,7 @@ class Dashboard extends BaseController
         return view('dashboard', [
             'view' => 'modulos',
             'categorias' => $categoria->where('id !=', 1)->selectCount('id')->first(),
-            'usuarios' => $usuarios->where('rol_id !=', 1)->selectCount('id')->first(),
+            'usuarios' => $usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
             'proveedores' => $proveedores->where('id !=', 1)->selectCount('id')->first(),
             'productos' => $productos->selectCount('id')->first(),
         ]);

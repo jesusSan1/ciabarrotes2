@@ -56,7 +56,7 @@
                     <button type="button" class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    <button type="button" class="btn btn-danger eliminar"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
             <?php endforeach;?>

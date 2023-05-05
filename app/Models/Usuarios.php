@@ -4,7 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Usuarios extends Model {
+class Usuarios extends Model
+{
     protected $DBGroup = 'default';
     protected $table = 'usuarios';
     protected $primaryKey = 'id';
@@ -13,7 +14,7 @@ class Usuarios extends Model {
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['nombre', 'apepat', 'apemat', 'genero', 'usuario', 'password', 'correo', 'telefono', 'habilitado', 'foto_perfil', 'rol_id', 'fecha_creacion', 'token'];
+    protected $allowedFields = ['nombre', 'apepat', 'apemat', 'genero', 'usuario', 'password', 'correo', 'telefono', 'habilitado', 'foto_perfil', 'rol_id', 'fecha_creacion', 'token', 'eliminado', 'fecha_eliminado'];
 
     // Dates
     protected $useTimestamps = false;

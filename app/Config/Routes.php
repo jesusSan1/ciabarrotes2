@@ -44,6 +44,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->get('empleados', 'Empleados::index');
         $routes->post('empleados', 'Empleados::index');
         $routes->post('accesoEmpleado', 'Empleados::accesoEmpleado');
+        $routes->post('eliminarEmpleado', 'Empleados::eliminarEmpleado');
     });
 });
 

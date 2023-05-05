@@ -81,6 +81,7 @@ class Empleados extends BaseController
                 'habilitado' => filter_var(intval($request->getPost('estatus')), FILTER_SANITIZE_NUMBER_INT),
                 'foto_perfil' => $request->getPost('img'),
                 'fecha_creacion' => date('Y-m-d'),
+                'eliminado' => 0,
             ];
             if ($this->usuarios->insert($data)) {
                 return view('dashboard', [
@@ -91,7 +92,7 @@ class Empleados extends BaseController
         }
         return view('dashboard', [
             'view' => 'empleados/empleados',
-            'empleados' => $this->usuarios->where('rol_id !=', 1)->findAll(),
+            'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
         ]);
     }
 
@@ -100,5 +101,10 @@ class Empleados extends BaseController
         $id = $this->request->getPost('id');
         $usuarioHabilitado = $this->request->getPost('habilitado');
         $this->usuarios->where('id', $id)->set(['habilitado' => $usuarioHabilitado])->update();
+    }
+    public function eliminarEmpleado()
+    {
+        $id = $this->request->getPost('id');
+        $this->usuarios->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d'), 'habilitado' => 0])->update();
     }
 }
