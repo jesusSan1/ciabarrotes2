@@ -70,16 +70,16 @@ class Empleados extends BaseController
                 ]);
             }
             $data = [
-                'nombre' => filter_var($request->getPost('nombre'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'apepat' => filter_var($request->getPost('apellido'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'telefono' => filter_var($request->getPost('telefono'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'rol_id' => filter_var(intval($request->getPost('puesto')), FILTER_SANITIZE_NUMBER_INT),
-                'genero' => filter_var($request->getPost('sexo'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'usuario' => filter_var($request->getPost('usuario'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'password' => password_hash($request->getPost('password'), PASSWORD_DEFAULT),
-                'correo' => filter_var($request->getPost('email'), FILTER_SANITIZE_EMAIL),
-                'habilitado' => filter_var(intval($request->getPost('estatus')), FILTER_SANITIZE_NUMBER_INT),
-                'foto_perfil' => $request->getPost('img'),
+                'nombre' => filter_var($this->request->getPost('nombre'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
+                'apepat' => filter_var($this->request->getPost('apellido'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
+                'telefono' => filter_var($this->request->getPost('telefono'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
+                'rol_id' => filter_var(intval($this->request->getPost('puesto')), FILTER_SANITIZE_NUMBER_INT),
+                'genero' => filter_var($this->request->getPost('sexo'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
+                'usuario' => filter_var($this->request->getPost('usuario'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                'correo' => filter_var($this->request->getPost('email'), FILTER_SANITIZE_EMAIL),
+                'habilitado' => filter_var(intval($this->request->getPost('estatus')), FILTER_SANITIZE_NUMBER_INT),
+                'foto_perfil' => $this->request->getPost('img'),
                 'fecha_creacion' => date('Y-m-d'),
                 'eliminado' => 0,
             ];
@@ -87,6 +87,7 @@ class Empleados extends BaseController
                 return view('dashboard', [
                     'view' => 'empleados/empleados',
                     'exito' => 'Se ha guardado el empleado con exito',
+                    'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
                 ]);
             }
         }
