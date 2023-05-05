@@ -43,6 +43,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->post('configurar', 'Configuracion::configurar');
         $routes->get('empleados', 'Empleados::index');
         $routes->post('empleados', 'Empleados::index');
+        $routes->post('accesoEmpleado', 'Empleados::accesoEmpleado');
     });
 });
 

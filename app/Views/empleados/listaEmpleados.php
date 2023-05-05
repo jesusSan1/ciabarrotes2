@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/check.css">
 <div class="table-responsive">
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -18,6 +19,7 @@
             <?php foreach ($empleados as $empleado): ?>
             <tr>
                 <td>
+                    <input type="hidden" value="<?= $empleado['id'] ?>" class="id-usuario">
                     <?php $img = $empleado['foto_perfil'] ? $empleado['foto_perfil'] : 'No tiene foto'?>
                     <img src="<?=$img?>" height="50" alt="">
                 </td>
@@ -61,3 +63,4 @@
         </tbody>
     </table>
 </div>
+<script src="js/listaEmpleados.js"></script>

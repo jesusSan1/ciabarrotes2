@@ -87,4 +87,14 @@ class Empleados extends BaseController
             'empleados' => $usuarios->where('rol_id !=', 1)->findAll(),
         ]);
     }
+
+    public function accesoEmpleado()
+    {
+        $request = \Config\Services::request();
+        $usuarios = new Usuarios;
+        $id = $request->getPost('id');
+        $usuarioHabilitado = $request->getPost('habilitado');
+        $usuarios->where('id', $id)->set(['habilitado' => $usuarioHabilitado])->update();
+        echo $usuarioHabilitado;
+    }
 }
