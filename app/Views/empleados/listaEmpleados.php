@@ -68,3 +68,4 @@
 </div>
 <script src="js/listaEmpleados.js"></script>
 <script src="js/zoom.js"></script>
+<script src="js/tablas.js"></script>
