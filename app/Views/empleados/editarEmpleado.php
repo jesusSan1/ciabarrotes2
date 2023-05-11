@@ -6,8 +6,18 @@
     </div>
 </div>
 <div class="card-body">
+    <?php if (isset($error)): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Errores</h4>
+        <?=$error?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php endif;?>
     <?php foreach ($datosEmpleado as $empleado): ?>
-    <form action="" method="post" autocomplete="off" id="form">
+    <form action="updateEmpleado" method="post" autocomplete="off" id="form">
+        <input type="hidden" name="id" value="<?=$empleado['id']?>">
         <div class="row">
             <div class="col-md-12">
                 <h4><i class="fa fa-user" aria-hidden="true"></i> Información Personal</h4>
@@ -92,7 +102,7 @@
                 <div class="form-group">
                     <label for="">Contraseña</label>
                     <input type="password" name="password" class="form-control password" placeholder="Contraseña"
-                        required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                         title="La contraseña debe tener 8 caracteres minimos, una letra mayuscula, una letra minuscula, un numero y un caracter especial">
 
                 </div>
@@ -106,7 +116,12 @@
                 <div class="form-group">
                     <label for="">Estatus del usuario</label>
                     <select class="form-control estatus" name="estatus" required>
-                        <option value="">Estatus del usuario</option>
+                        <?php if ($empleado['habilitado'] == 0): ?>
+                        <option class="opt" value="<?=$empleado['habilitado']?>">Inactivo</option>
+                        <?php endif;?>
+                        <?php if ($empleado['habilitado'] == 1): ?>
+                        <option class="opt" value="<?=$empleado['habilitado']?>">Activo</option>
+                        <?php endif;?>
                         <option value="1">Activo</option>
                         <option value="0">Inactivo</option>
                     </select>
