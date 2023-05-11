@@ -18,6 +18,7 @@ class Empleados extends BaseController
 
     public function index()
     {
+        helper('form');
         if ($this->request->getMethod() === 'post') {
             $rules = [
                 'nombre' => [
@@ -50,9 +51,10 @@ class Empleados extends BaseController
                 ],
                 'password' => [
                     'label' => 'contraseña',
-                    'rules' => 'required',
+                    'rules' => 'required|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/]',
                     'errors' => [
                         'required' => 'La {field} debe ser llenada',
+                        'regex_match' => 'La {field} debe tener 8 caracteres minimos, una letra mayuscula, una letra minuscula, un numero y un caracter especial',
                     ],
                 ],
                 'estatus' => [
@@ -60,6 +62,20 @@ class Empleados extends BaseController
                     'rules' => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
+                    ],
+                ],
+                'email' => [
+                    'label' => 'correo electronico',
+                    'rules' => 'valid_email',
+                    'errors' => [
+                        'valid_email' => 'El {field} debe ser un {field} valido',
+                    ],
+                ],
+                'telefono' => [
+                    'label' => 'telefono',
+                    'rules' => 'numeric',
+                    'errors' => [
+                        'numeric' => 'El {field} debe ser llenado con numeros',
                     ],
                 ],
             ];

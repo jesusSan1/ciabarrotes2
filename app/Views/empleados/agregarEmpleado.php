@@ -8,14 +8,16 @@
         <br>
         <div class="row">
             <div class="col-md-3">
-                <input type="text" name="nombre" class="form-control nombre" placeholder="Nombre" required>
+                <input type="text" name="nombre" class="form-control nombre" placeholder="Nombre" required
+                    value="<?= set_value('nombre') ?>">
             </div>
             <div class="col-md-3">
-                <input type="text" name="apellido" class="form-control apellido" placeholder="Apellido Paterno"
-                    required>
+                <input type="text" name="apellido" class="form-control apellido" placeholder="Apellido Paterno" required
+                    value="<?= set_value('apellido') ?>">
             </div>
             <div class="col-md-3">
-                <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono">
+                <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono"
+                    value="<?= set_value('telefono') ?>">
             </div>
             <div class="col-md-3">
                 <select name="puesto" class="form-control puesto" required>
@@ -60,7 +62,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <input type="text" name="usuario" class="form-control usuario" placeholder="Nombre de usuario"
-                        required>
+                        required value="<?= set_value('usuario') ?>">
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" class="form-control password" placeholder="Contraseña"
@@ -71,7 +73,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control email" placeholder="Correo electronico">
+                    <input type="email" name="email" class="form-control email" placeholder="Correo electronico"
+                        value="<?= set_value('email') ?>">
                 </div>
                 <div class="form-group">
                     <select class="form-control estatus" name="estatus" required>
