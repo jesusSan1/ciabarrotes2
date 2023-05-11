@@ -53,7 +53,10 @@
                 </td>
                 <td><?=$empleado['fecha_creacion']?></td>
                 <td>
-                    <button type="button" class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
+                    <form action="editar-empleado" method="post">
+                        <input type="hidden" name="id" value="<?=$empleado['id']?>">
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
+                    </form>
                 </td>
                 <td>
                     <button type="button" class="btn btn-danger eliminar"><i class="fas fa-trash"></i></button>

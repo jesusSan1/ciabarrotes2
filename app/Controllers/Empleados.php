@@ -108,4 +108,12 @@ class Empleados extends BaseController
         $id = $this->request->getPost('id');
         $this->usuarios->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d'), 'habilitado' => 0])->update();
     }
+    public function editarEmpleado()
+    {
+        $id = $this->request->getPost('id');
+        return view('dashboard', [
+            'view' => 'empleados/editarEmpleado',
+            'datosEmpleado' => $this->usuarios->where('id', $id)->find()
+        ]);
+    }
 }
