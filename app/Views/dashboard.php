@@ -26,6 +26,7 @@ $name = $conf->findAll();
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="sweetalert/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="dataTable/cs/datatables.min.css">
     <!-- Bootstrap core JavaScript-->
     <script src="popper/popper.min.js"></script>
     <script src="jquery/jquery-3.6.0.js"></script>
@@ -34,6 +35,7 @@ $name = $conf->findAll();
     <script src="fontawesome/js/all.js"></script>
     <script src="chartjs/chart.min.js"></script>
     <script src="zoomerang/zoomerang.js"></script>
+    <script src="dataTable/js/datatables.min.js"></script>
 </head>
 
 <body id="page-top">
