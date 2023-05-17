@@ -91,7 +91,7 @@
                             <a href="empleados">
                                 <a href="empleados">
                                     <?php foreach ($usuarios as $usuario): ?>
-                                    <p class="text-warning"><?=$usuario?> vendedores agregados</p>
+                                    <p class="text-warning"><?=$usuario?> empleados agregados</p>
                                     <?php endforeach;?>
                                 </a>
                             </a>

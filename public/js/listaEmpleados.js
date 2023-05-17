@@ -35,13 +35,13 @@ document.querySelectorAll(".eliminar").forEach((element) => {
     const id = tr.children[0].children[0].value;
     Swal.fire({
       title: "Eliminar empleado",
-      text: "¿desear eliminar el empleado?",
+      text: "¿deseas eliminar el empleado?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#666666",
-      confirmButtonText: "eliminar",
-      confirmCancelText: "cancelar",
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
