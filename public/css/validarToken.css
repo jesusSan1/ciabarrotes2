@@ -1,10 +1,10 @@
 my-login-validation{
-        width: 100%;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
 }
 
 .form-group {
@@ -21,7 +21,7 @@ my-login-validation{
     height: 60px;
     text-align: center;
     border-radius: 5px;
-    background: #f0f0f0;
+    background: #e0e5eb;
     font-size: 20px;
     margin: 2%
 }
