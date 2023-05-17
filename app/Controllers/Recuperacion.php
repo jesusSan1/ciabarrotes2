@@ -92,10 +92,9 @@ class Recuperacion extends BaseController
             $rules = [
                 'token' => [
                     'label' => 'token',
-                    'rules' => 'required|exact_length[6]',
+                    'rules' => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
-                        'exact_length' => 'El {field} debe tener 6 caracteres',
                     ],
                 ],
             ];
@@ -106,8 +105,10 @@ class Recuperacion extends BaseController
                 ]);
             }
             $token = $this->request->getPost('token');
+            [$n1, $n2, $n3, $n4,$n5, $n6] = $token;
+            $tokenCreado = $n1.$n2.$n3.$n4.$n5.$n6;
             $tokenGuardado = $this->usuarios->where('correo', $this->session->get('correo'))->first();
-            if ($token === $tokenGuardado['token']) {
+            if ($tokenCreado === $tokenGuardado['token']) {
                 return redirect()->to('crear-password');
             } else {
                 return view('login/layout', [

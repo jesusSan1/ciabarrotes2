@@ -1,0 +1,61 @@
+my-login-validation{
+        width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+}
+
+.form-group {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.form-group input {
+    border: none;
+    max-width: 20%;
+    height: 60px;
+    text-align: center;
+    border-radius: 5px;
+    background: #f0f0f0;
+    font-size: 20px;
+    margin: 2%
+}
+
+.form-group input::-webkit-inner-spin-button,
+.form-group input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.form-group input:focus {
+    outline: 1.5px solid #007bff;
+}
+
+form button {
+    margin-top: 25px;
+    width: 92%;
+    color: #525252;
+    font-size: 16px;
+    padding: 10px 0;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    pointer-events: none;
+    cursor: pointer;
+    background: #e9d585;
+    transition: all 0.2s ease;
+}
+
+form button.active {
+    background: #ffcc00;
+    pointer-events: auto;
+    color: #000000
+}
+
+form button:hover {
+    background: #e6b801;
+}

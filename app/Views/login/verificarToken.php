@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/validarToken.css">
 <section class="h-100">
     <div class="container h-100">
         <div class="row justify-content-md-center h-100">
@@ -13,13 +14,17 @@
                     </button>
                 </div>
                 <?php endif;?>
-                <div class="card fat shadow">
+                <div class="card fat shadow p-5">
                     <div class="card-body">
-                        <h4 class="card-title">Validacion de token</h4>
+                        <h4 class="card-title text-center">Validación de token</h4>
                         <form method="POST" class="my-login-validation" novalidate="" autocomplete="off">
                             <div class="form-group">
-                                <label>Token</label>
-                                <input type="text" class="form-control" name="token" value="" required autofocus>
+                                <input type="text" name="token[]" autofocus>
+                                <input type="text" name="token[]" disabled>
+                                <input type="text" name="token[]" disabled>
+                                <input type="text" name="token[]" disabled>
+                                <input type="text" name="token[]" disabled>
+                                <input type="text" name="token[]" disabled>
                             </div>
                             <br>
                             <div class="form-group m-0">
@@ -37,3 +42,4 @@
         </div>
     </div>
 </section>
+<script src="js/verificacion.js"></script>
