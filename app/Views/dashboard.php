@@ -141,7 +141,7 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThre"
+                <a class="nav-link collapsed" href="perfil" data-toggle="collapse" data-target="#collapseThre"
                     aria-expanded="true" aria-controls="collapseThre">
                     <i class="fas fa-user"></i>
                     <span>Perfil de usuario</span>
@@ -149,7 +149,7 @@ $name = $conf->findAll();
                 <div id="collapseThre" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="producto">Cambiar mi usuario</a>
+                        <a class="collapse-item" href="perfil">Cambiar mis datos</a>
 
                     </div>
                 </div>
@@ -315,7 +315,7 @@ $name = $conf->findAll();
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="perfil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
+                                    Perfil de usuario
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="salir">
