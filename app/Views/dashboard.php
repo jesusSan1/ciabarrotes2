@@ -135,6 +135,7 @@ $name = $conf->findAll();
             <hr class="sidebar-divider">
 
             <!-- Heading -->
+            <?php if (session()->get('id') != 1): ?>
             <div class="sidebar-heading">
                 Perfil de usuario
             </div>
@@ -155,6 +156,7 @@ $name = $conf->findAll();
                 </div>
             </li>
             <hr class="sidebar-divider">
+            <?php endif;?>
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -313,11 +315,13 @@ $name = $conf->findAll();
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                                <?php if (session()->get('id') != 1): ?>
                                 <a class="dropdown-item" href="perfil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil de usuario
                                 </a>
                                 <div class="dropdown-divider"></div>
+                                <?php endif;?>
                                 <a class="dropdown-item" href="salir">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
