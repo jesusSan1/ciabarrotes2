@@ -54,6 +54,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->post('editar-empleado', 'Empleados::editarEmpleado');
         $routes->post('updateEmpleado', 'Empleados::updateEmpleado');
         $routes->get('categorias', 'Categorias::index');
+        $routes->post('categorias', 'Categorias::index');
     });
 });
 
