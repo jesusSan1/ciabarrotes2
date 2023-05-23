@@ -37,7 +37,11 @@ $routes->post('recuperacion', 'Recuperacion::index');
 
 $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenticacion
     $routes->get('dashboard', 'Dashboard::index');
-    $routes->get('perfil', 'Perfil::index');
+
+    $routes->group('', ['filter' => 'vendedor'], static function ($routes) { //! autenticacion y perfil
+        $routes->get('perfil', 'Perfil::index');
+        $routes->post('perfil', 'Perfil::index');
+    });
 
     $routes->group('', ['filter' => 'admin'], static function ($routes) { //!autenticacion y admin
         $routes->get('configuracion', 'Configuracion::index');

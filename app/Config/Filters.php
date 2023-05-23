@@ -9,7 +9,8 @@ use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 
-class Filters extends BaseConfig {
+class Filters extends BaseConfig
+{
     /**
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
@@ -22,7 +23,8 @@ class Filters extends BaseConfig {
         'secureheaders' => SecureHeaders::class,
         'auth' => \App\Filters\Auth::class,
         'token' => \App\Filters\Token::class,
-        'admin' => \App\Filters\Admin::class
+        'admin' => \App\Filters\Admin::class,
+        'vendedor' => \App\Filters\Vendedor::class,
     ];
 
     /**

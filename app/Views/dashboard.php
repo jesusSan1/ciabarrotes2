@@ -1,6 +1,9 @@
 <?php
 use App\Models\ConfiguracionModel;
+use App\Models\Usuarios;
 $conf = new ConfiguracionModel;
+$usuarios = new Usuarios;
+$usuario = $usuarios->where('id', session()->get('id'))->find();
 $name = $conf->findAll();
 ?>
 <!DOCTYPE html>
@@ -309,8 +312,10 @@ $name = $conf->findAll();
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?=session()->get('usuario')?>
                                 </span>
-
-                                <img class="img-profile rounded-circle" src="images/undraw_profile.svg">
+                                <?php foreach ($usuario as $perfil): ?>
+                                <?php $img = $perfil['rol_id'] != 1 ? $perfil['foto_perfil'] : 'images/undraw_profile.svg' ?>
+                                <img class="img-profile rounded-circle" src="<?= $img ?>">
+                                <?php endforeach;?>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
