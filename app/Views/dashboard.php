@@ -72,7 +72,7 @@ $name = $conf->findAll();
             </li>
 
             <hr class="sidebar-divider">
-
+            <?php if (session()->get('rol_id') == 1): ?>
             <!-- Heading -->
             <div class="sidebar-heading">
                 Administrador
@@ -136,7 +136,7 @@ $name = $conf->findAll();
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-
+            <?php endif;?>
             <!-- Heading -->
             <?php if (session()->get('id') != 1): ?>
             <div class="sidebar-heading">
@@ -313,8 +313,8 @@ $name = $conf->findAll();
                                     <?=session()->get('usuario')?>
                                 </span>
                                 <?php foreach ($usuario as $perfil): ?>
-                                <?php $img = $perfil['rol_id'] != 1 ? $perfil['foto_perfil'] : 'images/undraw_profile.svg' ?>
-                                <img class="img-profile rounded-circle" src="<?= $img ?>">
+                                <?php $img = $perfil['rol_id'] != 1 ? $perfil['foto_perfil'] : 'images/undraw_profile.svg'?>
+                                <img class="img-profile rounded-circle" src="<?=$img?>">
                                 <?php endforeach;?>
                             </a>
                             <!-- Dropdown - User Information -->
