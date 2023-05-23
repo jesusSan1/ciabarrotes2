@@ -1,6 +1,9 @@
 <?php
 use App\Models\ConfiguracionModel;
+use App\Models\Usuarios;
 $conf = new ConfiguracionModel;
+$usuarios = new Usuarios;
+$usuario = $usuarios->where('id', session()->get('id'))->find();
 $name = $conf->findAll();
 ?>
 <!DOCTYPE html>
@@ -135,13 +138,14 @@ $name = $conf->findAll();
             <hr class="sidebar-divider">
 
             <!-- Heading -->
+            <?php if (session()->get('id') != 1): ?>
             <div class="sidebar-heading">
                 Perfil de usuario
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThre"
+                <a class="nav-link collapsed" href="perfil" data-toggle="collapse" data-target="#collapseThre"
                     aria-expanded="true" aria-controls="collapseThre">
                     <i class="fas fa-user"></i>
                     <span>Perfil de usuario</span>
@@ -149,12 +153,13 @@ $name = $conf->findAll();
                 <div id="collapseThre" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="producto">Cambiar mi usuario</a>
+                        <a class="collapse-item" href="perfil">Cambiar mis datos</a>
 
                     </div>
                 </div>
             </li>
             <hr class="sidebar-divider">
+            <?php endif;?>
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -307,17 +312,21 @@ $name = $conf->findAll();
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?=session()->get('usuario')?>
                                 </span>
-
-                                <img class="img-profile rounded-circle" src="images/undraw_profile.svg">
+                                <?php foreach ($usuario as $perfil): ?>
+                                <?php $img = $perfil['rol_id'] != 1 ? $perfil['foto_perfil'] : 'images/undraw_profile.svg' ?>
+                                <img class="img-profile rounded-circle" src="<?= $img ?>">
+                                <?php endforeach;?>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                                <?php if (session()->get('id') != 1): ?>
                                 <a class="dropdown-item" href="perfil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
+                                    Perfil de usuario
                                 </a>
                                 <div class="dropdown-divider"></div>
+                                <?php endif;?>
                                 <a class="dropdown-item" href="salir">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
