@@ -37,6 +37,8 @@ $routes->post('recuperacion', 'Recuperacion::index');
 
 $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenticacion
     $routes->get('dashboard', 'Dashboard::index');
+    $routes->get('categorias', 'Categorias::index');
+    $routes->post('categorias', 'Categorias::index');
 
     $routes->group('', ['filter' => 'vendedor'], static function ($routes) { //! autenticacion y perfil
         $routes->get('perfil', 'Perfil::index');
@@ -53,8 +55,6 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->get('editar-empleado', 'Empleados::editarEmpleado');
         $routes->post('editar-empleado', 'Empleados::editarEmpleado');
         $routes->post('updateEmpleado', 'Empleados::updateEmpleado');
-        $routes->get('categorias', 'Categorias::index');
-        $routes->post('categorias', 'Categorias::index');
     });
 });
 
