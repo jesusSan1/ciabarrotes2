@@ -72,8 +72,8 @@ $name = $conf->findAll();
             </li>
 
             <hr class="sidebar-divider">
-            <?php if (session()->get('rol_id') == 1): ?>
             <!-- Heading -->
+            <?php if (session()->get('rol_id') == 1): ?>
             <div class="sidebar-heading">
                 Administrador
             </div>
@@ -93,20 +93,6 @@ $name = $conf->findAll();
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-tags"></i>
-                    <span>Categorias</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="categorias">Nueva categoria</a>
-                        <a class="collapse-item" href="categorias#lista-categorias">Lista de categoria</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-users-cog"></i>
@@ -117,20 +103,6 @@ $name = $conf->findAll();
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="empleados">Agregar empleado</a>
                         <a class="collapse-item" href="empleados#lista-empleados">Lista de Empleados</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseFour">
-                    <i class="fas fa-truck"></i>
-                    <span>Proveedores</span>
-                </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="proveedores">Agregar proveedores</a>
-                        <a class="collapse-item" href="proveedores#lista-proveedores">lista de proveedores</a>
                     </div>
                 </div>
             </li>
@@ -167,6 +139,34 @@ $name = $conf->findAll();
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-tags"></i>
+                    <span>Categorias</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="categorias">Nueva categoria</a>
+                        <a class="collapse-item" href="categorias#lista-categorias">Lista de categoria</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-truck"></i>
+                    <span>Proveedores</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="proveedores">Agregar proveedores</a>
+                        <a class="collapse-item" href="proveedores#lista-proveedores">lista de proveedores</a>
+                    </div>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                     aria-expanded="true" aria-controls="collapseFour">

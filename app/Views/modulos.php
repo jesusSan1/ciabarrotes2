@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/welcome.css">
+<?php if (session()->get('rol_id') == 1): ?>
 <div class="row">
     <div class="col-md-3">
         <div class="card border-left-secondary shadow h-100 py-2">
@@ -54,6 +55,7 @@
     </div>
 </div>
 <br>
+<?php endif;?>
 <div class="row">
     <div class="col-md-3">
         <div class="card border-left-primary shadow h-100 py-2">
