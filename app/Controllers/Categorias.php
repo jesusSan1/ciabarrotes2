@@ -36,6 +36,9 @@ class Categorias extends BaseController
             }
             $data = [
                 'nombre' => $this->request->getPost('categoria'),
+                'fecha_creacion' => date('Y-m-d'),
+                'creado_por' => session()->get('id'),
+                'eliminado' => 0,
             ];
             if ($this->categoria->insert($data)) {
                 return view('dashboard', [
