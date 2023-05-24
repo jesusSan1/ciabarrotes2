@@ -9,11 +9,14 @@ class Categorias extends BaseController
 {
     protected $categoria;
     protected $request;
+    protected $db;
 
     public function __construct()
     {
         $this->categoria = new CategoriaModel;
         $this->request = \Config\Services::request();
+        $this->db = \Config\Database::connect();
+
     }
 
     public function index()
@@ -32,6 +35,7 @@ class Categorias extends BaseController
                 return view('dashboard', [
                     'view' => 'categorias/index',
                     'errors' => \Config\Services::validation()->listErrors(),
+                    'datos' => $this->listaCategorias(),
                 ]);
             }
             $data = [
@@ -44,11 +48,22 @@ class Categorias extends BaseController
                 return view('dashboard', [
                     'view' => 'categorias/index',
                     'exito' => 'Categoria guardada con exito',
+                    'datos' => $this->listaCategorias(),
                 ]);
             }
         }
         return view('dashboard', [
             'view' => 'categorias/index',
+            'datos' => $this->listaCategorias(),
         ]);
+    }
+    public function listaCategorias()
+    {
+        $builder = $this->db->table('categoria as c');
+        $builder->select('c.nombre, c.fecha_creacion, c.creado_por, u.nombre as creado_por');
+        $builder->join('usuarios as u', 'c.creado_por = u.id');
+        $builder->where('c.eliminado !=', 1);
+        $builder->where('u.rol_id !=', 1);
+        return $builder->get();
     }
 }
