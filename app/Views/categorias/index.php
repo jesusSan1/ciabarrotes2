@@ -30,7 +30,7 @@
                         <?=view('categorias/guardarCategoria')?>
                     </div>
                     <div id="menu1" class="tab-pane fade"><br>
-                        Listar
+                        <?=view('categorias/listarCategorias')?>
                     </div>
                 </div>
             </div>
