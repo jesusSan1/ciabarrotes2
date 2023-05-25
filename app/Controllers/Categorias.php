@@ -57,13 +57,18 @@ class Categorias extends BaseController
             'datos' => $this->listaCategorias(),
         ]);
     }
-    public function listaCategorias()
+    public function eliminarCategoria()
+    {
+        $id = $this->request->getPost('id');
+        $this->categoria->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
+    }
+    protected function listaCategorias()
     {
         $builder = $this->db->table('categoria as c');
-        $builder->select('c.nombre, c.fecha_creacion, c.creado_por, u.nombre as creado_por');
+        $builder->select('c.id, c.nombre, c.fecha_creacion, c.creado_por, u.nombre as creado_por');
         $builder->join('usuarios as u', 'c.creado_por = u.id');
         $builder->where('c.eliminado !=', 1);
-        $builder->where('u.rol_id !=', 1);
+        $builder->where('c.id !=', 1);
         return $builder->get();
     }
 }

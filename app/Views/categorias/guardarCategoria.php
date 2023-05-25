@@ -31,4 +31,3 @@
         </div>
     </div>
 </form>
-<script src="resources/js/guardarCategoria.js"></script>

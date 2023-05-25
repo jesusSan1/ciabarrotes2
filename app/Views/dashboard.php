@@ -29,7 +29,7 @@ $name = $conf->findAll();
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="sweetalert/dist/sweetalert2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="dataTable/cs/datatables.min.css">
+    <link rel="stylesheet" href="dataTable/css/datatables.min.css">
     <!-- Bootstrap core JavaScript-->
     <script src="popper/popper.min.js"></script>
     <script src="jquery/jquery-3.6.0.js"></script>

@@ -39,6 +39,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
     $routes->get('dashboard', 'Dashboard::index');
     $routes->get('categorias', 'Categorias::index');
     $routes->post('categorias', 'Categorias::index');
+    $routes->post('eliminarCategoria', 'Categorias::eliminarCategoria');
 
     $routes->group('', ['filter' => 'vendedor'], static function ($routes) { //! autenticacion y perfil
         $routes->get('perfil', 'Perfil::index');
