@@ -62,6 +62,12 @@ class Categorias extends BaseController
         $id = $this->request->getPost('id');
         $this->categoria->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
     }
+    public function editarCategoria()
+    {
+        $id = $this->request->getPost('id');
+        $valor = $this->request->getPost('valor');
+        $this->categoria->where('id', $id)->set(['nombre' => $valor])->update();
+    }
     protected function listaCategorias()
     {
         $builder = $this->db->table('categoria as c');
