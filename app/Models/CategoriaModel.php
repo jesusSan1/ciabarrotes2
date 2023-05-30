@@ -14,7 +14,7 @@ class CategoriaModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['id', 'nombre'];
+    protected $allowedFields = ['id', 'nombre', 'fecha_creacion', 'eliminado', 'creado_por', 'fecha_eliminado'];
 
     // Dates
     protected $useTimestamps = false;

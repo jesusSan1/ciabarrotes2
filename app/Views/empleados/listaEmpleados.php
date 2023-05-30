@@ -12,7 +12,6 @@
                 <th>Habilitar / deshabilitar acceso</th>
                 <th>Fecha de creación</th>
                 <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -52,12 +51,6 @@
                     <?php endif;?>
                 </td>
                 <td><?=$empleado['fecha_creacion']?></td>
-                <td>
-                    <form action="editar-empleado" method="post">
-                        <input type="hidden" name="id" value="<?=$empleado['id']?>">
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
-                    </form>
-                </td>
                 <td>
                     <button type="button" class="btn btn-danger eliminar"><i class="fas fa-trash"></i></button>
                 </td>

@@ -48,6 +48,7 @@ class Home extends BaseController
                     if ($habilitado) {
                         $sess_data = [
                             'login' => true,
+                            'id' => $existeUsuario['id'],
                             'nombre' => $existeUsuario['nombre'],
                             'usuario' => $existeUsuario['usuario'],
                             'correo' => $existeUsuario['correo'],

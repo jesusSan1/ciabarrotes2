@@ -124,35 +124,4 @@ class Empleados extends BaseController
         $id = $this->request->getPost('id');
         $this->usuarios->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d'), 'habilitado' => 0])->update();
     }
-    public function editarEmpleado()
-    {
-        $id = $this->request->getPost('id');
-        return view('dashboard', [
-            'view' => 'empleados/editarEmpleado',
-            'datosEmpleado' => $this->usuarios->where('id', $id)->find(),
-        ]);
-    }
-    public function updateEmpleado()
-    {
-        $id = $this->request->getPost('id');
-        $usuario = $this->usuarios->where('id', $id)->first();
-        $data = [
-            'nombre' => filter_var($this->request->getPost('nombre'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-            'apepat' => filter_var($this->request->getPost('apellido'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-            'telefono' => filter_var($this->request->getPost('telefono'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-            'rol_id' => filter_var(intval($this->request->getPost('puesto')), FILTER_SANITIZE_NUMBER_INT),
-            'genero' => filter_var($this->request->getPost('sexo'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-            'usuario' => filter_var($this->request->getPost('usuario'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-            'password' => (empty($this->request->getPost('password')) ? $usuario['password'] : password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)),
-            'correo' => filter_var($this->request->getPost('email'), FILTER_SANITIZE_EMAIL),
-            'habilitado' => filter_var(intval($this->request->getPost('estatus')), FILTER_SANITIZE_NUMBER_INT),
-            'foto_perfil' => $this->request->getPost('img'),
-            'fecha_creacion' => date('Y-m-d'),
-            'eliminado' => 0,
-        ];
-        if ($this->usuarios->where('id', $id)->set($data)->update()) {
-            return redirect()->to('empleados');
-        }
-        ;
-    }
 }

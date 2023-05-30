@@ -5,20 +5,23 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Usuarios;
 
-class Recuperacion extends BaseController {
+class Recuperacion extends BaseController
+{
     protected $usuarios;
     protected $request;
     protected $email;
     protected $session;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->usuarios = new Usuarios;
         $this->request = \Config\Services::request();
         $this->email = \Config\Services::email();
         $this->session = \Config\Services::session();
         helper(['form', 'text']);
     }
-    public function index() {
+    public function index()
+    {
         if ($this->session->get('login')) {
             return redirect()->to('dashboard');
         }
@@ -41,16 +44,25 @@ class Recuperacion extends BaseController {
             }
             $correo = $this->request->getPost('correo');
             $existeCorreo = $this->usuarios->where('correo', $correo)->first();
+            $usuarioHabilitado = $existeCorreo['habilitado'];
+            $usuarioEliminado = $existeCorreo['eliminado'];
             if ($existeCorreo) {
-                $token = random_string('nozero', 6);
-                $this->usuarios->where('correo', $existeCorreo['correo'])->set(['token' => $token])->update();
-                $this->enviarEmail($existeCorreo['correo'], $token);
-                $sess_data = [
-                    'correoExistente' => true,
-                    'correo' => $existeCorreo['correo'],
-                ];
-                $this->session->set($sess_data);
-                return redirect()->to('verificar-token');
+                if ($usuarioHabilitado == 0 || $usuarioEliminado == 1) {
+                    return view('login/layout', [
+                        'view' => 'login/recuperacion',
+                        'errors' => 'No tienes permitido recuperar la contraseña',
+                    ]);
+                } else {
+                    $token = random_string('nozero', 6);
+                    $this->usuarios->where('correo', $existeCorreo['correo'])->set(['token' => $token])->update();
+                    $this->enviarEmail($existeCorreo['correo'], $token);
+                    $sess_data = [
+                        'correoExistente' => true,
+                        'correo' => $existeCorreo['correo'],
+                    ];
+                    $this->session->set($sess_data);
+                    return redirect()->to('verificar-token');
+                }
             } else {
                 return view('login/layout', [
                     'view' => 'login/recuperacion',
@@ -62,7 +74,8 @@ class Recuperacion extends BaseController {
             'view' => 'login/recuperacion',
         ]);
     }
-    protected function enviarEmail(string $email = 'example@example.com', string $token = '000000') {
+    protected function enviarEmail(string $email = 'example@example.com', string $token = '000000')
+    {
 
         $this->email->setFrom('jjsanru3@gmail.com', 'Soporte tecnico');
         $this->email->setTo($email);
@@ -73,15 +86,15 @@ class Recuperacion extends BaseController {
         $this->email->send();
     }
 
-    public function verificarToken() {
+    public function verificarToken()
+    {
         if ($this->request->getMethod() === 'post') {
             $rules = [
                 'token' => [
                     'label' => 'token',
-                    'rules' => 'required|exact_length[6]',
+                    'rules' => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
-                        'exact_length' => 'El {field} debe tener 6 caracteres',
                     ],
                 ],
             ];
@@ -92,8 +105,10 @@ class Recuperacion extends BaseController {
                 ]);
             }
             $token = $this->request->getPost('token');
+            [$n1, $n2, $n3, $n4,$n5, $n6] = $token;
+            $tokenCreado = $n1.$n2.$n3.$n4.$n5.$n6;
             $tokenGuardado = $this->usuarios->where('correo', $this->session->get('correo'))->first();
-            if ($token === $tokenGuardado['token']) {
+            if ($tokenCreado === $tokenGuardado['token']) {
                 return redirect()->to('crear-password');
             } else {
                 return view('login/layout', [
@@ -106,7 +121,8 @@ class Recuperacion extends BaseController {
             'view' => 'login/verificarToken',
         ]);
     }
-    public function crearPassword() {
+    public function crearPassword()
+    {
         if ($this->request->getMethod() === 'post') {
             $rules = [
                 'password' => [
