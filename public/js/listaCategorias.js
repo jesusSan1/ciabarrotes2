@@ -1,3 +1,13 @@
+function mostrarOcultar(tr, param1, param2) {
+  tr.children[0].children[1].style.display = param1;
+  tr.children[0].children[2].style.display = param2;
+
+  tr.children[3].children[0].style.display = param1;
+  tr.children[3].children[1].style.display = param2;
+  tr.children[4].children[0].style.display = param1;
+  tr.children[4].children[1].style.display = param2;
+}
+
 document.querySelectorAll(".eliminar-categoria").forEach((element) => {
   element.addEventListener("click", (e) => {
     const tr = element.parentNode.parentNode;
@@ -44,26 +54,16 @@ document.querySelectorAll(".eliminar-categoria").forEach((element) => {
 document.querySelectorAll(".editar-categoria").forEach((element) => {
   element.addEventListener("click", () => {
     const tr = element.parentNode.parentNode;
-    tr.children[0].children[1].style.display = "none";
-    tr.children[0].children[2].style.display = "block";
-
-    tr.children[3].children[0].style.display = "none";
-    tr.children[3].children[1].style.display = "block";
-    tr.children[4].children[0].style.display = "none";
-    tr.children[4].children[1].style.display = "block";
+    //ocultar mostrar
+    mostrarOcultar(tr, "none", "block");
   });
 });
 
 document.querySelectorAll(".cancelar-categoria").forEach((element) => {
   element.addEventListener("click", () => {
     const tr = element.parentNode.parentNode;
-    tr.children[0].children[1].style.display = "block";
-    tr.children[0].children[2].style.display = "none";
-
-    tr.children[3].children[0].style.display = "block";
-    tr.children[3].children[1].style.display = "none";
-    tr.children[4].children[0].style.display = "block";
-    tr.children[4].children[1].style.display = "none";
+    //mostrar ocultar
+    mostrarOcultar(tr, "block", "none");
   });
 });
 
@@ -79,13 +79,8 @@ document.querySelectorAll(".guardar-categoria").forEach((element) => {
       data: { id, valor },
       success: function (response) {
         label.innerHTML = valor;
-        tr.children[0].children[1].style.display = "block";
-        tr.children[0].children[2].style.display = "none";
-
-        tr.children[3].children[0].style.display = "block";
-        tr.children[3].children[1].style.display = "none";
-        tr.children[4].children[0].style.display = "block";
-        tr.children[4].children[1].style.display = "none";
+        //mostrar ocultar
+        mostrarOcultar(tr, "block", "none");
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
