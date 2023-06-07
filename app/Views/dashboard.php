@@ -80,12 +80,25 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseZero"
+                <a class="nav-link collapsed" href="bitacora" data-toggle="collapse" data-target="#collapseZero"
                     aria-expanded="true" aria-controls="collapseZero">
+                    <i class="fas fa-book"></i>
+                    <span>Bitacora</span>
+                </a>
+                <div id="collapseZero" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="bitacora">bitacora</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
                     <i class="fas fa-cogs"></i>
                     <span>Configuración</span>
                 </a>
-                <div id="collapseZero" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="configuracion">Configuración</a>
@@ -117,12 +130,12 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="perfil" data-toggle="collapse" data-target="#collapseThre"
-                    aria-expanded="true" aria-controls="collapseThre">
+                <a class="nav-link collapsed" href="perfil" data-toggle="collapse" data-target="#collapsePerfil"
+                    aria-expanded="true" aria-controls="collapsePerfil">
                     <i class="fas fa-user"></i>
                     <span>Perfil de usuario</span>
                 </a>
-                <div id="collapseThre" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
+                <div id="collapsePerfil" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="perfil">Cambiar mis datos</a>
@@ -140,12 +153,12 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-tags"></i>
                     <span>Categorias</span>
                 </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="categorias">Nueva categoria</a>
@@ -168,12 +181,12 @@ $name = $conf->findAll();
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseFour">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+                    aria-expanded="true" aria-controls="collapseFive">
                     <i class="fas fa-boxes"></i>
                     <span>Productos</span>
                 </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
+                <div id="collapseFive" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="producto">Agregar productos</a>
