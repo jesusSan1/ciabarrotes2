@@ -3,15 +3,18 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\BitacoraModel;
 use App\Models\Usuarios;
 
 class Perfil extends BaseController
 {
     protected $usuarios;
+    protected $bitacora;
 
     public function __construct()
     {
         $this->usuarios = new Usuarios;
+        $this->bitacora = new BitacoraModel;
     }
 
     public function index()
@@ -77,6 +80,8 @@ class Perfil extends BaseController
 
                 ];
                 if ($this->usuarios->where('id', $id)->set($data)->update()) {
+                    $this->bitacora->insert(['accion' => 'Cambios de datos en el perfil de usuario', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+
                     return view('dashboard', [
                         'view' => 'perfil/index',
                         'exito' => 'Datos actualizados correctamente',

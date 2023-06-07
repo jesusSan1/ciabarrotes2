@@ -5,7 +5,8 @@ namespace Config;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Session\Handlers\FileHandler;
 
-class App extends BaseConfig {
+class App extends BaseConfig
+{
     /**
      * --------------------------------------------------------------------------
      * Base Site URL
@@ -105,7 +106,7 @@ class App extends BaseConfig {
      * The default timezone that will be used in your application to display
      * dates with the date helper, and can be retrieved through app_timezone()
      */
-    public string $appTimezone = 'UTC';
+    public string $appTimezone = 'America/Mexico_City';
 
     /**
      * --------------------------------------------------------------------------
@@ -235,7 +236,7 @@ class App extends BaseConfig {
      *
      * @deprecated use Config\Session::$DBGroup instead.
      */
-    public  ? string $sessionDBGroup = null;
+    public ?string $sessionDBGroup = null;
 
     /**
      * --------------------------------------------------------------------------
@@ -314,7 +315,7 @@ class App extends BaseConfig {
      *
      * @deprecated use Config\Cookie::$samesite property instead.
      */
-    public  ? string $cookieSameSite = 'Lax';
+    public ?string $cookieSameSite = 'Lax';
 
     /**
      * --------------------------------------------------------------------------

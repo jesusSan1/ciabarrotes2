@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\BitacoraModel;
 use App\Models\Usuarios;
 
 class Home extends BaseController
@@ -9,6 +10,7 @@ class Home extends BaseController
     public function index()
     {
         $usuarios = new Usuarios;
+        $bitacora = new BitacoraModel;
         $request = \Config\Services::request();
         $session = \Config\Services::session();
         helper('form');
@@ -55,6 +57,7 @@ class Home extends BaseController
                             'rol_id' => $existeUsuario['rol_id'],
                         ];
                         $session->set($sess_data);
+                        $bitacora->insert(['accion' => 'Usuario inicio sesion', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
                         return redirect()->to('dashboard');
                     } else {
                         return view('login/layout', [
