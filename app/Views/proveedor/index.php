@@ -25,7 +25,7 @@
                       <?=view('proveedor/agregarProveedor')?>
                   </div>
                   <div id="menu1" class="tab-pane fade"><br>
-                      Lista de proveedores
+                      <?=view('proveedor/listaProveedor');?>
                   </div>
               </div>
           </div>
