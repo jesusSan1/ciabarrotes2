@@ -79,6 +79,11 @@ class Proveedores extends BaseController
             'datos' => $this->listaProveedores(),
         ]);
     }
+    public function eliminarProveedor (){
+        $id = $this->request->getPost('id');
+        $this->proveedor->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
+                        $this->bitacora->insert(['accion' => 'Eliminado proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+    }
     protected function listaProveedores()
     {
         $builder = $this->db->table('proveedor as p');

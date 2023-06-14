@@ -7,11 +7,11 @@
                 <th>Telefono</th>
                 <th>Correo electronico</th>
                 <th>Fecha de creacion</th>
-                <?php if (session()->get('rol_id') === 1): ?>
+                <?php if (session()->get('rol_id') == 1): ?>
                 <th>Creado por</th>
                 <?php endif;?>
                 <th></th>
-                <?php if (session()->get('rol_id') === 1): ?>
+                <?php if (session()->get('rol_id') == 1): ?>
                 <th></th>
                 <?php endif;?>
             </tr>
@@ -35,7 +35,7 @@
                 <td>
                     <?=$proveedor->fecha_creacion?>
                 </td>
-                <?php if (session()->get('rol_id') === 1): ?>
+                <?php if (session()->get('rol_id') == 1): ?>
                 <td>
                     <?=$proveedor->creado_por?>
                 </td>
@@ -43,9 +43,9 @@
                 <td>
                     <button class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
                 </td>
-                <?php if (session()->get('rol_id') === 1): ?>
+                <?php if (session()->get('rol_id') == 1): ?>
                 <td>
-                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-danger eliminar-proveedor"><i class="fas fa-trash"></i></button>
                 </td>
                 <?php endif;?>
             </tr>
@@ -53,3 +53,4 @@
         </tbody>
     </table>
 </div>
+<script src="js/listaProveedores.js"></script>
