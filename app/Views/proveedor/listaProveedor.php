@@ -41,7 +41,10 @@
                 </td>
                 <?php endif;?>
                 <td>
-                    <button class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
+                    <form action="editar-proveedor" method="post">
+                        <input type="hidden" name="id" value="<?=$proveedor->id?>">
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
+                    </form>
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>

@@ -79,10 +79,39 @@ class Proveedores extends BaseController
             'datos' => $this->listaProveedores(),
         ]);
     }
-    public function eliminarProveedor (){
+    public function eliminarProveedor()
+    {
         $id = $this->request->getPost('id');
         $this->proveedor->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
-                        $this->bitacora->insert(['accion' => 'Eliminado proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+        $this->bitacora->insert(['accion' => 'Eliminado proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+    }
+    public function editarProveedor()
+    {
+        helper('form');
+        $id = $this->request->getPost('id');
+        return view('dashboard', [
+            'view' => 'proveedor/editarProveedor',
+            'datos' => $this->proveedor->where('id', $id)->find(),
+        ]);
+    }
+    public function updateProveedor()
+    {
+        $id = $this->request->getPost('id');
+        $data = [
+            'nombre' => $this->request->getPost('nombre'),
+            'direccion' => $this->request->getPost('direccion'),
+            'telefono' => $this->request->getPost('telefono'),
+            'correo' => $this->request->getPost('correo'),
+        ];
+        if ($this->proveedor->where('id', $id)->set($data)->update()) {
+            $this->bitacora->insert(['accion' => 'Informacion de proveedor actualizada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+            return view('dashboard', [
+                'view' => 'proveedor/editarProveedor',
+                'datos' => $this->proveedor->where('id', $id)->find(),
+                'exito' => 'Datos actualizados correctamente',
+            ]);
+        }
+        ;
     }
     protected function listaProveedores()
     {
