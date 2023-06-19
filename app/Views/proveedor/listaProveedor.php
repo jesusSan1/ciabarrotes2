@@ -57,3 +57,4 @@
     </table>
 </div>
 <script src="js/listaProveedores.js"></script>
+<script src="js/tablas.js"></script>
