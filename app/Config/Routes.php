@@ -41,6 +41,11 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
     $routes->post('categorias', 'Categorias::index');
     $routes->post('eliminarCategoria', 'Categorias::eliminarCategoria');
     $routes->post('editarCategoria', 'Categorias::editarCategoria');
+    $routes->get('proveedores', 'Proveedores::index');
+    $routes->post('proveedores', 'Proveedores::index');
+    $routes->post('eliminarProveedor', 'Proveedores::eliminarProveedor');
+    $routes->post('editar-proveedor', 'Proveedores::editarProveedor');
+    $routes->post('updateProveedor', 'Proveedores::updateProveedor');
 
     $routes->group('', ['filter' => 'vendedor'], static function ($routes) { //! autenticacion y perfil
         $routes->get('perfil', 'Perfil::index');
@@ -57,6 +62,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->get('editar-empleado', 'Empleados::editarEmpleado');
         $routes->post('editar-empleado', 'Empleados::editarEmpleado');
         $routes->post('updateEmpleado', 'Empleados::updateEmpleado');
+        $routes->get('bitacora', 'Bitacora::index');
     });
 });
 

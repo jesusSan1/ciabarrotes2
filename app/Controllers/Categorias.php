@@ -3,17 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\BitacoraModel;
 use App\Models\CategoriaModel;
 
 class Categorias extends BaseController
 {
     protected $categoria;
+    protected $bitacora;
     protected $request;
     protected $db;
 
     public function __construct()
     {
         $this->categoria = new CategoriaModel;
+        $this->bitacora = new BitacoraModel;
         $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
 
@@ -45,6 +48,7 @@ class Categorias extends BaseController
                 'eliminado' => 0,
             ];
             if ($this->categoria->insert($data)) {
+                $this->bitacora->insert(['accion' => 'Nueva categoria creada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
                 return view('dashboard', [
                     'view' => 'categorias/index',
                     'exito' => 'Categoria guardada con exito',
@@ -61,12 +65,16 @@ class Categorias extends BaseController
     {
         $id = $this->request->getPost('id');
         $this->categoria->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
+        $this->bitacora->insert(['accion' => 'Categoria eliminada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+
     }
     public function editarCategoria()
     {
         $id = $this->request->getPost('id');
         $valor = $this->request->getPost('valor');
         $this->categoria->where('id', $id)->set(['nombre' => $valor])->update();
+        $this->bitacora->insert(['accion' => 'Cambio de nombre en categoria', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+
     }
     protected function listaCategorias()
     {

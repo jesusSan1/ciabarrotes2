@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProveedorModel extends Model
+class BitacoraModel extends Model
 {
     protected $DBGroup = 'default';
-    protected $table = 'proveedor';
+    protected $table = 'bitacora';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $insertID = 0;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['id', 'nombre', 'telefono', 'correo', 'direccion', 'fecha_creacion', 'fecha_eliminado', 'eliminado', 'creado_por'];
+    protected $allowedFields = ['id', 'accion', 'fecha', 'id_usuario'];
 
     // Dates
     protected $useTimestamps = false;

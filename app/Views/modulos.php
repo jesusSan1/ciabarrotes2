@@ -2,6 +2,30 @@
 <?php if (session()->get('rol_id') == 1): ?>
 <div class="row">
     <div class="col-md-3">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <a href="bitacora">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Bitacora</div>
+                        </a>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <a href="bitacora">
+                                <p class="text-success">Movimientos del sistema</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <a href="categorias">
+                            <i class="fas fa-book fa-2x text-gray-300"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
         <div class="card border-left-secondary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
