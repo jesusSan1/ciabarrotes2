@@ -64,6 +64,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->post('updateEmpleado', 'Empleados::updateEmpleado');
         $routes->get('bitacora', 'Bitacora::index');
         $routes->get('productos', 'Productos::index');
+        $routes->post('productos', 'Productos::index');
     });
 });
 
