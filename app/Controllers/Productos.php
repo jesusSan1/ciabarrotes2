@@ -80,16 +80,6 @@ class Productos extends BaseController
                         'numeric' => 'El {field} debe ser llenada con numeros',
                     ],
                 ],
-            ];
-            if (!$this->validate($rules)) {
-                return view('dashboard', [
-                    'view' => 'productos/index',
-                    'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
-                    'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
-                    'errors' => \Config\Services::validation()->listErrors(),
-                ]);
-            }
-            $validationRule = [
                 'userfile' => [
                     'label' => 'Imagen del producto',
                     'rules' => [
@@ -102,7 +92,7 @@ class Productos extends BaseController
                     ],
                 ],
             ];
-            if (!$this->validate($validationRule)) {
+            if (!$this->validate($rules)) {
                 return view('dashboard', [
                     'view' => 'productos/index',
                     'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
