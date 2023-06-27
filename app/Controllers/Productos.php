@@ -31,6 +31,7 @@ class Productos extends BaseController
     public function index()
     {
         helper('form');
+        helper('filesystem');
         if ($this->request->getMethod() === 'post') {
             $rules = [
                 'nombre' => [
@@ -83,7 +84,6 @@ class Productos extends BaseController
                 'userfile' => [
                     'label' => 'Imagen del producto',
                     'rules' => [
-                        'uploaded[userfile]',
                         'is_image[userfile]',
                         'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
                     ],
@@ -97,6 +97,7 @@ class Productos extends BaseController
                     'view' => 'productos/index',
                     'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
                     'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
+                    'productos' => $this->listaProductos(),
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
@@ -105,8 +106,8 @@ class Productos extends BaseController
             $img = $this->request->getFile('userfile');
             if ($img->isValid() && !$img->hasMoved()) {
                 $imageName = $img->getRandomName();
-                $img->move(WRITEPATH . 'uploads/' . $imageName);
-                $this->productos->insert($this->datos(WRITEPATH . 'uploads/' . $imageName));
+                $img->move('uploads/', $imageName);
+                $this->productos->insert($this->datos($imageName));
                 $this->bitacora->insert(['accion' => 'Nuevo producto agregado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
                 $this->exito();
             } else {
@@ -119,6 +120,7 @@ class Productos extends BaseController
             'view' => 'productos/index',
             'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
+            'productos' => $this->listaProductos(),
         ]);
     }
     protected function exito()
@@ -127,6 +129,7 @@ class Productos extends BaseController
             'view' => 'productos/index',
             'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
+            'productos' => $this->listaProductos(),
             'exito' => 'Producto guardado con exito',
         ]);
 
@@ -153,5 +156,14 @@ class Productos extends BaseController
             'creado_por' => session()->get('id'),
             'fecha_creacion' => date('Y-m-d'),
         ];
+    }
+    protected function listaProductos()
+    {
+        $builder = $this->db->table('producto as p');
+        $builder->select('p.id, p.codigo_barras, p.nombre, p.existencia, p.precio_venta, p.fecha_creacion, p.imagen, u.nombre as creado_por');
+        $builder->join('usuarios as u', 'p.creado_por = u.id');
+        $builder->where('p.eliminado !=', 1);
+        $builder->where('p.id !=', 1);
+        return $builder->get()->getResult();
     }
 }

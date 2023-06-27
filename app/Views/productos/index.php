@@ -38,7 +38,7 @@
                         <?=view('productos/agregarProducto')?>
                     </div>
                     <div id="menu1" class="tab-pane fade"><br>
-                        Lista de productos
+                    <?= view('productos/listaProductos') ?>
                     </div>
                     <div id="menu2" class="tab-pane fade"><br>
                         Lista de productos minimos
