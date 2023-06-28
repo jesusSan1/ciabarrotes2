@@ -98,6 +98,7 @@ class Productos extends BaseController
                     'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
                     'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
                     'productos' => $this->listaProductos(),
+                    'productosMinimos' => $this->productos->productosExistenciaMinima(),
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
@@ -121,6 +122,7 @@ class Productos extends BaseController
             'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
             'productos' => $this->listaProductos(),
+            'productosMinimos' => $this->productos->productosExistenciaMinima(),
         ]);
     }
     protected function exito()
@@ -130,6 +132,7 @@ class Productos extends BaseController
             'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
             'productos' => $this->listaProductos(),
+            'productosMinimos' => $this->productos->productosExistenciaMinima(),
             'exito' => 'Producto guardado con exito',
         ]);
 
@@ -163,7 +166,6 @@ class Productos extends BaseController
         $builder->select('p.id, p.codigo_barras, p.nombre, p.existencia, p.precio_venta, p.fecha_creacion, p.imagen, u.nombre as creado_por');
         $builder->join('usuarios as u', 'p.creado_por = u.id');
         $builder->where('p.eliminado !=', 1);
-        $builder->where('p.id !=', 1);
         return $builder->get()->getResult();
     }
 }

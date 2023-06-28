@@ -39,4 +39,20 @@ class ProductosModel extends Model
     protected $afterFind = [];
     protected $beforeDelete = [];
     protected $afterDelete = [];
+    public function productosExistenciaMinima()
+    {
+        $db = db_connect();
+        return $db->query("select p.id
+,p.imagen
+,p.nombre
+,p.existencia
+,p.existencia_minima
+,CASE
+ when p.existencia = p.existencia_minima then 1
+ when p.existencia between 1 and p.existencia_minima then 2
+ when p.existencia = 0 then 3
+end as estatus
+from producto p
+where p.existencia <= p.existencia_minima and p.eliminado = 0")->getResult();
+    }
 }

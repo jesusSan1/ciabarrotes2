@@ -24,8 +24,8 @@
                                 class="fas fa-boxes"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link producto-minimo" data-toggle="tab" href="#menu2">Productos en stock minimo <i
-                                class="fas fa-stopwatch-20"></i></a>
+                        <a class="nav-link producto-minimo" data-toggle="tab" href="#menu2">Productos en existencia
+                            minima <i class="fas fa-stopwatch-20"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link producto-caducado" data-toggle="tab" href="#menu3">Productos a punto de
@@ -38,10 +38,10 @@
                         <?=view('productos/agregarProducto')?>
                     </div>
                     <div id="menu1" class="tab-pane fade"><br>
-                    <?= view('productos/listaProductos') ?>
+                        <?= view('productos/listaProductos') ?>
                     </div>
                     <div id="menu2" class="tab-pane fade"><br>
-                        Lista de productos minimos
+                        <?= view('productos/listaProductosExistenciaMinima') ?>
                     </div>
                     <div id="menu3" class="tab-pane fade"><br>
                         Lista de productos caducados
