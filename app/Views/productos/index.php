@@ -50,6 +50,7 @@
             </div>
         </div>
     </div>
+    <script src="js/zoom.js"></script>
     <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()

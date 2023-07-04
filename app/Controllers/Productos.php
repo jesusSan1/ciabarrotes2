@@ -127,6 +127,13 @@ class Productos extends BaseController
             'productosCaducados' => $this->productos->productosCaducados(),
         ]);
     }
+    public function eliminarProducto()
+    {
+        $id = $this->request->getPost('id');
+        $this->productos->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
+        $this->bitacora->insert(['accion' => 'Eliminacion de producto', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+
+    }
     protected function exito()
     {
         return view('dashboard', [

@@ -21,6 +21,7 @@
             <?php foreach ($productos as $producto): ?>
             <tr>
                 <td scope="row">
+                    <input type="hidden" name="id" value="<?=$producto->id?>">
                     <?php $img = $producto->imagen ? 'uploads/' . $producto->imagen : 'images/caja.png'?>
                     <img src="<?=$img?>" alt="Imagen del producto" height="50" class="imagen">
                 </td>
@@ -48,7 +49,7 @@
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>
-                    <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    <button type="button" class="btn btn-danger eliminar-producto"><i class="fas fa-trash"></i></button>
                 </td>
                 <?php endif;?>
             </tr>
@@ -56,4 +57,4 @@
         </tbody>
     </table>
 </div>
-<script src="js/zoom.js"></script>
+<script src="js/listaProductos.js"></script>
