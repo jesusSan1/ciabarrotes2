@@ -39,6 +39,7 @@ class ProductosModel extends Model
     protected $afterFind = [];
     protected $beforeDelete = [];
     protected $afterDelete = [];
+
     public function productosExistenciaMinima()
     {
         $db = db_connect();
@@ -54,5 +55,30 @@ class ProductosModel extends Model
 end as estatus
 from producto p
 where p.existencia <= p.existencia_minima and p.eliminado = 0")->getResult();
+    }
+
+    public function productosCaducados()
+    {
+        $db = db_connect();
+        return $db->query("select p.id
+,p.imagen
+,p.nombre
+,p.eliminado,
+p.existencia
+,fecha_caducidad
+,if(datediff(fecha_caducidad, curdate()) <= 0,
+		0,
+		datediff(fecha_caducidad, curdate())
+) as dias
+,case
+	when datediff(fecha_caducidad, curdate()) <= 0 then 1 -- 1
+	when datediff(fecha_caducidad, curdate()) between 5 and 10 then 2 -- 2
+	when datediff(fecha_caducidad, curdate()) between 1 and 4 then 3 -- 3
+end
+as estatus
+from producto p
+where p.existencia > 0
+and datediff(fecha_caducidad, curdate()) <= 10
+and p.eliminado = 0")->getResult();
     }
 }

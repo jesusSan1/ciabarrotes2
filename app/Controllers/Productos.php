@@ -99,6 +99,7 @@ class Productos extends BaseController
                     'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
                     'productos' => $this->listaProductos(),
                     'productosMinimos' => $this->productos->productosExistenciaMinima(),
+                    'productosCaducados' => $this->productos->productosCaducados(),
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
@@ -123,6 +124,7 @@ class Productos extends BaseController
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
             'productos' => $this->listaProductos(),
             'productosMinimos' => $this->productos->productosExistenciaMinima(),
+            'productosCaducados' => $this->productos->productosCaducados(),
         ]);
     }
     protected function exito()
@@ -133,6 +135,7 @@ class Productos extends BaseController
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
             'productos' => $this->listaProductos(),
             'productosMinimos' => $this->productos->productosExistenciaMinima(),
+            'productosCaducados' => $this->productos->productosCaducados(),
             'exito' => 'Producto guardado con exito',
         ]);
 

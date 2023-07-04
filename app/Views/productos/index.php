@@ -38,13 +38,13 @@
                         <?=view('productos/agregarProducto')?>
                     </div>
                     <div id="menu1" class="tab-pane fade"><br>
-                        <?= view('productos/listaProductos') ?>
+                        <?=view('productos/listaProductos')?>
                     </div>
                     <div id="menu2" class="tab-pane fade"><br>
-                        <?= view('productos/listaProductosExistenciaMinima') ?>
+                        <?=view('productos/listaProductosExistenciaMinima')?>
                     </div>
                     <div id="menu3" class="tab-pane fade"><br>
-                        Lista de productos caducados
+                        <?=view('productos/listaProductosCaducados')?>
                     </div>
                 </div>
             </div>

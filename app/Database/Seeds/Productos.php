@@ -11,12 +11,12 @@ class Productos extends Seeder
     {
         $faker = Factory::create();
         $data = [];
-        for ($i = 0; $i <= 15; $i++) {
+        for ($i = 1; $i <= 15; $i++) {
             $data[] = [
                 'codigo_barras' => $faker->ean13(),
                 'sku' => '',
-                'nombre' => $faker->word(),
-                'fecha_caducidad' => $faker->date('Y_m_d'),
+                'nombre' => "Producto$i",
+                'fecha_caducidad' => '2023' . $faker->month() . $faker->dayOfMonth(),
                 'existencia' => $faker->numberBetween(0, 15),
                 'existencia_minima' => $faker->numberBetween(0, 15),
                 'presentacion' => '',
@@ -32,7 +32,7 @@ class Productos extends Seeder
                 'creado_por' => 1,
                 'fecha_creacion' => $faker->date('Y_m_d'),
                 'fecha_eliminado' => '0000-00-00',
-                'eliminado' => 0,
+                'eliminado' => $faker->numberBetween(0, 1),
             ];
         }
         $builder = $this->db->table('producto');
