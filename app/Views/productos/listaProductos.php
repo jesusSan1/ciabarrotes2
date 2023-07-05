@@ -45,7 +45,10 @@
                     <?=$producto->fecha_creacion?>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                    <form action="editar-producto" method="post">
+                        <input type="hidden" name="id" value="<?=$producto->id?>">
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                    </form>
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>

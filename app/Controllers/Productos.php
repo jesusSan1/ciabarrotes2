@@ -134,6 +134,51 @@ class Productos extends BaseController
         $this->bitacora->insert(['accion' => 'Eliminacion de producto', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
 
     }
+    public function editarProducto()
+    {
+        helper('form');
+        $id = $this->request->getPost('id');
+        return view('dashboard', [
+            'view' => 'productos/editarProducto',
+            'datos' => $this->datosEditar($id),
+            'proveedores' => $this->proveedor->findAll(),
+            'categorias' => $this->categoria->findAll(),
+        ]);
+    }
+    public function updateProducto()
+    {
+        $id = $this->request->getPost('id');
+        $imagenOld = $this->productos->where('id', $id)->first();
+        $img = $this->request->getFile('userfile');
+        if ($img->isValid() && !$img->hasMoved()) {
+            $imageName = $img->getRandomName();
+            $img->move('uploads/', $imageName);
+            if ($imagenOld['imagen'] != '') {
+                unlink('uploads/' . $imagenOld['imagen']);
+            }
+            $this->productos->where('id', $id)->set($this->datos($imageName))->update();
+            $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+            // $this->exito();
+            return view('dashboard', [
+                'view' => 'productos/editarProducto',
+                'datos' => $this->datosEditar($id),
+                'proveedores' => $this->proveedor->findAll(),
+                'categorias' => $this->categoria->findAll(),
+                'exito' => 'Producto editado correctamente',
+            ]);
+        } else {
+            $this->productos->where('id', $id)->set($this->datos(''))->update();
+            $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+            return view('dashboard', [
+                'view' => 'productos/editarProducto',
+                'datos' => $this->datosEditar($id),
+                'proveedores' => $this->proveedor->findAll(),
+                'categorias' => $this->categoria->findAll(),
+                'exito' => 'Producto editado correctamente',
+            ]);
+        }
+
+    }
     protected function exito()
     {
         return view('dashboard', [
@@ -146,6 +191,15 @@ class Productos extends BaseController
             'exito' => 'Producto guardado con exito',
         ]);
 
+    }
+    protected function datosEditar($id)
+    {
+        $builder = $this->db->table('producto as p');
+        $builder->select('p.id ,p.codigo_barras ,p.sku ,p.nombre ,p.fecha_caducidad ,p.existencia ,p.existencia_minima ,p.presentacion ,p.precio_compra ,p.precio_venta ,p.precio_venta_mayoreo ,p.descuento_venta ,p.marca ,p.modelo ,p2.nombre as nombre_proveedor ,c.nombre as nombre_categoria, p.categoria_id, p.proveedor_id');
+        $builder->join('proveedor as p2', 'p.proveedor_id = p2.id');
+        $builder->join('categoria as c', 'p.categoria_id = c.id');
+        $builder->where('p.id', $id);
+        return $builder->get()->getResult();
     }
     protected function datos($ruta)
     {

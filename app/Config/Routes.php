@@ -49,6 +49,8 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
     $routes->get('productos', 'Productos::index');
     $routes->post('productos', 'Productos::index');
     $routes->post('eliminar-producto', 'Productos::eliminarProducto');
+    $routes->post('editar-producto', 'Productos::editarProducto');
+    $routes->post('updateProducto', 'Productos::updateProducto');
 
     $routes->group('', ['filter' => 'vendedor'], static function ($routes) { //! autenticacion y perfil
         $routes->get('perfil', 'Perfil::index');
