@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-responsive">
+    <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
                 <th>Imagen del producto</th>
