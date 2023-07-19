@@ -8,6 +8,8 @@ class Init extends Seeder
 {
     public function run()
     {
-        //
+        $this->call('Roles');
+        $this->call('Usuarios');
+        $this->call('Configuracion');
     }
 }
