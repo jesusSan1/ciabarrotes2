@@ -189,10 +189,7 @@ $name = $conf->findAll();
                 <div id="collapseFive" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="producto">Agregar productos</a>
-                        <a class="collapse-item" href="producto#producto-almacen">Productos en almacen</a>
-                        <a class="collapse-item" href="producto#producto-minimo">Productos stock minimo</a>
-                        <a class="collapse-item" href="producto#producto-caducado">Productos caducados</a>
+                        <a class="collapse-item" href="productos">Agregar productos</a>
                     </div>
                 </div>
             </li>

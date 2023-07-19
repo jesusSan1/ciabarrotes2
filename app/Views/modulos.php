@@ -140,12 +140,12 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <a href="producto">
+                        <a href="productos">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Productos</div>
                         </a>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            <a href="producto">
+                            <a href="productos">
                                 <?php foreach ($productos as $producto): ?>
                                 <p class="text-info"><?=$producto?> productos agregados
                                     <?php endforeach;?>
@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <div class="col-auto">
-                        <a href="producto">
+                        <a href="productos">
                             <i class="fas fa-boxes fa-2x text-gray-300"></i>
                         </a>
                     </div>
