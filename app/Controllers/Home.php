@@ -17,7 +17,7 @@ class Home extends BaseController
         if ($session->get('login')) {
             return redirect()->to('dashboard');
         }
-        if ($request->getMethod() === 'post') {
+        if ($request->is('post')) {
             $rules = [
                 'usuario-correo' => [
                     'label' => 'usuario o correo electronico',
@@ -35,8 +35,7 @@ class Home extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/layout', [
-                    'view' => 'login/login',
+                return view('login/login', [
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
@@ -60,24 +59,21 @@ class Home extends BaseController
                         $bitacora->insert(['accion' => 'Usuario inicio sesion', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
                         return redirect()->to('dashboard');
                     } else {
-                        return view('login/layout', [
-                            'view' => 'login/login',
+                        return view('login/login', [
                             'errors' => 'El usuario no puede ingresar al sistema',
                         ]);
                     }
                 } else {
-                    return view('login/layout', [
-                        'view' => 'login/login',
+                    return view('login/login', [
                         'errors' => 'Usuario y/o contraseña incorrectas',
                     ]);
                 }
             } else {
-                return view('login/layout', [
-                    'view' => 'login/login',
+                return view('login/login', [
                     'errors' => 'Usuario y/o contraseña incorrectas',
                 ]);
             }
         }
-        return view('login/layout', ['view' => 'login/login']);
+        return view('login/login');
     }
 }

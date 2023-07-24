@@ -25,7 +25,7 @@ class Recuperacion extends BaseController
         if ($this->session->get('login')) {
             return redirect()->to('dashboard');
         }
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'correo' => [
                     'label' => 'correo electronico',
@@ -37,19 +37,17 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/layout', [
-                    'view' => 'login/recuperacion',
+                return view('login/recuperacion', [
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
             $correo = $this->request->getPost('correo');
             $existeCorreo = $this->usuarios->where('correo', $correo)->first();
-            $usuarioHabilitado = $existeCorreo['habilitado'];
-            $usuarioEliminado = $existeCorreo['eliminado'];
             if ($existeCorreo) {
+                $usuarioHabilitado = $existeCorreo['habilitado'];
+                $usuarioEliminado = $existeCorreo['eliminado'];
                 if ($usuarioHabilitado == 0 || $usuarioEliminado == 1) {
-                    return view('login/layout', [
-                        'view' => 'login/recuperacion',
+                    return view('login/recuperacion', [
                         'errors' => 'No tienes permitido recuperar la contraseña',
                     ]);
                 } else {
@@ -64,15 +62,12 @@ class Recuperacion extends BaseController
                     return redirect()->to('verificar-token');
                 }
             } else {
-                return view('login/layout', [
-                    'view' => 'login/recuperacion',
+                return view('login/recuperacion', [
                     'errors' => 'El correo electronico no se encuentra',
                 ]);
             }
         }
-        return view('login/layout', [
-            'view' => 'login/recuperacion',
-        ]);
+        return view('login/recuperacion');
     }
     protected function enviarEmail(string $email = 'example@example.com', string $token = '000000')
     {
@@ -88,7 +83,7 @@ class Recuperacion extends BaseController
 
     public function verificarToken()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'token' => [
                     'label' => 'token',
@@ -99,31 +94,27 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/layout', [
-                    'view' => 'login/verificarToken',
+                return view('login/verificarToken', [
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
             $token = $this->request->getPost('token');
-            [$n1, $n2, $n3, $n4,$n5, $n6] = $token;
-            $tokenCreado = $n1.$n2.$n3.$n4.$n5.$n6;
+            [$n1, $n2, $n3, $n4, $n5, $n6] = $token;
+            $tokenCreado = $n1 . $n2 . $n3 . $n4 . $n5 . $n6;
             $tokenGuardado = $this->usuarios->where('correo', $this->session->get('correo'))->first();
             if ($tokenCreado === $tokenGuardado['token']) {
                 return redirect()->to('crear-password');
             } else {
-                return view('login/layout', [
-                    'view' => 'login/verificarToken',
+                return view('login/verificarToken', [
                     'errors' => 'El token no coincide',
                 ]);
             }
         }
-        return view('login/layout', [
-            'view' => 'login/verificarToken',
-        ]);
+        return view('login/verificarToken');
     }
     public function crearPassword()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'password' => [
                     'label' => 'contraseña',
@@ -135,8 +126,7 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/layout', [
-                    'view' => 'login/crearPassword',
+                return view('login/crearPassword', [
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
@@ -145,8 +135,6 @@ class Recuperacion extends BaseController
             $this->session->destroy();
             return redirect()->to('/');
         }
-        return view('login/layout', [
-            'view' => 'login/crearPassword',
-        ]);
+        return view('login/crearPassword');
     }
 }

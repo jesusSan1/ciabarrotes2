@@ -14,7 +14,34 @@
 
 <body class="my-login-page">
     <div id="particles-js"></div>
-    <?=view($view)?>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="brand">
+                        <img src="images/shops.png" alt="logo">
+                    </div>
+                    <?php if (isset($errors)): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?=$errors?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <?php endif;?>
+                    <div class="card fat shadow">
+                        <div class="card-body">
+                            <h4 class="card-title"><?= $this->renderSection('titulo') ?></h4>
+                            <?= $this->renderSection('contenido') ?>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        Copyright &copy; 2022 &mdash; jesusSan1
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="jquery/jquery-3.6.0.js"></script>
     <script src="fontawesome/js/all.js"></script>
