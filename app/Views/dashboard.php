@@ -93,31 +93,16 @@ $name = $conf->findAll();
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
+                <a class="nav-link" href="configuracion">
                     <i class="fas fa-cogs"></i>
-                    <span>Configuración</span>
+                    <span>Configuracion</span>
                 </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="configuracion">Configuración</a>
-                    </div>
-                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="empleados">
                     <i class="fas fa-users-cog"></i>
                     <span>Empleados</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="empleados">Agregar empleado</a>
-                        <a class="collapse-item" href="empleados#lista-empleados">Lista de Empleados</a>
-                    </div>
-                </div>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -130,18 +115,10 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="perfil" data-toggle="collapse" data-target="#collapsePerfil"
-                    aria-expanded="true" aria-controls="collapsePerfil">
+                <a class="nav-link" href="perfil">
                     <i class="fas fa-user"></i>
                     <span>Perfil de usuario</span>
                 </a>
-                <div id="collapsePerfil" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="perfil">Cambiar mis datos</a>
-
-                    </div>
-                </div>
             </li>
             <hr class="sidebar-divider">
             <?php endif;?>
@@ -153,47 +130,23 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseThree">
+                <a class="nav-link" href="categorias">
                     <i class="fas fa-tags"></i>
                     <span>Categorias</span>
                 </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="categorias">Nueva categoria</a>
-                        <a class="collapse-item" href="categorias#lista-categorias">Lista de categoria</a>
-                    </div>
-                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseFour">
+                <a class="nav-link" href="proveedores">
                     <i class="fas fa-truck"></i>
                     <span>Proveedores</span>
                 </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="proveedores">Agregar proveedores</a>
-                        <a class="collapse-item" href="proveedores#lista-proveedores">lista de proveedores</a>
-                    </div>
-                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
-                    aria-expanded="true" aria-controls="collapseFive">
+                <a class="nav-link" href="productos">
                     <i class="fas fa-boxes"></i>
                     <span>Productos</span>
                 </a>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingThre" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="productos">Agregar productos</a>
-                    </div>
-                </div>
             </li>
-
             <hr class="sidebar-divider">
             <li class="nav-item active">
                 <a class="nav-link" href="salir">
