@@ -11,5 +11,8 @@ class Init extends Seeder
         $this->call('Roles');
         $this->call('Usuarios');
         $this->call('Configuracion');
+        $this->call('Presentacion');
+        $this->call('Proveedor');
+        $this->call('Categoria');
     }
 }

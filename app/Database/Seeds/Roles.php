@@ -8,15 +8,16 @@ class Roles extends Seeder
 {
     public function run()
     {
-        $usuario1 = [
-            'nombre' => 'admin',
-            'descripcion' => 'Soy el admin',
+        $data = [
+            [
+                'nombre' => 'admin',
+                'descripcion' => 'Soy el admin',
+            ],
+            [
+                'nombre' => 'vendedor',
+                'descripcion' => 'Soy el vendedor',
+            ],
         ];
-        $usuario2 = [
-            'nombre' => 'vendedor',
-            'descripcion' => 'Soy el vendedor',
-        ];
-        $this->db->table('roles')->insert($usuario1);
-        $this->db->table('roles')->insert($usuario2);
+        $this->db->table('roles')->insertBatch($data);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\BitacoraModel;
 use App\Models\CategoriaModel;
+use App\Models\PresentacionModel;
 use App\Models\ProductosModel;
 use App\Models\ProveedorModel;
 use CodeIgniter\Files\File;
@@ -15,6 +16,7 @@ class Productos extends BaseController
     protected $bitacora;
     protected $productos;
     protected $proveedor;
+    protected $presentacion;
     protected $categoria;
     protected $db;
 
@@ -25,6 +27,7 @@ class Productos extends BaseController
         $this->bitacora = new BitacoraModel;
         $this->productos = new ProductosModel;
         $this->proveedor = new ProveedorModel;
+        $this->presentacion = new PresentacionModel;
         $this->categoria = new CategoriaModel;
     }
 
@@ -100,6 +103,7 @@ class Productos extends BaseController
                     'productos' => $this->listaProductos(),
                     'productosMinimos' => $this->productos->productosExistenciaMinima(),
                     'productosCaducados' => $this->productos->productosCaducados(),
+                    'presentaciones' => $this->presentacion->findAll(),
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
@@ -125,6 +129,7 @@ class Productos extends BaseController
             'productos' => $this->listaProductos(),
             'productosMinimos' => $this->productos->productosExistenciaMinima(),
             'productosCaducados' => $this->productos->productosCaducados(),
+            'presentaciones' => $this->presentacion->findAll(),
         ]);
     }
     public function eliminarProducto()
@@ -143,6 +148,7 @@ class Productos extends BaseController
             'datos' => $this->datosEditar($id),
             'proveedores' => $this->proveedor->findAll(),
             'categorias' => $this->categoria->findAll(),
+            'presentaciones' => $this->presentacion->findAll(),
         ]);
     }
     public function updateProducto()
@@ -164,6 +170,7 @@ class Productos extends BaseController
                 'datos' => $this->datosEditar($id),
                 'proveedores' => $this->proveedor->findAll(),
                 'categorias' => $this->categoria->findAll(),
+                'presentaciones' => $this->presentacion->findAll(),
                 'exito' => 'Producto editado correctamente',
             ]);
         } else {
@@ -174,6 +181,7 @@ class Productos extends BaseController
                 'datos' => $this->datosEditar($id),
                 'proveedores' => $this->proveedor->findAll(),
                 'categorias' => $this->categoria->findAll(),
+                'presentaciones' => $this->presentacion->findAll(),
                 'exito' => 'Producto editado correctamente',
             ]);
         }
@@ -188,6 +196,7 @@ class Productos extends BaseController
             'productos' => $this->listaProductos(),
             'productosMinimos' => $this->productos->productosExistenciaMinima(),
             'productosCaducados' => $this->productos->productosCaducados(),
+            'presentaciones' => $this->presentacion->findAll(),
             'exito' => 'Producto guardado con exito',
         ]);
 
