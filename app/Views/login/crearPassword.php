@@ -6,7 +6,7 @@ Crear nueva contraseña
 <form method="POST" class="my-login-validation" autocomplete="off">
     <div class="form-group">
         <label>Nueva contraseña</label>
-        <input type="password" class="form-control" name="password" value="" required autofocus>
+        <input type="password" class="form-control" name="password" value="<?=old('password')?>" required autofocus>
     </div>
     <br>
     <div class="form-group m-0">

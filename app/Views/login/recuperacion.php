@@ -6,7 +6,7 @@ Recuperacion de contraseña olvidada
 <form method="POST" class="my-login-validation" autocomplete="off">
     <div class="form-group">
         <label>Correo electronico</label>
-        <input type="email" class="form-control" name="correo" value="" required autofocus>
+        <input type="email" class="form-control" name="correo" value="<?=old('correo')?>" required autofocus>
     </div>
     <br>
     <div class="form-group m-0">

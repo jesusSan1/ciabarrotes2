@@ -13,7 +13,7 @@ class Home extends BaseController
         $bitacora = new BitacoraModel;
         $request = \Config\Services::request();
         $session = \Config\Services::session();
-        helper('form');
+        helper(['form', 'html']);
         if ($session->get('login')) {
             return redirect()->to('dashboard');
         }
@@ -35,9 +35,7 @@ class Home extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/login', [
-                    'errors' => \Config\Services::validation()->listErrors(),
-                ]);
+                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
             }
             $usuario = $request->getPost('usuario-correo');
             $password = $request->getPost('password');
@@ -59,19 +57,13 @@ class Home extends BaseController
                         $bitacora->insert(['accion' => 'Usuario inicio sesion', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
                         return redirect()->to('dashboard');
                     } else {
-                        return view('login/login', [
-                            'errors' => 'El usuario no puede ingresar al sistema',
-                        ]);
+                        return redirect()->back()->with('errors', 'El usuario no puede ingresar al sistema')->withInput();
                     }
                 } else {
-                    return view('login/login', [
-                        'errors' => 'Usuario y/o contraseña incorrectas',
-                    ]);
+                    return redirect()->back()->with('errors', 'Usuario y/o contraseña incorrectas')->withInput();
                 }
             } else {
-                return view('login/login', [
-                    'errors' => 'Usuario y/o contraseña incorrectas',
-                ]);
+                return redirect()->back()->with('errors', 'Usuario y/o contraseña incorrectas')->withInput();
             }
         }
         return view('login/login');

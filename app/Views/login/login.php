@@ -3,25 +3,22 @@
 Inicio de sesión
 <?=$this->endSection()?>
 <?=$this->section('contenido')?>
-<form method="POST" class="my-login-validation" autocomplete="off">
-    <div class="form-group">
-        <label>Usuario o correo electronico</label>
-        <input type="text" class="form-control" name="usuario-correo" value="" required autofocus>
+<?=form_open('', ['class' => 'my-login-validation', 'autocomplete' => 'off']);?>
+<div class="form-group">
+    <?=form_label('Usuario o correo electronico', 'usuario-correo')?>
+    <?=form_input(['type' => 'text', 'id' => 'usuario-correo', 'class' => 'form-control', 'name' => 'usuario-correo', 'value' => old('usuario-correo'), 'required' => true, 'autofocus' => true])?>
+</div>
+<div class="form-group">
+    <?=form_label('Contraseña', 'password')?>
+    <?=form_input(['type' => 'password', 'id' => 'password', 'class' => 'form-control', 'name' => 'password', 'value' => old('password')])?>
+</div>
+<div class="form-group m-0">
+    <?=form_submit('', 'Iniciar sesión', ['class' => 'btn btn-primary btn-block'])?>
+</div>
+<div class="row">
+    <div class="col-md-12 text-right">
+        <?=anchor('recuperacion', '¿Contraseña olvidada?')?>
     </div>
-    <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input id="password" type="password" class="form-control" name="password" required data-eye>
-
-    </div>
-    <div class="form-group m-0">
-        <button type="submit" class="btn btn-primary btn-block">
-            Iniciar sesión
-        </button>
-    </div>
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <a href="recuperacion">¿Contraseña olvidada?</a>
-        </div>
-    </div>
-</form>
+</div>
+<?=form_close()?>
 <?=$this->endSection()?>

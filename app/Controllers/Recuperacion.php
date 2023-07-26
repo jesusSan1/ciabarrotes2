@@ -18,7 +18,7 @@ class Recuperacion extends BaseController
         $this->request = \Config\Services::request();
         $this->email = \Config\Services::email();
         $this->session = \Config\Services::session();
-        helper(['form', 'text']);
+        helper(['form', 'text', 'html']);
     }
     public function index()
     {
@@ -37,9 +37,7 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/recuperacion', [
-                    'errors' => \Config\Services::validation()->listErrors(),
-                ]);
+                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
             }
             $correo = $this->request->getPost('correo');
             $existeCorreo = $this->usuarios->where('correo', $correo)->first();
@@ -47,9 +45,7 @@ class Recuperacion extends BaseController
                 $usuarioHabilitado = $existeCorreo['habilitado'];
                 $usuarioEliminado = $existeCorreo['eliminado'];
                 if ($usuarioHabilitado == 0 || $usuarioEliminado == 1) {
-                    return view('login/recuperacion', [
-                        'errors' => 'No tienes permitido recuperar la contraseña',
-                    ]);
+                    return redirect()->back()->with('errors', 'No tienes permitido recuperar la contraseña')->withInput();
                 } else {
                     $token = random_string('nozero', 6);
                     $this->usuarios->where('correo', $existeCorreo['correo'])->set(['token' => $token])->update();
@@ -62,9 +58,7 @@ class Recuperacion extends BaseController
                     return redirect()->to('verificar-token');
                 }
             } else {
-                return view('login/recuperacion', [
-                    'errors' => 'El correo electronico no se encuentra',
-                ]);
+                return redirect()->back()->with('errors', 'El correo electronico no se encuentra')->withInput();
             }
         }
         return view('login/recuperacion');
@@ -126,9 +120,7 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/crearPassword', [
-                    'errors' => \Config\Services::validation()->listErrors(),
-                ]);
+                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
             }
             $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
             $this->usuarios->where('correo', $this->session->get('correo'))->set(['password' => $password])->update();
