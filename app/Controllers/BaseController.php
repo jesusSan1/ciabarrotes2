@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\BitacoraModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -46,6 +47,7 @@ abstract class BaseController extends Controller
      * Constructor.
      */
     protected $security;
+    protected $bitacora;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -56,5 +58,6 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
         $this->security = \Config\Services::security();
+        $this->bitacora = new BitacoraModel;
     }
 }

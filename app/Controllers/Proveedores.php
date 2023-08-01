@@ -3,20 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\ProveedorModel;
 
 class Proveedores extends BaseController
 {
     protected $proveedor;
-    protected $bitacora;
     protected $request;
     protected $db;
 
     public function __construct()
     {
         $this->proveedor = new ProveedorModel;
-        $this->bitacora = new BitacoraModel;
         $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
     }

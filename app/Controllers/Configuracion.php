@@ -3,18 +3,15 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\ConfiguracionModel;
 
 class Configuracion extends BaseController
 {
     protected $configuracion;
-    protected $bitacora;
 
     public function __construct()
     {
         $this->configuracion = new ConfiguracionModel;
-        $this->bitacora = new BitacoraModel;
     }
 
     public function index()

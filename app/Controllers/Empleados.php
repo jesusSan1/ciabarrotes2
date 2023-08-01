@@ -3,19 +3,16 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\Usuarios;
 
 class Empleados extends BaseController
 {
     protected $usuarios;
     protected $request;
-    protected $bitacora;
 
     public function __construct()
     {
         $this->usuarios = new Usuarios;
-        $this->bitacora = new BitacoraModel;
         $this->request = \Config\Services::request();
     }
 

@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\CategoriaModel;
 use App\Models\PresentacionModel;
 use App\Models\ProductosModel;
@@ -13,7 +12,6 @@ use CodeIgniter\Files\File;
 class Productos extends BaseController
 {
     protected $request;
-    protected $bitacora;
     protected $productos;
     protected $proveedor;
     protected $presentacion;
@@ -24,7 +22,6 @@ class Productos extends BaseController
     {
         $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
-        $this->bitacora = new BitacoraModel;
         $this->productos = new ProductosModel;
         $this->proveedor = new ProveedorModel;
         $this->presentacion = new PresentacionModel;

@@ -3,20 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\CategoriaModel;
 
 class Categorias extends BaseController
 {
     protected $categoria;
-    protected $bitacora;
     protected $request;
     protected $db;
 
     public function __construct()
     {
         $this->categoria = new CategoriaModel;
-        $this->bitacora = new BitacoraModel;
         $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
 

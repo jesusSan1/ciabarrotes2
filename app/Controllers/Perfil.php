@@ -3,18 +3,15 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\Usuarios;
 
 class Perfil extends BaseController
 {
     protected $usuarios;
-    protected $bitacora;
 
     public function __construct()
     {
         $this->usuarios = new Usuarios;
-        $this->bitacora = new BitacoraModel;
     }
 
     public function index()
