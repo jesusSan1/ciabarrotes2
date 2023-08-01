@@ -90,14 +90,14 @@ class Empleados extends BaseController
                 ]);
             }
             $data = [
-                'nombre' => filter_var($this->request->getPost('nombre'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'apepat' => filter_var($this->request->getPost('apellido'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'telefono' => filter_var($this->request->getPost('telefono'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
+                'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
+                'apepat' => $this->security->sanitizeFilename($this->request->getPost('apellido')),
+                'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
                 'rol_id' => filter_var(intval($this->request->getPost('puesto')), FILTER_SANITIZE_NUMBER_INT),
-                'genero' => filter_var($this->request->getPost('sexo'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
-                'usuario' => filter_var($this->request->getPost('usuario'), FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW),
+                'genero' => $this->security->sanitizeFilename($this->request->getPost('sexo')),
+                'usuario' => $this->security->sanitizeFilename($this->request->getPost('usuario')),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'correo' => filter_var($this->request->getPost('email'), FILTER_SANITIZE_EMAIL),
+                'correo' => $this->security->sanitizeFilename($this->request->getPost('email')),
                 'habilitado' => filter_var(intval($this->request->getPost('estatus')), FILTER_SANITIZE_NUMBER_INT),
                 'foto_perfil' => $this->request->getPost('img'),
                 'fecha_creacion' => date('Y-m-d'),

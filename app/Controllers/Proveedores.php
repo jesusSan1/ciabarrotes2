@@ -57,10 +57,10 @@ class Proveedores extends BaseController
                 ]);
             }
             $data = [
-                'nombre' => $this->request->getPost('nombre'),
-                'direccion' => $this->request->getPost('direccion'),
-                'telefono' => $this->request->getPost('telefono'),
-                'correo' => $this->request->getPost('correo'),
+                'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
+                'direccion' => $this->security->sanitizeFilename($this->request->getPost('direccion')),
+                'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
+                'correo' => $this->security->sanitizeFilename($this->request->getPost('correo')),
                 'fecha_creacion' => date('Y-m-d'),
                 'creado_por' => session()->get('id'),
                 'eliminado' => 0,
@@ -98,10 +98,10 @@ class Proveedores extends BaseController
     {
         $id = $this->request->getPost('id');
         $data = [
-            'nombre' => $this->request->getPost('nombre'),
-            'direccion' => $this->request->getPost('direccion'),
-            'telefono' => $this->request->getPost('telefono'),
-            'correo' => $this->request->getPost('correo'),
+            'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
+            'direccion' => $this->security->sanitizeFilename($this->request->getPost('direccion')),
+            'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
+            'correo' => $this->security->sanitizeFilename($this->request->getPost('correo')),
         ];
         if ($this->proveedor->where('id', $id)->set($data)->update()) {
             $this->bitacora->insert(['accion' => 'Informacion de proveedor actualizada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
