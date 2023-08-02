@@ -36,16 +36,18 @@ class Perfil extends BaseController
                 ],
                 'usuario' => [
                     'label' => 'usuario',
-                    'rules' => 'required',
+                    'rules' => 'required|is_unique[usuarios.usuario]',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
+                        'is_unique' => 'El {field} ya está ocupado',
                     ],
                 ],
                 'email' => [
                     'label' => 'correo electronico',
-                    'rules' => 'valid_email',
+                    'rules' => 'valid_email|is_unique[usuarios.correo]',
                     'errors' => [
-                        'valid_email' => 'El {field} debe ser un {field} valido',
+                        'valid_email' => 'El {field} debe ser un {fied} valido',
+                        'is_unique' => 'El {field} ya está ocupado',
                     ],
                 ],
                 'telefono' => [
