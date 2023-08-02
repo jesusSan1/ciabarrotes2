@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\BitacoraModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -27,7 +28,6 @@ abstract class BaseController extends Controller
      * @var CLIRequest|IncomingRequest
      */
     protected $request;
-
     /**
      * An array of helpers to be loaded automatically upon
      * class instantiation. These helpers will be available
@@ -46,6 +46,9 @@ abstract class BaseController extends Controller
     /**
      * Constructor.
      */
+    protected $security;
+    protected $bitacora;
+
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
@@ -54,5 +57,7 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+        $this->security = \Config\Services::security();
+        $this->bitacora = new BitacoraModel;
     }
 }

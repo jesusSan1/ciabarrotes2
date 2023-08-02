@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\CategoriaModel;
+use App\Models\PresentacionModel;
 use App\Models\ProductosModel;
 use App\Models\ProveedorModel;
 use CodeIgniter\Files\File;
@@ -12,9 +12,9 @@ use CodeIgniter\Files\File;
 class Productos extends BaseController
 {
     protected $request;
-    protected $bitacora;
     protected $productos;
     protected $proveedor;
+    protected $presentacion;
     protected $categoria;
     protected $db;
 
@@ -22,9 +22,9 @@ class Productos extends BaseController
     {
         $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
-        $this->bitacora = new BitacoraModel;
         $this->productos = new ProductosModel;
         $this->proveedor = new ProveedorModel;
+        $this->presentacion = new PresentacionModel;
         $this->categoria = new CategoriaModel;
     }
 
@@ -100,6 +100,7 @@ class Productos extends BaseController
                     'productos' => $this->listaProductos(),
                     'productosMinimos' => $this->productos->productosExistenciaMinima(),
                     'productosCaducados' => $this->productos->productosCaducados(),
+                    'presentaciones' => $this->presentacion->findAll(),
                     'errors' => \Config\Services::validation()->listErrors(),
                 ]);
             }
@@ -125,6 +126,7 @@ class Productos extends BaseController
             'productos' => $this->listaProductos(),
             'productosMinimos' => $this->productos->productosExistenciaMinima(),
             'productosCaducados' => $this->productos->productosCaducados(),
+            'presentaciones' => $this->presentacion->findAll(),
         ]);
     }
     public function eliminarProducto()
@@ -143,6 +145,7 @@ class Productos extends BaseController
             'datos' => $this->datosEditar($id),
             'proveedores' => $this->proveedor->findAll(),
             'categorias' => $this->categoria->findAll(),
+            'presentaciones' => $this->presentacion->findAll(),
         ]);
     }
     public function updateProducto()
@@ -164,6 +167,7 @@ class Productos extends BaseController
                 'datos' => $this->datosEditar($id),
                 'proveedores' => $this->proveedor->findAll(),
                 'categorias' => $this->categoria->findAll(),
+                'presentaciones' => $this->presentacion->findAll(),
                 'exito' => 'Producto editado correctamente',
             ]);
         } else {
@@ -174,6 +178,7 @@ class Productos extends BaseController
                 'datos' => $this->datosEditar($id),
                 'proveedores' => $this->proveedor->findAll(),
                 'categorias' => $this->categoria->findAll(),
+                'presentaciones' => $this->presentacion->findAll(),
                 'exito' => 'Producto editado correctamente',
             ]);
         }
@@ -188,6 +193,7 @@ class Productos extends BaseController
             'productos' => $this->listaProductos(),
             'productosMinimos' => $this->productos->productosExistenciaMinima(),
             'productosCaducados' => $this->productos->productosCaducados(),
+            'presentaciones' => $this->presentacion->findAll(),
             'exito' => 'Producto guardado con exito',
         ]);
 
@@ -204,19 +210,19 @@ class Productos extends BaseController
     protected function datos($ruta)
     {
         return $data = [
-            'codigo_barras' => $this->request->getPost('codigo-barras'),
-            'sku' => $this->request->getPost('sku'),
-            'nombre' => $this->request->getPost('nombre'),
-            'fecha_caducidad' => $this->request->getPost('fecha-caducidad'),
-            'existencia' => $this->request->getPost('existencia'),
-            'existencia_minima' => $this->request->getPost('existencia-minima'),
-            'presentacion' => $this->request->getPost('presentacion'),
-            'precio_compra' => $this->request->getPost('precio-compra'),
-            'precio_venta' => $this->request->getPost('precio-venta'),
-            'precio_venta_mayoreo' => $this->request->getPost('precio-venta-mayoreo'),
-            'descuento_venta' => $this->request->getPost('descuento-venta'),
-            'marca' => $this->request->getPost('marca'),
-            'modelo' => $this->request->getPost('modelo'),
+            'codigo_barras' => $this->security->sanitizeFilename($this->request->getPost('codigo-barras')),
+            'sku' => $this->security->sanitizeFilename($this->request->getPost('sku')),
+            'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
+            'fecha_caducidad' => $this->security->sanitizeFilename($this->request->getPost('fecha-caducidad')),
+            'existencia' => $this->security->sanitizeFilename($this->request->getPost('existencia')),
+            'existencia_minima' => $this->security->sanitizeFilename($this->request->getPost('existencia-minima')),
+            'presentacion' => $this->security->sanitizeFilename($this->request->getPost('presentacion')),
+            'precio_compra' => $this->security->sanitizeFilename($this->request->getPost('precio-compra')),
+            'precio_venta' => $this->security->sanitizeFilename($this->request->getPost('precio-venta')),
+            'precio_venta_mayoreo' => $this->security->sanitizeFilename($this->request->getPost('precio-venta-mayoreo')),
+            'descuento_venta' => $this->security->sanitizeFilename($this->request->getPost('descuento-venta')),
+            'marca' => $this->security->sanitizeFilename($this->request->getPost('marca')),
+            'modelo' => $this->security->sanitizeFilename($this->request->getPost('modelo')),
             'proveedor_id' => $this->request->getPost('proveedor'),
             'categoria_id' => $this->request->getPost('categoria'),
             'imagen' => $ruta,

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\BitacoraModel;
 use App\Models\Usuarios;
 
 class Home extends BaseController
@@ -10,14 +9,13 @@ class Home extends BaseController
     public function index()
     {
         $usuarios = new Usuarios;
-        $bitacora = new BitacoraModel;
         $request = \Config\Services::request();
         $session = \Config\Services::session();
-        helper('form');
+        helper(['form', 'html']);
         if ($session->get('login')) {
             return redirect()->to('dashboard');
         }
-        if ($request->getMethod() === 'post') {
+        if ($request->is('post')) {
             $rules = [
                 'usuario-correo' => [
                     'label' => 'usuario o correo electronico',
@@ -35,10 +33,7 @@ class Home extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('login/layout', [
-                    'view' => 'login/login',
-                    'errors' => \Config\Services::validation()->listErrors(),
-                ]);
+                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
             }
             $usuario = $request->getPost('usuario-correo');
             $password = $request->getPost('password');
@@ -57,27 +52,18 @@ class Home extends BaseController
                             'rol_id' => $existeUsuario['rol_id'],
                         ];
                         $session->set($sess_data);
-                        $bitacora->insert(['accion' => 'Usuario inicio sesion', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+                        $this->bitacora->insert(['accion' => 'Usuario inicio sesion', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
                         return redirect()->to('dashboard');
                     } else {
-                        return view('login/layout', [
-                            'view' => 'login/login',
-                            'errors' => 'El usuario no puede ingresar al sistema',
-                        ]);
+                        return redirect()->back()->with('errors', 'El usuario no puede ingresar al sistema')->withInput();
                     }
                 } else {
-                    return view('login/layout', [
-                        'view' => 'login/login',
-                        'errors' => 'Usuario y/o contraseña incorrectas',
-                    ]);
+                    return redirect()->back()->with('errors', 'Usuario y/o contraseña incorrectas')->withInput();
                 }
             } else {
-                return view('login/layout', [
-                    'view' => 'login/login',
-                    'errors' => 'Usuario y/o contraseña incorrectas',
-                ]);
+                return redirect()->back()->with('errors', 'Usuario y/o contraseña incorrectas')->withInput();
             }
         }
-        return view('login/layout', ['view' => 'login/login']);
+        return view('login/login');
     }
 }

@@ -3,18 +3,15 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\Usuarios;
 
 class Perfil extends BaseController
 {
     protected $usuarios;
-    protected $bitacora;
 
     public function __construct()
     {
         $this->usuarios = new Usuarios;
-        $this->bitacora = new BitacoraModel;
     }
 
     public function index()
@@ -39,16 +36,18 @@ class Perfil extends BaseController
                 ],
                 'usuario' => [
                     'label' => 'usuario',
-                    'rules' => 'required',
+                    'rules' => 'required|is_unique[usuarios.usuario]',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
+                        'is_unique' => 'El {field} ya está ocupado',
                     ],
                 ],
                 'email' => [
                     'label' => 'correo electronico',
-                    'rules' => 'valid_email',
+                    'rules' => 'valid_email|is_unique[usuarios.correo]',
                     'errors' => [
-                        'valid_email' => 'El {field} debe ser un {field} valido',
+                        'valid_email' => 'El {field} debe ser un {fied} valido',
+                        'is_unique' => 'El {field} ya está ocupado',
                     ],
                 ],
                 'telefono' => [
@@ -70,12 +69,12 @@ class Perfil extends BaseController
             $usuario = $this->usuarios->where('id', $id)->select('password')->find();
             foreach ($usuario as $s) {
                 $data = [
-                    'nombre' => $request->getPost('nombre'),
-                    'apepat' => $request->getPost('apellido'),
-                    'telefono' => $request->getPost('telefono'),
-                    'genero' => $request->getPost('sexo'),
-                    'usuario' => $request->getPost('usuario'),
-                    'correo' => $request->getPost('email'),
+                    'nombre' => $this->security->sanitizeFilename($request->getPost('nombre')),
+                    'apepat' => $this->security->sanitizeFilename($request->getPost('apellido')),
+                    'telefono' => $this->security->sanitizeFilename($request->getPost('telefono')),
+                    'genero' => $this->security->sanitizeFilename($request->getPost('sexo')),
+                    'usuario' => $this->secirity->sanitizeFilename($request->getPost('usuario')),
+                    'correo' => $this->security->sanitizeFilename($request->getPost('email')),
                     'password' => (empty($request->getPost('password')) ? $s['password'] : password_hash($request->getPost('password'), PASSWORD_DEFAULT)),
 
                 ];

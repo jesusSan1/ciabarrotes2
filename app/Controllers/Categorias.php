@@ -3,20 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BitacoraModel;
 use App\Models\CategoriaModel;
 
 class Categorias extends BaseController
 {
     protected $categoria;
-    protected $bitacora;
     protected $request;
     protected $db;
 
     public function __construct()
     {
         $this->categoria = new CategoriaModel;
-        $this->bitacora = new BitacoraModel;
         $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
 
@@ -42,7 +39,7 @@ class Categorias extends BaseController
                 ]);
             }
             $data = [
-                'nombre' => $this->request->getPost('categoria'),
+                'nombre' => $this->security->sanitizeFilename($this->request->getPost('categoria')),
                 'fecha_creacion' => date('Y-m-d'),
                 'creado_por' => session()->get('id'),
                 'eliminado' => 0,
@@ -71,7 +68,7 @@ class Categorias extends BaseController
     public function editarCategoria()
     {
         $id = $this->request->getPost('id');
-        $valor = $this->request->getPost('valor');
+        $valor = $this->security->sanitizeFilename($this->request->getPost('valor'));
         $this->categoria->where('id', $id)->set(['nombre' => $valor])->update();
         $this->bitacora->insert(['accion' => 'Cambio de nombre en categoria', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
 

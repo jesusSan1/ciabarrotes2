@@ -81,19 +81,10 @@
             <label>Presentación</label>
             <select name="presentacion" class="form-control">
                 <option value="">Seleccionar</option>
-                <option value="Unidad" <?=set_select('presentacion', 'Unidad')?>>Unidad</option>
-                <option value="Libra" <?=set_select('presentacion', 'Libra')?>>Libra</option>
-                <option value="Kilogramo" <?=set_select('presentacion', 'Kilogramo')?>>Kilogramo</option>
-                <option value="Caja" <?=set_select('presentacion', 'Caja')?>>Caja</option>
-                <option value="Paquete" <?=set_select('presentacion', 'Paquete')?>>Paquete</option>
-                <option value="Lata" <?=set_select('presentacion', 'Lata')?>>Lata</option>
-                <option value="Galon" <?=set_select('presentacion', 'Galon')?>>Galon</option>
-                <option value="Botella" <?=set_select('presentacion', 'Botella')?>>Botella</option>
-                <option value="Tira" <?=set_select('presentacion', 'Tira')?>>Tira</option>
-                <option value="Sobre" <?=set_select('presentacion', 'Sobre')?>>Sobre</option>
-                <option value="Bolsa" <?=set_select('presentacion', 'Bolsa')?>>Bolsa</option>
-                <option value="Saco" <?=set_select('presentacion', 'Saco')?>>Saco</option>
-                <option value="Tarjeta" <?=set_select('presentacion', 'Tarjeta')?>>Tarjeta</option>
+                <?php foreach ($presentaciones as $presentacion): ?>
+                <option value="<?= $presentacion['nombre'] ?>" <?=set_select('presentacion', $presentacion['nombre'])?>>
+                    <?=$presentacion['nombre']?></option>
+                <?php endforeach;?>
             </select>
         </div>
     </div>

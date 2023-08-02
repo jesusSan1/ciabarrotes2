@@ -87,19 +87,9 @@
             <label>Presentación</label>
             <select name="presentacion" class="form-control">
                 <option value="<?=$dato->presentacion?>"><?=$dato->presentacion?></option>
-                <option value="Unidad">Unidad</option>
-                <option value="Libra">Libra</option>
-                <option value="Kilogramo">Kilogramo</option>
-                <option value="Caja">Caja</option>
-                <option value="Paquete">Paquete</option>
-                <option value="Lata">Lata</option>
-                <option value="Galon">Galon</option>
-                <option value="Botella">Botella</option>
-                <option value="Tira">Tira</option>
-                <option value="Sobre">Sobre</option>
-                <option value="Bolsa">Bolsa</option>
-                <option value="Saco">Saco</option>
-                <option value="Tarjeta">Tarjeta</option>
+                <?php foreach($presentaciones as $presentacion): ?>
+                <option value="<?= $presentacion['nombre'] ?>"><?= $presentacion['nombre'] ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
     </div>
