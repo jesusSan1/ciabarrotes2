@@ -99,9 +99,7 @@ class Recuperacion extends BaseController
             if ($tokenCreado === $tokenGuardado['token']) {
                 return redirect()->to('crear-password');
             } else {
-                return view('login/verificarToken', [
-                    'errors' => 'El token no coincide',
-                ]);
+                return redirect()->back()->with('errors', 'El token no coincide')->withInput();
             }
         }
         return view('login/verificarToken');

@@ -10,7 +10,7 @@ Inicio de sesión
 </div>
 <div class="form-group">
     <?=form_label('Contraseña', 'password')?>
-    <?=form_input(['type' => 'password', 'id' => 'password', 'class' => 'form-control', 'name' => 'password', 'value' => old('password')])?>
+    <?=form_input(['type' => 'password', 'id' => 'password', 'class' => 'form-control', 'name' => 'password', 'value' => old('password'), 'required' => true])?>
 </div>
 <div class="form-group m-0">
     <?=form_submit('', 'Iniciar sesión', ['class' => 'btn btn-primary btn-block'])?>
