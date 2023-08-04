@@ -18,7 +18,6 @@ class Empleados extends BaseController
 
     public function index()
     {
-        helper('form');
         if ($this->request->getMethod() === 'post') {
             $rules = [
                 'nombre' => [

@@ -30,7 +30,6 @@ class Productos extends BaseController
 
     public function index()
     {
-        helper('form');
         helper('filesystem');
         if ($this->request->getMethod() === 'post') {
             $rules = [
@@ -138,7 +137,6 @@ class Productos extends BaseController
     }
     public function editarProducto()
     {
-        helper('form');
         $id = $this->request->getPost('id');
         return view('dashboard', [
             'view' => 'productos/editarProducto',

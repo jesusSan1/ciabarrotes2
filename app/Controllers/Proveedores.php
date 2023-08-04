@@ -20,7 +20,6 @@ class Proveedores extends BaseController
 
     public function index()
     {
-        helper('form');
         if ($this->request->getMethod() === 'post') {
             $rules = [
                 'nombre' => [
@@ -84,7 +83,6 @@ class Proveedores extends BaseController
     }
     public function editarProveedor()
     {
-        helper('form');
         $id = $this->request->getPost('id');
         return view('dashboard', [
             'view' => 'proveedor/editarProveedor',

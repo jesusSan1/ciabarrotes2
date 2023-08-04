@@ -11,7 +11,6 @@ class Home extends BaseController
         $usuarios = new Usuarios;
         $request = \Config\Services::request();
         $session = \Config\Services::session();
-        helper(['form', 'html']);
         if ($session->get('login')) {
             return redirect()->to('dashboard');
         }

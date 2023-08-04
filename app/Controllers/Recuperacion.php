@@ -18,7 +18,7 @@ class Recuperacion extends BaseController
         $this->request = \Config\Services::request();
         $this->email = \Config\Services::email();
         $this->session = \Config\Services::session();
-        helper(['form', 'text', 'html']);
+        helper('text');
     }
     public function index()
     {

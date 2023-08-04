@@ -16,7 +16,6 @@ class Perfil extends BaseController
 
     public function index()
     {
-        helper('form');
         $request = \Config\Services::request();
         if ($request->getMethod() === 'post') {
             $rules = [
