@@ -20,25 +20,22 @@ $name = $conf->findAll();
     <title>CI Abarrotes 2</title>
 
     <!-- Custom fonts for this template-->
-    <link rel="Shortcut Icon" type="image/x-icon" href="images/shops.png" /> <!-- Cambiar favicon -->
-    <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <?=link_tag('fontawesome/css/all.css')?>
+    <?=link_tag('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')?>
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="sweetalert/dist/sweetalert2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="dataTable/css/datatables.min.css">
+    <?=link_tag('css/sb-admin-2.min.css')?>
+    <?=link_tag('sweetalert/dist/sweetalert2.min.css')?>
+    <?=link_tag('dataTable/css/datatables.min.css')?>
     <!-- Bootstrap core JavaScript-->
-    <script src="popper/popper.min.js"></script>
-    <script src="jquery/jquery-3.6.0.js"></script>
-    <script src="bootstrap/bootstrap.min.js"></script>
-    <script src="sweetalert/dist/sweetalert2.min.js"></script>
-    <script src="fontawesome/js/all.js"></script>
-    <script src="chartjs/chart.min.js"></script>
-    <script src="zoomerang/zoomerang.js"></script>
-    <script src="dataTable/js/datatables.min.js"></script>
+    <?=script_tag('popper/popper.min.js')?>
+    <?=script_tag('jquery/jquery-3.6.0.js')?>
+    <?=script_tag('bootstrap/bootstrap.min.js')?>
+    <?=script_tag('sweetalert/dist/sweetalert2.min.js')?>
+    <?=script_tag('fontawesome/js/all.js')?>
+    <?=script_tag('chartjs/chart.min.js')?>
+    <?=script_tag('zoomerang/zoomerang.js')?>
+    <?=script_tag('dataTable/js/datatables.min.js')?>
 </head>
 
 <body id="page-top">
@@ -277,7 +274,7 @@ $name = $conf->findAll();
                                 </span>
                                 <?php foreach ($usuario as $perfil): ?>
                                 <?php $img = $perfil['rol_id'] != 1 ? $perfil['foto_perfil'] : 'images/undraw_profile.svg'?>
-                                <img class="img-profile rounded-circle" src="<?=$img?>">
+                                <?=img(['src' => $img, 'class' => 'img-profile rounded-circle'])?>
                                 <?php endforeach;?>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -341,7 +338,7 @@ $name = $conf->findAll();
         <i class="fas fa-angle-up"></i>
     </a>
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <?=script_tag('js/sb-admin-2.min.js')?>
 </body>
 
 </html>

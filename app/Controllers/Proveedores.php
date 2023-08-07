@@ -81,9 +81,8 @@ class Proveedores extends BaseController
         $this->proveedor->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
         $this->bitacora->insert(['accion' => 'Eliminado proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
     }
-    public function editarProveedor()
+    public function editarProveedor(int $id)
     {
-        $id = $this->request->getPost('id');
         return view('dashboard', [
             'view' => 'proveedor/editarProveedor',
             'datos' => $this->proveedor->where('id', $id)->find(),
@@ -92,6 +91,27 @@ class Proveedores extends BaseController
     public function updateProveedor()
     {
         $id = $this->request->getPost('id');
+        $rules = [
+            'nombre' => [
+                'label' => 'nombre',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El {field} debe ser llenado',
+                ],
+            ],
+            'telefono' => [
+                'label' => 'telefono',
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'El {field} debe ser llenado',
+                    'numeric' => 'El {field} debe ser un numero telefonico',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
+        }
         $data = [
             'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
             'direccion' => $this->security->sanitizeFilename($this->request->getPost('direccion')),
@@ -100,11 +120,12 @@ class Proveedores extends BaseController
         ];
         if ($this->proveedor->where('id', $id)->set($data)->update()) {
             $this->bitacora->insert(['accion' => 'Informacion de proveedor actualizada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-            return view('dashboard', [
-                'view' => 'proveedor/editarProveedor',
-                'datos' => $this->proveedor->where('id', $id)->find(),
-                'exito' => 'Datos actualizados correctamente',
-            ]);
+            return redirect()->back()->with('exito', 'Los datos has sido actualizados con exito')->withInput();
+            // return view('dashboard', [
+            //     'view' => 'proveedor/editarProveedor',
+            //     'datos' => $this->proveedor->where('id', $id)->find(),
+            //     'exito' => 'Datos actualizados correctamente',
+            // ]);
         }
         ;
     }

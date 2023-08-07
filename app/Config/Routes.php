@@ -44,7 +44,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
     $routes->get('proveedores', 'Proveedores::index');
     $routes->post('proveedores', 'Proveedores::index');
     $routes->post('eliminarProveedor', 'Proveedores::eliminarProveedor');
-    $routes->post('editar-proveedor', 'Proveedores::editarProveedor');
+    $routes->get('editar-proveedor/(:num)', 'Proveedores::editarProveedor/$1');
     $routes->post('updateProveedor', 'Proveedores::updateProveedor');
     $routes->get('productos', 'Productos::index');
     $routes->post('productos', 'Productos::index');
