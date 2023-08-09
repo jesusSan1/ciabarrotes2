@@ -83,7 +83,7 @@ class Empleados extends BaseController
             if (!$this->validate($rules)) {
                 return view('dashboard', [
                     'view' => 'empleados/empleados',
-                    'errors' => \Config\Services::validation()->listErrors(),
+                    'errors' => $this->validation->listErrors(),
                     'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
                 ]);
             }

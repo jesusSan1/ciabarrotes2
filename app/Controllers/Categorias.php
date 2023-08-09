@@ -34,7 +34,7 @@ class Categorias extends BaseController
             if (!$this->validate($rules)) {
                 return view('dashboard', [
                     'view' => 'categorias/index',
-                    'errors' => \Config\Services::validation()->listErrors(),
+                    'errors' => $this->validation->listErrors(),
                     'datos' => $this->listaCategorias(),
                 ]);
             }

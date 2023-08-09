@@ -37,7 +37,7 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $correo = $this->request->getPost('correo');
             $existeCorreo = $this->usuarios->where('correo', $correo)->first();
@@ -89,7 +89,7 @@ class Recuperacion extends BaseController
             ];
             if (!$this->validate($rules)) {
                 return view('login/verificarToken', [
-                    'errors' => \Config\Services::validation()->listErrors(),
+                    'errors' => $this->validation->listErrors(),
                 ]);
             }
             $token = $this->request->getPost('token');
@@ -118,7 +118,7 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
             $this->usuarios->where('correo', $this->session->get('correo'))->set(['password' => $password])->update();

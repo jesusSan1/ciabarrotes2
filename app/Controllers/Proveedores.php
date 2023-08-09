@@ -48,7 +48,7 @@ class Proveedores extends BaseController
             if (!$this->validate($rules)) {
                 return view('dashboard', [
                     'view' => 'proveedor/index',
-                    'errors' => \Config\Services::validation()->listErrors(),
+                    'errors' => $this->validation->listErrors(),
                     'datos' => $this->listaProveedores(),
                 ]);
             }
@@ -110,7 +110,7 @@ class Proveedores extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
+            return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
         }
         $data = [
             'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),

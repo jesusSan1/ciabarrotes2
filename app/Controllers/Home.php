@@ -32,7 +32,7 @@ class Home extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $usuario = $request->getPost('usuario-correo');
             $password = $request->getPost('password');

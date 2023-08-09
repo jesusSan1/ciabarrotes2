@@ -48,6 +48,7 @@ abstract class BaseController extends Controller
      */
     protected $security;
     protected $bitacora;
+    protected $validation;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -58,6 +59,7 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
         $this->security = \Config\Services::security();
+        $this->validation = \Config\Services::validation();
         $this->bitacora = new BitacoraModel;
     }
 }

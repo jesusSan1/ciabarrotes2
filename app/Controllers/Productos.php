@@ -100,7 +100,7 @@ class Productos extends BaseController
                     'productosMinimos' => $this->productos->productosExistenciaMinima(),
                     'productosCaducados' => $this->productos->productosCaducados(),
                     'presentaciones' => $this->presentacion->findAll(),
-                    'errors' => \Config\Services::validation()->listErrors(),
+                    'errors' => $this->validation->listErrors(),
                 ]);
             }
 

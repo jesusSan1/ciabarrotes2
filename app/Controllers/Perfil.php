@@ -60,7 +60,7 @@ class Perfil extends BaseController
             if (!$this->validate($rules)) {
                 return view('dashboard', [
                     'view' => 'perfil/index',
-                    'error' => \Config\Services::validation()->listErrors(),
+                    'error' => $this->validation->listErrors(),
                     'usuario' => $this->usuarios->where('id', session()->get('id'))->find(),
                 ]);
             }
