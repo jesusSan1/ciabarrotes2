@@ -16,8 +16,7 @@ class Perfil extends BaseController
 
     public function index()
     {
-        $request = \Config\Services::request();
-        if ($request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'nombre' => [
                     'label' => 'nombre',
@@ -68,13 +67,13 @@ class Perfil extends BaseController
             $usuario = $this->usuarios->where('id', $id)->select('password')->find();
             foreach ($usuario as $s) {
                 $data = [
-                    'nombre' => $this->security->sanitizeFilename($request->getPost('nombre')),
-                    'apepat' => $this->security->sanitizeFilename($request->getPost('apellido')),
-                    'telefono' => $this->security->sanitizeFilename($request->getPost('telefono')),
-                    'genero' => $this->security->sanitizeFilename($request->getPost('sexo')),
-                    'usuario' => $this->secirity->sanitizeFilename($request->getPost('usuario')),
-                    'correo' => $this->security->sanitizeFilename($request->getPost('email')),
-                    'password' => (empty($request->getPost('password')) ? $s['password'] : password_hash($request->getPost('password'), PASSWORD_DEFAULT)),
+                    'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
+                    'apepat' => $this->security->sanitizeFilename($this->request->getPost('apellido')),
+                    'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
+                    'genero' => $this->security->sanitizeFilename($this->request->getPost('sexo')),
+                    'usuario' => $this->secirity->sanitizeFilename($this->request->getPost('usuario')),
+                    'correo' => $this->security->sanitizeFilename($this->request->getPost('email')),
+                    'password' => (empty($this->request->getPost('password')) ? $s['password'] : password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)),
 
                 ];
                 if ($this->usuarios->where('id', $id)->set($data)->update()) {

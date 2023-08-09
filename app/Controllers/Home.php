@@ -9,12 +9,11 @@ class Home extends BaseController
     public function index()
     {
         $usuarios = new Usuarios;
-        $request = \Config\Services::request();
         $session = \Config\Services::session();
         if ($session->get('login')) {
             return redirect()->to('dashboard');
         }
-        if ($request->is('post')) {
+        if ($this->request->is('post')) {
             $rules = [
                 'usuario-correo' => [
                     'label' => 'usuario o correo electronico',
@@ -34,8 +33,8 @@ class Home extends BaseController
             if (!$this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
-            $usuario = $request->getPost('usuario-correo');
-            $password = $request->getPost('password');
+            $usuario = $this->request->getPost('usuario-correo');
+            $password = $this->request->getPost('password');
             $existeUsuario = $usuarios->where('usuario', $usuario)->orWhere('correo', $usuario)->first();
             if ($existeUsuario) {
                 $cont = $existeUsuario['password'];

@@ -8,17 +8,15 @@ use App\Models\Usuarios;
 class Empleados extends BaseController
 {
     protected $usuarios;
-    protected $request;
 
     public function __construct()
     {
         $this->usuarios = new Usuarios;
-        $this->request = \Config\Services::request();
     }
 
     public function index()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'nombre' => [
                     'label' => 'nombre',

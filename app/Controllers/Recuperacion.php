@@ -8,14 +8,12 @@ use App\Models\Usuarios;
 class Recuperacion extends BaseController
 {
     protected $usuarios;
-    protected $request;
     protected $email;
     protected $session;
 
     public function __construct()
     {
         $this->usuarios = new Usuarios;
-        $this->request = \Config\Services::request();
         $this->email = \Config\Services::email();
         $this->session = \Config\Services::session();
         helper('text');

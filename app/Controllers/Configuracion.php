@@ -23,12 +23,11 @@ class Configuracion extends BaseController
     }
     public function configurar()
     {
-        $request = \Config\Services::request();
         $data = [
-            'nombre_empresa' => $this->security->sanitizeFilename($request->getPost('nombre')),
-            'direccion' => $this->security->sanitizeFilename($request->getPost('direccion')),
-            'telefono' => $this->security->sanitizeFilename($request->getPost('telefono')),
-            'correo_electronico' => $this->security->sanitizeFilename($request->getPost('correo')),
+            'nombre_empresa' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
+            'direccion' => $this->security->sanitizeFilename($this->request->getPost('direccion')),
+            'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
+            'correo_electronico' => $this->security->sanitizeFilename($this->request->getPost('correo')),
         ];
         $this->configuracion->where('id', 1)->set($data)->update();
         $this->bitacora->insert(['accion' => 'informacion de configuracion actualizada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);

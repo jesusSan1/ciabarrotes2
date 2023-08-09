@@ -8,19 +8,17 @@ use App\Models\ProveedorModel;
 class Proveedores extends BaseController
 {
     protected $proveedor;
-    protected $request;
     protected $db;
 
     public function __construct()
     {
         $this->proveedor = new ProveedorModel;
-        $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
     }
 
     public function index()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'nombre' => [
                     'label' => 'nombre',

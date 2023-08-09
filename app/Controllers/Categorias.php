@@ -8,20 +8,18 @@ use App\Models\CategoriaModel;
 class Categorias extends BaseController
 {
     protected $categoria;
-    protected $request;
     protected $db;
 
     public function __construct()
     {
         $this->categoria = new CategoriaModel;
-        $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
 
     }
 
     public function index()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'categoria' => [
                     'label' => 'categoria',

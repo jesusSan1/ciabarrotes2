@@ -11,7 +11,6 @@ use CodeIgniter\Files\File;
 
 class Productos extends BaseController
 {
-    protected $request;
     protected $productos;
     protected $proveedor;
     protected $presentacion;
@@ -20,7 +19,6 @@ class Productos extends BaseController
 
     public function __construct()
     {
-        $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
         $this->productos = new ProductosModel;
         $this->proveedor = new ProveedorModel;
@@ -31,7 +29,7 @@ class Productos extends BaseController
     public function index()
     {
         helper('filesystem');
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'nombre' => [
                     'label' => 'nombre del producto',
