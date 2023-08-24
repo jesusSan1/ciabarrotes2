@@ -17,6 +17,7 @@
 </div>
 <?php endif;?>
 <form id="formulario" action="" method="post" autocomplete="off" enctype="multipart/form-data">
+    <?= csrf_field() ?>
     <div class="row">
         <div class="col-md-12">
             <h4><i class="fas fa-barcode"></i> Codigo de Barras y SKU</h4>

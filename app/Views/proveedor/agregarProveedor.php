@@ -17,6 +17,7 @@
 </div>
 <?php endif;?>
 <form action="" method="post" autocomplete="off">
+    <?= csrf_field() ?>
     <div class="row">
         <div class="col-md-12">
             <h4><i class="fas fa-id-card    "></i> Datos del proveedor</h4>

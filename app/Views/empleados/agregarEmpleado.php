@@ -1,5 +1,6 @@
 <div class="card-body">
     <form action="" method="post" autocomplete="off" id="form">
+        <?= csrf_field() ?>
         <div class="row">
             <div class="col-md-12">
                 <h4><i class="fa fa-user" aria-hidden="true"></i> Información Personal</h4>

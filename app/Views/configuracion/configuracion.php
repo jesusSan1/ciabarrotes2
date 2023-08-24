@@ -14,6 +14,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <form action="configurar" method="post" novalidate="" autocomplete="off">
+                    <?=csrf_field()?>
                     <div class="row">
                         <div class="col-md-12">
                             <h4><i class="fas fa-building"></i> Datos de la empresa</h4>

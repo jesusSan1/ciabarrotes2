@@ -46,6 +46,7 @@
                 </td>
                 <td>
                     <form action="editar-producto" method="post">
+                        <?=csrf_field()?>
                         <input type="hidden" name="id" value="<?=$producto->id?>">
                         <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
                     </form>

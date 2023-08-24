@@ -24,6 +24,7 @@
     </div>
 </div>
 <form id="formulario" action="updateProducto" method="post" autocomplete="off" enctype="multipart/form-data">
+    <?= csrf_field() ?>
     <input type="hidden" name="id" value="<?=$dato->id?>">
     <div class="row">
         <div class="col-md-12">
