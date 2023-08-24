@@ -1,3 +1,8 @@
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Actualizar perfil
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
 <?php if (isset($errors)): ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <h4 class="alert-heading">Errores</h4>
@@ -19,7 +24,7 @@
 <?php foreach ($usuario as $user): ?>
 <div class="card-body">
     <form action="" method="post" autocomplete="off" id="form">
-        <?= csrf_field() ?>
+        <?=csrf_field()?>
         <div class="row">
             <div class="col-md-12">
                 <h4><i class="fa fa-user" aria-hidden="true"></i> Información Personal</h4>
@@ -441,3 +446,4 @@
     </form>
 </div>
 <?php endforeach;?>
+<?=$this->endSection()?>

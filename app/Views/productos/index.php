@@ -1,3 +1,8 @@
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Productos
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
 <div class="row">
 
     <!-- Area Chart -->
@@ -57,3 +62,4 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
     </script>
+    <?=$this->endSection()?>

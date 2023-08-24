@@ -48,7 +48,8 @@ $name = $conf->findAll();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                href="<?=base_url('dashboard')?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-store"></i> <!-- Poner aqui el logo u otra cosa -->
                 </div>
@@ -63,7 +64,7 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="dashboard">
+                <a class="nav-link" href="<?=base_url('dashboard')?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Inicio</span></a>
             </li>
@@ -234,9 +235,12 @@ $name = $conf->findAll();
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <h2><b id="titulo">
+                    <h2>
+                        <b>
                             <!--Aqui poner un titulo-->
-                        </b></h2>
+                            <?=$this->renderSection('titulo')?>
+                        </b>
+                    </h2>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -250,7 +254,7 @@ $name = $conf->findAll();
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
-                                    <?= csrf_field() ?>
+                                    <?=csrf_field()?>
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
@@ -310,7 +314,7 @@ $name = $conf->findAll();
 
 
                     <!-- Contenido -->
-                    <?=view($view)?>
+                    <?=$this->renderSection('contenido');?>
 
                 </div>
                 <!-- /.container-fluid -->

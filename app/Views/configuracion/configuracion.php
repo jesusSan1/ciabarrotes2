@@ -1,4 +1,9 @@
-<link rel="stylesheet" href="css/perfil.css">
+<?= $this->extend('dashboard') ?>
+<?= $this->section('titulo') ?>
+Configuración
+<?= $this->endSection() ?>
+<?= $this->section('contenido') ?>
+<?= link_tag('css/perfil.css') ?>
 <div class="row">
     <!-- Area Chart -->
     <div class="col-md-12">
@@ -57,3 +62,4 @@
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>

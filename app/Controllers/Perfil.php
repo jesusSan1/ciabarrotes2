@@ -57,8 +57,7 @@ class Perfil extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('dashboard', [
-                    'view' => 'perfil/index',
+                return view('perfil/index', [
                     'error' => $this->validation->listErrors(),
                     'usuario' => $this->usuarios->where('id', session()->get('id'))->find(),
                 ]);
@@ -79,8 +78,7 @@ class Perfil extends BaseController
                 if ($this->usuarios->where('id', $id)->set($data)->update()) {
                     $this->bitacora->insert(['accion' => 'Cambios de datos en el perfil de usuario', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
 
-                    return view('dashboard', [
-                        'view' => 'perfil/index',
+                    return view('perfil/index', [
                         'exito' => 'Datos actualizados correctamente',
                         'usuario' => $this->usuarios->where('id', session()->get('id'))->find(),
                     ]);
@@ -88,8 +86,7 @@ class Perfil extends BaseController
 
             }
         }
-        return view('dashboard', [
-            'view' => 'perfil/index',
+        return view('perfil/index', [
             'usuario' => $this->usuarios->where('id', session()->get('id'))->find(),
         ]);
     }

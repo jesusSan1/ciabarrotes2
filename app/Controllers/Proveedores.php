@@ -44,8 +44,7 @@ class Proveedores extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('dashboard', [
-                    'view' => 'proveedor/index',
+                return view('proveedor/index', [
                     'errors' => $this->validation->listErrors(),
                     'datos' => $this->listaProveedores(),
                 ]);
@@ -61,15 +60,13 @@ class Proveedores extends BaseController
             ];
             if ($this->proveedor->insert($data)) {
                 $this->bitacora->insert(['accion' => 'creado nuevo proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-                return view('dashboard', [
-                    'view' => 'proveedor/index',
+                return view('proveedor/index', [
                     'exito' => 'Se ha guardado el empleado con exito',
                     'datos' => $this->listaProveedores(),
                 ]);
             }
         }
-        return view('dashboard', [
-            'view' => 'proveedor/index',
+        return view('proveedor/index', [
             'datos' => $this->listaProveedores(),
         ]);
     }
@@ -81,8 +78,7 @@ class Proveedores extends BaseController
     }
     public function editarProveedor(int $id)
     {
-        return view('dashboard', [
-            'view' => 'proveedor/editarProveedor',
+        return view('proveedor/editarProveedor', [
             'datos' => $this->proveedor->where('id', $id)->find(),
         ]);
     }

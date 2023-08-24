@@ -1,3 +1,8 @@
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Editar Proveedor
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
 <div class="row">
     <div class="col-md-10"></div>
     <div class="col-md-2">
@@ -62,3 +67,4 @@
 </div>
 <?=form_close()?>
 <?php endforeach;?>
+<?=$this->endSection()?>

@@ -1,3 +1,8 @@
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Empleados
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
 <div class="row">
 
     <!-- Area Chart -->
@@ -55,3 +60,4 @@
         </div>
     </div>
 </div>
+<?=$this->endSection()?>

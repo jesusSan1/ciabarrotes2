@@ -90,8 +90,7 @@ class Productos extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('dashboard', [
-                    'view' => 'productos/index',
+                return view('productos/index', [
                     'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
                     'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
                     'productos' => $this->listaProductos(),
@@ -116,8 +115,7 @@ class Productos extends BaseController
                 $this->exito();
             }
         }
-        return view('dashboard', [
-            'view' => 'productos/index',
+        return view('productos/index', [
             'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
             'productos' => $this->listaProductos(),
@@ -136,8 +134,7 @@ class Productos extends BaseController
     public function editarProducto()
     {
         $id = $this->request->getPost('id');
-        return view('dashboard', [
-            'view' => 'productos/editarProducto',
+        return view('productos/editarProducto', [
             'datos' => $this->datosEditar($id),
             'proveedores' => $this->proveedor->findAll(),
             'categorias' => $this->categoria->findAll(),
@@ -158,8 +155,7 @@ class Productos extends BaseController
             $this->productos->where('id', $id)->set($this->datos($imageName))->update();
             $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
             // $this->exito();
-            return view('dashboard', [
-                'view' => 'productos/editarProducto',
+            return view('productos/editarProducto', [
                 'datos' => $this->datosEditar($id),
                 'proveedores' => $this->proveedor->findAll(),
                 'categorias' => $this->categoria->findAll(),
@@ -169,8 +165,7 @@ class Productos extends BaseController
         } else {
             $this->productos->where('id', $id)->set($this->datos(''))->update();
             $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-            return view('dashboard', [
-                'view' => 'productos/editarProducto',
+            return view('productos/editarProducto', [
                 'datos' => $this->datosEditar($id),
                 'proveedores' => $this->proveedor->findAll(),
                 'categorias' => $this->categoria->findAll(),
@@ -182,8 +177,7 @@ class Productos extends BaseController
     }
     protected function exito()
     {
-        return view('dashboard', [
-            'view' => 'productos/index',
+        return view('productos/index', [
             'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
             'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
             'productos' => $this->listaProductos(),

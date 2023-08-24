@@ -1,4 +1,9 @@
-<link rel="stylesheet" href="css/welcome.css">
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Dashboard
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
+<?=link_tag('css/welcome.css')?>
 <?php if (session()->get('rol_id') == 1): ?>
 <div class="row">
     <div class="col-md-3">
@@ -163,3 +168,4 @@
         </div>
     </div>
 </div>
+<?=$this->endSection()?>

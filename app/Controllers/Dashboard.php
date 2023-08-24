@@ -18,8 +18,7 @@ class Dashboard extends BaseController
         $proveedores = new ProveedorModel;
         $productos = new ProductosModel;
         $configuracion = new ConfiguracionModel;
-        return view('dashboard', [
-            'view' => 'modulos',
+        return view('modulos', [
             'categorias' => $categoria->where('id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
             'usuarios' => $usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
             'proveedores' => $proveedores->where('id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),

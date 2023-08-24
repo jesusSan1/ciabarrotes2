@@ -16,8 +16,7 @@ class Configuracion extends BaseController
 
     public function index()
     {
-        return view('dashboard', [
-            'view' => 'configuracion/configuracion',
+        return view('configuracion/configuracion', [
             'configuraciones' => $this->configuracion->findAll(),
         ]);
     }

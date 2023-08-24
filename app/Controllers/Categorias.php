@@ -30,8 +30,7 @@ class Categorias extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('dashboard', [
-                    'view' => 'categorias/index',
+                return view('categorias/index', [
                     'errors' => $this->validation->listErrors(),
                     'datos' => $this->listaCategorias(),
                 ]);
@@ -44,15 +43,13 @@ class Categorias extends BaseController
             ];
             if ($this->categoria->insert($data)) {
                 $this->bitacora->insert(['accion' => 'Nueva categoria creada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-                return view('dashboard', [
-                    'view' => 'categorias/index',
+                return view('categorias/index', [
                     'exito' => 'Categoria guardada con exito',
                     'datos' => $this->listaCategorias(),
                 ]);
             }
         }
-        return view('dashboard', [
-            'view' => 'categorias/index',
+        return view('categorias/index', [
             'datos' => $this->listaCategorias(),
         ]);
     }

@@ -79,8 +79,7 @@ class Empleados extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('dashboard', [
-                    'view' => 'empleados/empleados',
+                return view('empleados/empleados', [
                     'errors' => $this->validation->listErrors(),
                     'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
                 ]);
@@ -101,15 +100,13 @@ class Empleados extends BaseController
             ];
             if ($this->usuarios->insert($data)) {
                 $this->bitacora->insert(['accion' => 'creado nuevo usuario', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-                return view('dashboard', [
-                    'view' => 'empleados/empleados',
+                return view('empleados/empleados', [
                     'exito' => 'Se ha guardado el empleado con exito',
                     'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
                 ]);
             }
         }
-        return view('dashboard', [
-            'view' => 'empleados/empleados',
+        return view('empleados/empleados', [
             'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
         ]);
     }

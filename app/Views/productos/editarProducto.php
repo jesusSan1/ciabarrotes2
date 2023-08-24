@@ -1,3 +1,8 @@
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Editar producto
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
 <?php if (isset($errors)): ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <h4 class="alert-heading">Errores</h4>
@@ -24,7 +29,7 @@
     </div>
 </div>
 <form id="formulario" action="updateProducto" method="post" autocomplete="off" enctype="multipart/form-data">
-    <?= csrf_field() ?>
+    <?=csrf_field()?>
     <input type="hidden" name="id" value="<?=$dato->id?>">
     <div class="row">
         <div class="col-md-12">
@@ -88,9 +93,9 @@
             <label>Presentación</label>
             <select name="presentacion" class="form-control">
                 <option value="<?=$dato->presentacion?>"><?=$dato->presentacion?></option>
-                <?php foreach($presentaciones as $presentacion): ?>
-                <option value="<?= $presentacion['nombre'] ?>"><?= $presentacion['nombre'] ?></option>
-                <?php endforeach; ?>
+                <?php foreach ($presentaciones as $presentacion): ?>
+                <option value="<?=$presentacion['nombre']?>"><?=$presentacion['nombre']?></option>
+                <?php endforeach;?>
             </select>
         </div>
     </div>
@@ -183,3 +188,4 @@
     </div>
 </form>
 <?php endforeach;?>
+<?=$this->endSection()?>
