@@ -44,10 +44,7 @@ class Proveedores extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('proveedor/index', [
-                    'errors' => $this->validation->listErrors(),
-                    'datos' => $this->listaProveedores(),
-                ]);
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $data = [
                 'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
@@ -60,10 +57,7 @@ class Proveedores extends BaseController
             ];
             if ($this->proveedor->insert($data)) {
                 $this->bitacora->insert(['accion' => 'creado nuevo proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-                return view('proveedor/index', [
-                    'exito' => 'Se ha guardado el empleado con exito',
-                    'datos' => $this->listaProveedores(),
-                ]);
+                return redirect()->back()->with('exito', 'Se ha guardado el proveedor con exito');
             }
         }
         return view('proveedor/index', [
