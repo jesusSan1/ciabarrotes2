@@ -30,10 +30,7 @@ class Categorias extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('categorias/index', [
-                    'errors' => $this->validation->listErrors(),
-                    'datos' => $this->listaCategorias(),
-                ]);
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $data = [
                 'nombre' => $this->security->sanitizeFilename($this->request->getPost('categoria')),
@@ -43,10 +40,7 @@ class Categorias extends BaseController
             ];
             if ($this->categoria->insert($data)) {
                 $this->bitacora->insert(['accion' => 'Nueva categoria creada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-                return view('categorias/index', [
-                    'exito' => 'Categoria guardada con exito',
-                    'datos' => $this->listaCategorias(),
-                ]);
+                return redirect()->back()->with('exito', 'Categoria guardada con exito');
             }
         }
         return view('categorias/index', [
