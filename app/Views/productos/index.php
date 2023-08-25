@@ -55,8 +55,8 @@ Productos
             </div>
         </div>
     </div>
-    <script src="js/tablas.js"></script>
-    <script src="js/zoom.js"></script>
+    <?=script_tag('js/tablas.js')?>
+    <?=script_tag('js/zoom.js')?>
     <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
