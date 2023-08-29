@@ -49,7 +49,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
     $routes->get('productos', 'Productos::index');
     $routes->post('productos', 'Productos::index');
     $routes->post('eliminar-producto', 'Productos::eliminarProducto');
-    $routes->post('editar-producto', 'Productos::editarProducto');
+    $routes->get('editar-producto/(:num)', 'Productos::editarProducto/$1');
     $routes->post('updateProducto', 'Productos::updateProducto');
 
     $routes->group('', ['filter' => 'vendedor'], static function ($routes) { //! autenticacion y perfil

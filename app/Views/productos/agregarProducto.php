@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-6">
         <?=form_label('Sku', 'sku')?>
-        <?=form_input(['type' => 'text', 'name' => 'sku', 'id' => 'sku', 'class' => 'form-control sku', 'placeholder' => 'Sku', 'value' => old('old')])?>
+        <?=form_input(['type' => 'text', 'name' => 'sku', 'id' => 'sku', 'class' => 'form-control sku', 'placeholder' => 'Sku', 'value' => old('sku')])?>
     </div>
 </div>
 <br>

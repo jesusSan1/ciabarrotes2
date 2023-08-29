@@ -45,11 +45,7 @@
                     <?=$producto->fecha_creacion?>
                 </td>
                 <td>
-                    <form action="editar-producto" method="post">
-                        <?=csrf_field()?>
-                        <input type="hidden" name="id" value="<?=$producto->id?>">
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                    </form>
+                    <?=anchor(base_url('editar-producto/' . $producto->id), '<i class="fas fa-edit"></i>', ['class' => 'btn btn-warning'])?>
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>
