@@ -1,4 +1,9 @@
-<link rel="stylesheet" href="css/perfil.css">
+<?= $this->extend('dashboard') ?>
+<?= $this->section('titulo') ?>
+Configuración
+<?= $this->endSection() ?>
+<?= $this->section('contenido') ?>
+<?= link_tag('css/perfil.css') ?>
 <div class="row">
     <!-- Area Chart -->
     <div class="col-md-12">
@@ -14,6 +19,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <form action="configurar" method="post" novalidate="" autocomplete="off">
+                    <?=csrf_field()?>
                     <div class="row">
                         <div class="col-md-12">
                             <h4><i class="fas fa-building"></i> Datos de la empresa</h4>
@@ -56,3 +62,4 @@
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>

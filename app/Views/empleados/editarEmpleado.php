@@ -17,6 +17,7 @@
     <?php endif;?>
     <?php foreach ($datosEmpleado as $empleado): ?>
     <form action="updateEmpleado" method="post" autocomplete="off" id="form">
+        <?= csrf_field() ?>
         <input type="hidden" name="id" value="<?=$empleado['id']?>">
         <div class="row">
             <div class="col-md-12">

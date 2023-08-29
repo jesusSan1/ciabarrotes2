@@ -8,17 +8,15 @@ use App\Models\Usuarios;
 class Recuperacion extends BaseController
 {
     protected $usuarios;
-    protected $request;
     protected $email;
     protected $session;
 
     public function __construct()
     {
         $this->usuarios = new Usuarios;
-        $this->request = \Config\Services::request();
         $this->email = \Config\Services::email();
         $this->session = \Config\Services::session();
-        helper(['form', 'text', 'html']);
+        helper('text');
     }
     public function index()
     {
@@ -37,7 +35,7 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $correo = $this->request->getPost('correo');
             $existeCorreo = $this->usuarios->where('correo', $correo)->first();
@@ -89,7 +87,7 @@ class Recuperacion extends BaseController
             ];
             if (!$this->validate($rules)) {
                 return view('login/verificarToken', [
-                    'errors' => \Config\Services::validation()->listErrors(),
+                    'errors' => $this->validation->listErrors(),
                 ]);
             }
             $token = $this->request->getPost('token');
@@ -99,9 +97,7 @@ class Recuperacion extends BaseController
             if ($tokenCreado === $tokenGuardado['token']) {
                 return redirect()->to('crear-password');
             } else {
-                return view('login/verificarToken', [
-                    'errors' => 'El token no coincide',
-                ]);
+                return redirect()->back()->with('errors', 'El token no coincide')->withInput();
             }
         }
         return view('login/verificarToken');
@@ -120,7 +116,7 @@ class Recuperacion extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return redirect()->back()->with('errors', \Config\Services::validation()->listErrors())->withInput();
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
             $this->usuarios->where('correo', $this->session->get('correo'))->set(['password' => $password])->update();

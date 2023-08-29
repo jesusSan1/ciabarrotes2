@@ -1,4 +1,9 @@
-<link rel="stylesheet" href="css/perfil.css">
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Bitacora
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
+<?=link_tag('css/perfil.css')?>
 <div class="row">
     <!-- Area Chart -->
     <div class="col-md-12">
@@ -23,13 +28,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($datos as $dato): ?>
+                            <?php foreach ($datos as $dato): ?>
                             <tr>
-                                <td scope="row"><?= $dato->accion ?></td>
-                                <td><?= $dato->fecha ?></td>
-                                <td><?= $dato->nombre ?></td>
+                                <td scope="row"><?=$dato->accion?></td>
+                                <td><?=$dato->fecha?></td>
+                                <td><?=$dato->nombre?></td>
                             </tr>
-                            <?php endforeach; ?>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -37,4 +42,5 @@
         </div>
     </div>
 </div>
-<script src="js/tablas.js"></script>
+<?=script_tag('js/tablas.js')?>
+<?=$this->endSection()?>

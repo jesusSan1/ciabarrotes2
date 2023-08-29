@@ -10,8 +10,7 @@ class Bitacora extends BaseController
     public function index()
     {
         $bitacora = new BitacoraModel;
-        return view('dashboard', [
-            'view' => 'bitacora/index',
+        return view('bitacora/index', [
             'datos' => $this->bitacora(),
         ]);
     }

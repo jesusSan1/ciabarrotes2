@@ -8,20 +8,18 @@ use App\Models\CategoriaModel;
 class Categorias extends BaseController
 {
     protected $categoria;
-    protected $request;
     protected $db;
 
     public function __construct()
     {
         $this->categoria = new CategoriaModel;
-        $this->request = \Config\Services::request();
         $this->db = \Config\Database::connect();
 
     }
 
     public function index()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->is('post')) {
             $rules = [
                 'categoria' => [
                     'label' => 'categoria',
@@ -32,11 +30,7 @@ class Categorias extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('dashboard', [
-                    'view' => 'categorias/index',
-                    'errors' => \Config\Services::validation()->listErrors(),
-                    'datos' => $this->listaCategorias(),
-                ]);
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $data = [
                 'nombre' => $this->security->sanitizeFilename($this->request->getPost('categoria')),
@@ -46,15 +40,10 @@ class Categorias extends BaseController
             ];
             if ($this->categoria->insert($data)) {
                 $this->bitacora->insert(['accion' => 'Nueva categoria creada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-                return view('dashboard', [
-                    'view' => 'categorias/index',
-                    'exito' => 'Categoria guardada con exito',
-                    'datos' => $this->listaCategorias(),
-                ]);
+                return redirect()->back()->with('exito', 'Categoria guardada con exito');
             }
         }
-        return view('dashboard', [
-            'view' => 'categorias/index',
+        return view('categorias/index', [
             'datos' => $this->listaCategorias(),
         ]);
     }

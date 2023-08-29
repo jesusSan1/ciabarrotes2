@@ -41,10 +41,7 @@
                 </td>
                 <?php endif;?>
                 <td>
-                    <form action="editar-proveedor" method="post">
-                        <input type="hidden" name="id" value="<?=$proveedor->id?>">
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-user-edit"></i></button>
-                    </form>
+                    <?=anchor(base_url('editar-proveedor/' . $proveedor->id), '<i class="fas fa-user-edit"></i>', ['class' => 'btn btn-warning'])?>
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>

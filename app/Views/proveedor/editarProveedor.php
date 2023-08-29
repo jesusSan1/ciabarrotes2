@@ -1,76 +1,70 @@
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
+Editar Proveedor
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
 <div class="row">
     <div class="col-md-10"></div>
     <div class="col-md-2">
-        <a href="proveedores" class="btn btn-primary">Regresar</a>
+        <?=anchor(base_url('proveedores'), 'Regresar', ['class' => 'btn btn-primary'])?>
     </div>
 </div>
-<?php if (isset($errors)): ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <h4 class="alert-heading">Errores</h4>
-    <?=$errors?>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<br>
+<?php if (session()->getFlashdata('errors')): ?>
+<?=$this->include('errors')?>
 <?php endif;?>
-<?php if (isset($exito)): ?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <h4 class="alert-heading">Guardado correctamente</h4>
-    <?=$exito?>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<?php if (session()->getFlashdata('exito')): ?>
+<?=$this->include('exito')?>
 <?php endif;?>
 <?php foreach ($datos as $proveedor): ?>
-<form action="updateProveedor" method="post" autocomplete="off">
-    <input type="hidden" name="id" value="<?=$proveedor['id']?>">
-    <div class="row">
-        <div class="col-md-12">
-            <h4><i class="fas fa-id-card"></i> Datos del proveedor</h4>
-        </div>
+<?=form_open(base_url('updateProveedor'), ['autocomplete' => 'off'])?>
+<?=form_hidden('id', $proveedor['id'])?>
+<div class="row">
+    <div class="col-md-12">
+        <h4><i class="fas fa-id-card"></i> Datos del proveedor</h4>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-4">
-            <input type="text" name="nombre" class="form-control nombre" placeholder="Nombre del proveedor"
-                value="<?=$proveedor['nombre']?>" required>
-        </div>
-        <div class="col-md-4">
-            <input type="text" name="direccion" class="form-control direccion" placeholder="Dirección"
-                value="<?=$proveedor['direccion']?>">
-        </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <label for="nombre">Nombre del proveedor <i class="fas fa-info-circle" data-toggle="tooltip"
+                data-placement="top" title="Nombre del proveedor"></i></label>
+        <?=form_input(['type' => 'text', 'name' => 'nombre', 'class' => 'form-control', 'placeholder' => 'Nombre del proveedor', 'value' => set_value('nombre', $proveedor['nombre']), 'required' => true])?>
     </div>
-    <br>
-    <hr>
-    <br>
-    <div class="row">
-        <div class="col-md-12">
-            <h4><i class="fas fa-phone"></i> Información del proveedor</h4>
-        </div>
+    <div class="col-md-4">
+        <?=form_label('Direccion', 'direccion')?>
+        <?=form_input(['type' => 'text', 'name' => 'direccion', 'class' => 'form-control direccion', 'placeholder' => 'Dirección', 'value' => set_value('direccion', $proveedor['direccion'], true)])?>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-4">
-            <label>Numero de telefono <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                    title="Numero de telefono"></i></label>
-            <input type="text" name="telefono" class="form-control telefono" placeholder="Numero de telefono"
-                value="<?=$proveedor['telefono']?>" required>
-        </div>
-        <div class="col-md-4">
-            <label>Correo electronico</label>
-            <input type="email" name="correo" class="form-control correo" placeholder="Correo electronico"
-                value="<?=$proveedor['correo']?>">
-        </div>
+</div>
+<br>
+<hr>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <h4><i class="fas fa-phone"></i> Información del proveedor</h4>
     </div>
-    <br>
-    <br>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
-            <button type="submit" class="btn btn-primary agregarProveedor">Editar informacion</button>
-        </div>
-        <div class="col-md-4"></div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <label for="telefono">Numero de telefono <i class="fas fa-info-circle" data-toggle="tooltip"
+                data-placement="top" title="Numero de telefono"></i></label>
+        <?=form_input(['type' => 'text', 'name' => 'telefono', 'class' => 'form-control telefono', 'placeholder' => 'Numero de telefono', 'value' => set_value('telefono', $proveedor['telefono'], true), 'required' => true])?>
     </div>
-</form>
+    <div class="col-md-4">
+        <?=form_label('Correo electronico', 'correo')?>
+        <?=form_input(['type' => 'email', 'name' => 'correo', 'class' => 'form-control correo', 'placeholder' => 'Correo electronico', 'value' => set_value('correo', $proveedor['correo'], true)])?>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+        <?=form_submit('', 'Editar información', ['class' => 'btn btn-primary agregarProveedor'])?>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<?=form_close()?>
 <?php endforeach;?>
+<?=$this->endSection()?>
