@@ -18,6 +18,7 @@ $name = $conf->findAll();
     <meta name="author" content="">
 
     <title>CI Abarrotes 2</title>
+    <?=link_tag('images/shops.png', 'shortcut icon', 'image/x-icon');?>
 
     <!-- Custom fonts for this template-->
     <?=link_tag('fontawesome/css/all.css')?>
@@ -48,8 +49,7 @@ $name = $conf->findAll();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="<?=base_url('dashboard')?>">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url('dashboard')?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-store"></i> <!-- Poner aqui el logo u otra cosa -->
                 </div>
