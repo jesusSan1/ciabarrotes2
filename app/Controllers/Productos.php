@@ -122,9 +122,8 @@ class Productos extends BaseController
         $this->bitacora->insert(['accion' => 'Eliminacion de producto', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
 
     }
-    public function editarProducto()
+    public function editarProducto(int $id)
     {
-        $id = $this->request->getPost('id');
         return view('productos/editarProducto', [
             'datos' => $this->datosEditar($id),
             'proveedores' => $this->proveedor->findAll(),
@@ -134,35 +133,86 @@ class Productos extends BaseController
     }
     public function updateProducto()
     {
-        $id = $this->request->getPost('id');
-        $imagenOld = $this->productos->where('id', $id)->first();
-        $img = $this->request->getFile('userfile');
-        if ($img->isValid() && !$img->hasMoved()) {
-            $imageName = $img->getRandomName();
-            $img->move('uploads/', $imageName);
-            if ($imagenOld['imagen'] != '') {
-                unlink('uploads/' . $imagenOld['imagen']);
+        if ($this->request->is('post')) {
+            $rules = [
+                'nombre' => [
+                    'label' => 'nombre del producto',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'El {field} debe ser llenado',
+                    ],
+                ],
+                'fecha-caducidad' => [
+                    'label' => 'fecha de caducidad',
+                    'rules' => 'required|valid_date[Y-m-d]',
+                    'errors' => [
+                        'required' => 'La {field} debe ser llenada',
+                        'valid_date' => 'La {field} debe estar en formato de fecha',
+                    ],
+                ],
+                'existencia' => [
+                    'label' => 'existencia',
+                    'rules' => 'required|numeric',
+                    'errors' => [
+                        'required' => 'La {field} debe ser llenada',
+                        'numeric' => 'La {field} debe ser llenada con numeros',
+                    ],
+                ],
+                'existencia-minima' => [
+                    'label' => 'existencia minima',
+                    'rules' => 'required|numeric',
+                    'errors' => [
+                        'required' => 'La {field} debe ser llenada',
+                        'numeric' => 'La {field} debe ser llenada con numeros',
+                    ],
+                ],
+                'precio-compra' => [
+                    'label' => 'precio de compra',
+                    'rules' => 'required|numeric',
+                    'errors' => [
+                        'required' => 'El {field} debe ser llenada',
+                        'numeric' => 'El {field} debe ser llenada con numeros',
+                    ],
+                ],
+                'precio-venta' => [
+                    'label' => 'precio de venta',
+                    'rules' => 'required|numeric',
+                    'errors' => [
+                        'required' => 'El {field} debe ser llenada',
+                        'numeric' => 'El {field} debe ser llenada con numeros',
+                    ],
+                ],
+                'userfile' => [
+                    'label' => 'Imagen del producto',
+                    'rules' => [
+                        'is_image[userfile]',
+                        'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+                    ],
+                    'errors' => [
+                        'is_image' => 'La {field} debe ser en formato de imagen',
+                    ],
+                ],
+            ];
+            if (!$this->validate($rules)) {
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
-            $this->productos->where('id', $id)->set($this->datos($imageName))->update();
-            $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-            // $this->exito();
-            return view('productos/editarProducto', [
-                'datos' => $this->datosEditar($id),
-                'proveedores' => $this->proveedor->findAll(),
-                'categorias' => $this->categoria->findAll(),
-                'presentaciones' => $this->presentacion->findAll(),
-                'exito' => 'Producto editado correctamente',
-            ]);
-        } else {
-            $this->productos->where('id', $id)->set($this->datos(''))->update();
-            $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-            return view('productos/editarProducto', [
-                'datos' => $this->datosEditar($id),
-                'proveedores' => $this->proveedor->findAll(),
-                'categorias' => $this->categoria->findAll(),
-                'presentaciones' => $this->presentacion->findAll(),
-                'exito' => 'Producto editado correctamente',
-            ]);
+            $id = $this->request->getPost('id');
+            $imagenOld = $this->productos->where('id', $id)->first();
+            $img = $this->request->getFile('userfile');
+            if ($img->isValid() && !$img->hasMoved()) {
+                $imageName = $img->getRandomName();
+                $img->move('uploads/', $imageName);
+                if ($imagenOld['imagen'] != '') {
+                    unlink('uploads/' . $imagenOld['imagen']);
+                }
+                $this->productos->where('id', $id)->set($this->datos($imageName))->update();
+                $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+                return redirect()->back()->with('exito', 'Producto editado correctamente')->withInput();
+            } else {
+                $this->productos->where('id', $id)->set($this->datos(''))->update();
+                $this->bitacora->insert(['accion' => 'Producto editado', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+                return redirect()->back()->with('exito', 'Producto editado correctamente')->withInput();
+            }
         }
 
     }
