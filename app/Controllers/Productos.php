@@ -37,14 +37,20 @@ class Productos extends BaseController
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
-                'fecha-caducidad' => [
-                    'label' => 'fecha de caducidad',
-                    'rules' => 'required|valid_date[Y-m-d]',
+                'tiene-caducidad' => [
+                    'label' => 'tiene fecha de caducidad',
+                    'rules' => 'required',
                     'errors' => [
-                        'required' => 'La {field} debe ser llenada',
-                        'valid_date' => 'La {field} debe estar en formato de fecha',
+                        'required' => 'El campo {field} debe ser llenado',
                     ],
                 ],
+                /* 'fecha-caducidad' => [
+                'label' => 'fecha de caducidad',
+                'rules' => 'valid_date[Y-m-d]',
+                'errors' => [
+                'valid_date' => 'La {field} debe estar en formato de fecha',
+                ],
+                ], */
                 'existencia' => [
                     'label' => 'existencia',
                     'rules' => 'required|numeric',
@@ -91,7 +97,6 @@ class Productos extends BaseController
             if (!$this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
-
             //Subir imagen
             $img = $this->request->getFile('userfile');
             if ($img->isValid() && !$img->hasMoved()) {
@@ -231,7 +236,7 @@ class Productos extends BaseController
             'codigo_barras' => $this->security->sanitizeFilename($this->request->getPost('codigo-barras')),
             'sku' => $this->security->sanitizeFilename($this->request->getPost('sku')),
             'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
-            'fecha_caducidad' => $this->security->sanitizeFilename($this->request->getPost('fecha-caducidad')),
+            'fecha_caducidad' => $this->request->getPost('fecha-caducidad') == null && $this->request->getPost('tiene-caducidad') == '0' ? '0000-00-00' : $this->request->getPost('fecha-caducidad'),
             'existencia' => $this->security->sanitizeFilename($this->request->getPost('existencia')),
             'existencia_minima' => $this->security->sanitizeFilename($this->request->getPost('existencia-minima')),
             'presentacion' => $this->security->sanitizeFilename($this->request->getPost('presentacion')),
@@ -246,6 +251,7 @@ class Productos extends BaseController
             'imagen' => $ruta,
             'creado_por' => session()->get('id'),
             'fecha_creacion' => date('Y-m-d'),
+            'tiene_caducidad' => $this->request->getPost('tiene-caducidad'),
         ];
     }
     protected function listaProductos()

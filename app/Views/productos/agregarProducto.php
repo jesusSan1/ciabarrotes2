@@ -41,17 +41,17 @@
         <?=form_input(['type' => 'text', 'name' => 'nombre', 'id' => 'nombre', 'class' => 'form-control', 'placeholder' => 'Nombre', 'value' => old('nombre'), 'required' => true])?>
     </div>
     <div class="col-md-4">
-        <label for="fecha-caducidad">Fecha de caducidad <i class="fas fa-info-circle" data-toggle="tooltip"
-                data-placement="top" title="Fecha de caducidad"></i></label>
-        <?=form_input(['type' => 'date', 'id' => 'fecha-caducidad', 'name' => 'fecha-caducidad', 'class' => 'form-control', 'placeholder' => 'Fecha de caducidad', 'value' => old('fecha-caducidad'), 'required' => true])?>
+        <label for="tiene-fecha">¿tiene fecha de caducidad? <i class="fas fa-info-circle" data-toggle="tooltip"
+                data-placement="top" title="¿tiene fecha de caducidad?"></i></label>
+        <select name="tiene-caducidad" id="tiene-caducidad" class="form-control">
+            <option value="">Seleccionar</option>
+            <option value="1" <?=set_select('tiene-caducidad', '1')?>>Si tiene</option>
+            <option value="0" <?=set_select('tiene-caducidad', '0')?>>No tiene</option>
+        </select>
     </div>
     <div class="col-md-4">
-        <label for="">Habilitado</label>
-        <select name="habilitado" id="" class="form-control">
-            <option value="">Seleccionar</option>
-            <option value="1" <?=set_select('habilitado', '1')?>>Habilitado</option>
-            <option value="0" <?=set_select('habilitado', '0')?>>Deshabilitado</option>
-        </select>
+        <?=form_label('Fecha de caducidad', 'fecha-caducidad')?>
+        <?=form_input(['type' => 'date', 'id' => 'fecha-caducidad', 'name' => 'fecha-caducidad', 'class' => 'form-control', 'placeholder' => 'Fecha de caducidad', 'value' => old('fecha-caducidad'), 'disabled' => session()->getFlashdata('errors') ? false : true])?>
     </div>
 </div>
 <br>
@@ -163,4 +163,5 @@
     </div>
     <div class="col-md-4"></div>
 </div>
+<?=script_tag('js/agregarProducto.js')?>
 <?=form_close()?>

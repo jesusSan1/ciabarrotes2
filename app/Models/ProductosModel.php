@@ -14,7 +14,7 @@ class ProductosModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['id', 'codigo_barras', 'sku', 'nombre', 'fecha_caducidad', 'existencia', 'existencia_minima', 'presentacion', 'precio_compra', 'precio_venta', 'precio_venta_mayoreo', 'descuento_venta', 'marca', 'modelo', 'proveedor_id', 'categoria_id', 'imagen', 'creado_por', 'fecha_creacion', 'fecha_eliminado', 'eliminado'];
+    protected $allowedFields = ['id', 'codigo_barras', 'sku', 'nombre', 'fecha_caducidad', 'existencia', 'existencia_minima', 'presentacion', 'precio_compra', 'precio_venta', 'precio_venta_mayoreo', 'descuento_venta', 'marca', 'modelo', 'proveedor_id', 'categoria_id', 'imagen', 'creado_por', 'fecha_creacion', 'fecha_eliminado', 'eliminado', 'tiene_caducidad'];
 
     // Dates
     protected $useTimestamps = false;
