@@ -79,6 +79,7 @@ as estatus
 from producto p
 where p.existencia > 0
 and datediff(fecha_caducidad, curdate()) <= 10
-and p.eliminado = 0")->getResult();
+and p.eliminado = 0
+and p.tiene_caducidad = 1")->getResult();
     }
 }
