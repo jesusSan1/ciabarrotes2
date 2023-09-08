@@ -147,14 +147,21 @@ class Productos extends BaseController
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
-                'fecha-caducidad' => [
-                    'label' => 'fecha de caducidad',
-                    'rules' => 'required|valid_date[Y-m-d]',
+                'tiene-caducidad' => [
+                    'label' => 'tiene fecha de caducidad',
+                    'rules' => 'required',
                     'errors' => [
-                        'required' => 'La {field} debe ser llenada',
-                        'valid_date' => 'La {field} debe estar en formato de fecha',
+                        'required' => 'El campo {field} debe ser llenado',
                     ],
                 ],
+                /* 'fecha-caducidad' => [
+                'label' => 'fecha de caducidad',
+                'rules' => 'valid_date[Y-m-d]',
+                'errors' => [
+                'required' => 'La {field} debe ser llenada',
+                'valid_date' => 'La {field} debe estar en formato de fecha',
+                ],
+                ], */
                 'existencia' => [
                     'label' => 'existencia',
                     'rules' => 'required|numeric',
@@ -224,7 +231,7 @@ class Productos extends BaseController
     protected function datosEditar($id)
     {
         $builder = $this->db->table('producto as p');
-        $builder->select('p.id ,p.codigo_barras ,p.sku ,p.nombre ,p.fecha_caducidad ,p.existencia ,p.existencia_minima ,p.presentacion ,p.precio_compra ,p.precio_venta ,p.precio_venta_mayoreo ,p.descuento_venta ,p.marca ,p.modelo ,p2.nombre as nombre_proveedor ,c.nombre as nombre_categoria, p.categoria_id, p.proveedor_id');
+        $builder->select('p.id ,p.codigo_barras ,p.sku ,p.nombre ,p.fecha_caducidad ,p.existencia ,p.existencia_minima ,p.presentacion ,p.precio_compra ,p.precio_venta ,p.precio_venta_mayoreo ,p.descuento_venta ,p.marca ,p.modelo ,p2.nombre as nombre_proveedor ,c.nombre as nombre_categoria, p.categoria_id, p.proveedor_id, p.tiene_caducidad');
         $builder->join('proveedor as p2', 'p.proveedor_id = p2.id');
         $builder->join('categoria as c', 'p.categoria_id = c.id');
         $builder->where('p.id', $id);
