@@ -66,12 +66,12 @@ class Perfil extends BaseController
             $usuario = $this->usuarios->where('id', $id)->select('password')->find();
             foreach ($usuario as $s) {
                 $data = [
-                    'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
-                    'apepat' => $this->security->sanitizeFilename($this->request->getPost('apellido')),
-                    'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
+                    'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+                    'apepat' => $this->security->sanitizeFilename(trim($this->request->getPost('apellido'))),
+                    'telefono' => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
                     'genero' => $this->security->sanitizeFilename($this->request->getPost('sexo')),
-                    'usuario' => $this->secirity->sanitizeFilename($this->request->getPost('usuario')),
-                    'correo' => $this->security->sanitizeFilename($this->request->getPost('email')),
+                    'usuario' => $this->secirity->sanitizeFilename(trim($this->request->getPost('usuario'))),
+                    'correo' => $this->security->sanitizeFilename(trim($this->request->getPost('email'))),
                     'password' => (empty($this->request->getPost('password')) ? $s['password'] : password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)),
 
                 ];

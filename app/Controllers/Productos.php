@@ -240,9 +240,9 @@ class Productos extends BaseController
     protected function datos($ruta)
     {
         return $data = [
-            'codigo_barras' => $this->security->sanitizeFilename($this->request->getPost('codigo-barras')),
-            'sku' => $this->security->sanitizeFilename($this->request->getPost('sku')),
-            'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
+            'codigo_barras' => $this->security->sanitizeFilename(trim($this->request->getPost('codigo-barras'))),
+            'sku' => $this->security->sanitizeFilename(trim($this->request->getPost('sku'))),
+            'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
             'fecha_caducidad' => $this->request->getPost('fecha-caducidad') == null && $this->request->getPost('tiene-caducidad') == '0' ? '0000-00-00' : $this->request->getPost('fecha-caducidad'),
             'existencia' => $this->security->sanitizeFilename($this->request->getPost('existencia')),
             'existencia_minima' => $this->security->sanitizeFilename($this->request->getPost('existencia-minima')),
@@ -251,8 +251,8 @@ class Productos extends BaseController
             'precio_venta' => $this->security->sanitizeFilename($this->request->getPost('precio-venta')),
             'precio_venta_mayoreo' => $this->security->sanitizeFilename($this->request->getPost('precio-venta-mayoreo')),
             'descuento_venta' => $this->security->sanitizeFilename($this->request->getPost('descuento-venta')),
-            'marca' => $this->security->sanitizeFilename($this->request->getPost('marca')),
-            'modelo' => $this->security->sanitizeFilename($this->request->getPost('modelo')),
+            'marca' => $this->security->sanitizeFilename(trim($this->request->getPost('marca'))),
+            'modelo' => $this->security->sanitizeFilename(trim($this->request->getPost('modelo'))),
             'proveedor_id' => $this->request->getPost('proveedor') !== "" ? $this->request->getPost('proveedor') : 1,
             'categoria_id' => $this->request->getPost('categoria') !== "" ? $this->request->getPost('categoria') : 1,
             'imagen' => $ruta,
