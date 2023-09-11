@@ -57,31 +57,24 @@ class Perfil extends BaseController
                 ],
             ];
             if (!$this->validate($rules)) {
-                return view('perfil/index', [
-                    'error' => $this->validation->listErrors(),
-                    'usuario' => $this->usuarios->where('id', session()->get('id'))->find(),
-                ]);
+                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $id = session()->get('id');
             $usuario = $this->usuarios->where('id', $id)->select('password')->find();
             foreach ($usuario as $s) {
                 $data = [
-                    'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
-                    'apepat' => $this->security->sanitizeFilename($this->request->getPost('apellido')),
-                    'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
+                    'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+                    'apepat' => $this->security->sanitizeFilename(trim($this->request->getPost('apellido'))),
+                    'telefono' => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
                     'genero' => $this->security->sanitizeFilename($this->request->getPost('sexo')),
-                    'usuario' => $this->secirity->sanitizeFilename($this->request->getPost('usuario')),
-                    'correo' => $this->security->sanitizeFilename($this->request->getPost('email')),
+                    'usuario' => $this->security->sanitizeFilename(trim($this->request->getPost('usuario'))),
+                    'correo' => $this->security->sanitizeFilename(trim($this->request->getPost('email'))),
                     'password' => (empty($this->request->getPost('password')) ? $s['password'] : password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)),
 
                 ];
                 if ($this->usuarios->where('id', $id)->set($data)->update()) {
                     $this->bitacora->insert(['accion' => 'Cambios de datos en el perfil de usuario', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-
-                    return view('perfil/index', [
-                        'exito' => 'Datos actualizados correctamente',
-                        'usuario' => $this->usuarios->where('id', session()->get('id'))->find(),
-                    ]);
+                    return redirect()->back()->with('exito', 'Datos actualizados correctamente')->withInput();
                 }
 
             }

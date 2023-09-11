@@ -18,11 +18,14 @@ class Productos extends Seeder
             $modelo = $faker->boolean(30) ? "modelo $i" : '';
             $sku = $faker->boolean(30) ? $faker->bothify('????###') : '';
             $codigoBarras = $faker->boolean(30) ? $faker->ean13() : '';
+            $tieneCaducidad = $faker->boolean(50) ? '1' : '0';
+            $fechaCaducidad = $tieneCaducidad === '1' ? '2023' . $faker->month() . $faker->dayOfMonth() : null;
+
             $data[] = [
                 'codigo_barras' => $codigoBarras,
                 'sku' => $sku,
                 'nombre' => "Producto $i",
-                'fecha_caducidad' => '2023' . $faker->month() . $faker->dayOfMonth(),
+                'fecha_caducidad' => $fechaCaducidad,
                 'existencia' => $faker->numberBetween(0, 15),
                 'existencia_minima' => $faker->numberBetween(0, 15),
                 'presentacion' => $presentaciones[array_rand($presentaciones)],
@@ -39,6 +42,7 @@ class Productos extends Seeder
                 'fecha_creacion' => $faker->date('Y_m_d'),
                 'fecha_eliminado' => '0000-00-00',
                 'eliminado' => $faker->numberBetween(0, 1),
+                'tiene_caducidad' => $tieneCaducidad,
             ];
         }
         $builder = $this->db->table('producto');

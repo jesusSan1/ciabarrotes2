@@ -37,14 +37,20 @@ class Productos extends BaseController
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
-                'fecha-caducidad' => [
-                    'label' => 'fecha de caducidad',
-                    'rules' => 'required|valid_date[Y-m-d]',
+                'tiene-caducidad' => [
+                    'label' => 'tiene fecha de caducidad',
+                    'rules' => 'required',
                     'errors' => [
-                        'required' => 'La {field} debe ser llenada',
-                        'valid_date' => 'La {field} debe estar en formato de fecha',
+                        'required' => 'El campo {field} debe ser llenado',
                     ],
                 ],
+                /* 'fecha-caducidad' => [
+                'label' => 'fecha de caducidad',
+                'rules' => 'valid_date[Y-m-d]',
+                'errors' => [
+                'valid_date' => 'La {field} debe estar en formato de fecha',
+                ],
+                ], */
                 'existencia' => [
                     'label' => 'existencia',
                     'rules' => 'required|numeric',
@@ -91,7 +97,6 @@ class Productos extends BaseController
             if (!$this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
-
             //Subir imagen
             $img = $this->request->getFile('userfile');
             if ($img->isValid() && !$img->hasMoved()) {
@@ -142,14 +147,21 @@ class Productos extends BaseController
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
-                'fecha-caducidad' => [
-                    'label' => 'fecha de caducidad',
-                    'rules' => 'required|valid_date[Y-m-d]',
+                'tiene-caducidad' => [
+                    'label' => 'tiene fecha de caducidad',
+                    'rules' => 'required',
                     'errors' => [
-                        'required' => 'La {field} debe ser llenada',
-                        'valid_date' => 'La {field} debe estar en formato de fecha',
+                        'required' => 'El campo {field} debe ser llenado',
                     ],
                 ],
+                /* 'fecha-caducidad' => [
+                'label' => 'fecha de caducidad',
+                'rules' => 'valid_date[Y-m-d]',
+                'errors' => [
+                'required' => 'La {field} debe ser llenada',
+                'valid_date' => 'La {field} debe estar en formato de fecha',
+                ],
+                ], */
                 'existencia' => [
                     'label' => 'existencia',
                     'rules' => 'required|numeric',
@@ -219,7 +231,7 @@ class Productos extends BaseController
     protected function datosEditar($id)
     {
         $builder = $this->db->table('producto as p');
-        $builder->select('p.id ,p.codigo_barras ,p.sku ,p.nombre ,p.fecha_caducidad ,p.existencia ,p.existencia_minima ,p.presentacion ,p.precio_compra ,p.precio_venta ,p.precio_venta_mayoreo ,p.descuento_venta ,p.marca ,p.modelo ,p2.nombre as nombre_proveedor ,c.nombre as nombre_categoria, p.categoria_id, p.proveedor_id');
+        $builder->select('p.id ,p.codigo_barras ,p.sku ,p.nombre ,p.fecha_caducidad ,p.existencia ,p.existencia_minima ,p.presentacion ,p.precio_compra ,p.precio_venta ,p.precio_venta_mayoreo ,p.descuento_venta ,p.marca ,p.modelo ,p2.nombre as nombre_proveedor ,c.nombre as nombre_categoria, p.categoria_id, p.proveedor_id, p.tiene_caducidad');
         $builder->join('proveedor as p2', 'p.proveedor_id = p2.id');
         $builder->join('categoria as c', 'p.categoria_id = c.id');
         $builder->where('p.id', $id);
@@ -228,24 +240,25 @@ class Productos extends BaseController
     protected function datos($ruta)
     {
         return $data = [
-            'codigo_barras' => $this->security->sanitizeFilename($this->request->getPost('codigo-barras')),
-            'sku' => $this->security->sanitizeFilename($this->request->getPost('sku')),
-            'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
-            'fecha_caducidad' => $this->security->sanitizeFilename($this->request->getPost('fecha-caducidad')),
+            'codigo_barras' => $this->security->sanitizeFilename(trim($this->request->getPost('codigo-barras'))),
+            'sku' => $this->security->sanitizeFilename(trim($this->request->getPost('sku'))),
+            'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+            'fecha_caducidad' => $this->request->getPost('fecha-caducidad') == null && $this->request->getPost('tiene-caducidad') == '0' ? '0000-00-00' : $this->request->getPost('fecha-caducidad'),
             'existencia' => $this->security->sanitizeFilename($this->request->getPost('existencia')),
             'existencia_minima' => $this->security->sanitizeFilename($this->request->getPost('existencia-minima')),
-            'presentacion' => $this->security->sanitizeFilename($this->request->getPost('presentacion')),
+            'presentacion' => $this->request->getPost('presentacion') !== "" ? $this->security->sanitizeFilename($this->request->getPost('presentacion')) : "Unidad",
             'precio_compra' => $this->security->sanitizeFilename($this->request->getPost('precio-compra')),
             'precio_venta' => $this->security->sanitizeFilename($this->request->getPost('precio-venta')),
             'precio_venta_mayoreo' => $this->security->sanitizeFilename($this->request->getPost('precio-venta-mayoreo')),
             'descuento_venta' => $this->security->sanitizeFilename($this->request->getPost('descuento-venta')),
-            'marca' => $this->security->sanitizeFilename($this->request->getPost('marca')),
-            'modelo' => $this->security->sanitizeFilename($this->request->getPost('modelo')),
-            'proveedor_id' => $this->request->getPost('proveedor'),
-            'categoria_id' => $this->request->getPost('categoria'),
+            'marca' => $this->security->sanitizeFilename(trim($this->request->getPost('marca'))),
+            'modelo' => $this->security->sanitizeFilename(trim($this->request->getPost('modelo'))),
+            'proveedor_id' => $this->request->getPost('proveedor') !== "" ? $this->request->getPost('proveedor') : 1,
+            'categoria_id' => $this->request->getPost('categoria') !== "" ? $this->request->getPost('categoria') : 1,
             'imagen' => $ruta,
             'creado_por' => session()->get('id'),
             'fecha_creacion' => date('Y-m-d'),
+            'tiene_caducidad' => $this->request->getPost('tiene-caducidad'),
         ];
     }
     protected function listaProductos()

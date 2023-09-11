@@ -85,14 +85,14 @@ class Empleados extends BaseController
                 ]);
             }
             $data = [
-                'nombre' => $this->security->sanitizeFilename($this->request->getPost('nombre')),
-                'apepat' => $this->security->sanitizeFilename($this->request->getPost('apellido')),
-                'telefono' => $this->security->sanitizeFilename($this->request->getPost('telefono')),
+                'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+                'apepat' => $this->security->sanitizeFilename(trim($this->request->getPost('apellido'))),
+                'telefono' => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
                 'rol_id' => filter_var(intval($this->request->getPost('puesto')), FILTER_SANITIZE_NUMBER_INT),
                 'genero' => $this->security->sanitizeFilename($this->request->getPost('sexo')),
-                'usuario' => $this->security->sanitizeFilename($this->request->getPost('usuario')),
+                'usuario' => $this->security->sanitizeFilename(trim($this->request->getPost('usuario'))),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'correo' => $this->security->sanitizeFilename($this->request->getPost('email')),
+                'correo' => $this->security->sanitizeFilename(trim($this->request->getPost('email'))),
                 'habilitado' => filter_var(intval($this->request->getPost('estatus')), FILTER_SANITIZE_NUMBER_INT),
                 'foto_perfil' => $this->request->getPost('img'),
                 'fecha_creacion' => date('Y-m-d'),
