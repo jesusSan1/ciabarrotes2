@@ -151,7 +151,7 @@
 <br>
 <div class="row">
     <div class="col-md-4">
-        <?=form_input(['type' => 'file', 'name' => 'userfile', 'class' => 'form-control'])?>
+        <?=form_input(['type' => 'file', 'name' => 'userfile', 'class' => 'form-control', 'accept' => 'image/.jpg,.png,.jpeg'])?>
     </div>
     <div class="col-md-8"></div>
 </div>

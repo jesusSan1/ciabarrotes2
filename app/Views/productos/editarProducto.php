@@ -55,10 +55,10 @@ Editar producto
         <select name="tiene-caducidad" id="tiene-caducidad" class="form-control">
             <option class="opt" value="<?=$dato->tiene_caducidad?>"
                 <?=set_select('tiene-caducidad', $dato->tiene_caducidad)?>>
-                <?php if($dato->tiene_caducidad === 1): ?>
-                <?= 'Si tiene' ?>
+                <?php if ($dato->tiene_caducidad === 1): ?>
+                <?='Si tiene'?>
                 <?php else: ?>
-                <?= 'No tiene' ?>
+                <?='No tiene'?>
                 <?php endif;?>
             </option>
             <option value="1" <?=set_select('tiene-caducidad', '1')?>>Si tiene</option>
@@ -176,7 +176,7 @@ Editar producto
 <br>
 <div class="row">
     <div class="col-md-4">
-        <?=form_input(['type' => 'file', 'name' => 'userfile', 'class' => 'form-control'])?>
+        <?=form_input(['type' => 'file', 'name' => 'userfile', 'class' => 'form-control', 'accept' => 'image/.jpg,.png,.jpeg'])?>
     </div>
     <div class="col-md-8"></div>
 </div>
