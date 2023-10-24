@@ -1,9 +1,9 @@
-<?= $this->extend('dashboard') ?>
-<?= $this->section('titulo') ?>
+<?=$this->extend('dashboard')?>
+<?=$this->section('titulo')?>
 Configuración
-<?= $this->endSection() ?>
-<?= $this->section('contenido') ?>
-<?= link_tag('css/perfil.css') ?>
+<?=$this->endSection()?>
+<?=$this->section('contenido')?>
+<?=link_tag('css/perfil.css')?>
 <div class="row">
     <!-- Area Chart -->
     <div class="col-md-12">
@@ -30,22 +30,22 @@ Configuración
                     <div class="row">
                         <div class="col-md-6">
                             <input type="text" name="nombre" class="form-control" placeholder="Nombre de la empresa"
-                                value="<?=$configuracion['nombre_empresa']?>">
+                                value="<?=esc($configuracion['nombre_empresa'])?>">
                         </div>
                         <div class="col-md-6">
                             <input type="text" name="direccion" class="form-control" placeholder="Dirección"
-                                value="<?=$configuracion['direccion']?>">
+                                value="<?=esc($configuracion['direccion'])?>">
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-6">
                             <input type="phone" name="telefono" class="form-control" placeholder="Numero de contacto"
-                                value="<?=$configuracion['telefono']?>">
+                                value="<?=esc($configuracion['telefono'])?>">
                         </div>
                         <div class="col-md-6">
                             <input type="email" name="correo" class="form-control" placeholder="Correo electronico"
-                                value="<?=$configuracion['correo_electronico']?>">
+                                value="<?=esc($configuracion['correo_electronico'])?>">
                         </div>
                     </div>
                     <?php endforeach;?>
@@ -62,4 +62,4 @@ Configuración
         </div>
     </div>
 </div>
-<?= $this->endSection() ?>
+<?=$this->endSection()?>

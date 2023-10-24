@@ -30,9 +30,9 @@ Bitacora
                         <tbody>
                             <?php foreach ($datos as $dato): ?>
                             <tr>
-                                <td scope="row"><?=$dato->accion?></td>
-                                <td><?=$dato->fecha?></td>
-                                <td><?=$dato->nombre?></td>
+                                <td scope="row"><?=esc($dato->accion)?></td>
+                                <td><?=esc($dato->fecha)?></td>
+                                <td><?=esc($dato->nombre)?></td>
                             </tr>
                             <?php endforeach;?>
                         </tbody>

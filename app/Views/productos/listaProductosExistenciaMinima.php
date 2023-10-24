@@ -17,13 +17,13 @@
                     <img src="<?=$img?>" alt="Imagen del producto" height="50" class="imagen">
                 </td>
                 <td>
-                    <?=$productoMinimo->nombre?>
+                    <?=esc($productoMinimo->nombre)?>
                 </td>
                 <td>
-                    <?=$productoMinimo->existencia?>
+                    <?=esc($productoMinimo->existencia)?>
                 </td>
                 <td>
-                    <?=$productoMinimo->existencia_minima?>
+                    <?=esc($productoMinimo->existencia_minima)?>
                 </td>
                 <td>
                     <?php if ($productoMinimo->estatus == 1): ?>

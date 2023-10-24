@@ -21,16 +21,16 @@
             <tr>
                 <td scope="row">
                     <input type="hidden" name="" value="<?=$proveedor->id?>">
-                    <?=$proveedor->nombre?>
+                    <?=esc($proveedor->nombre)?>
                 </td>
                 <td>
-                    <?=$proveedor->direccion?>
+                    <?=esc($proveedor->direccion)?>
                 </td>
                 <td>
-                    <?=$proveedor->telefono?>
+                    <?=esc($proveedor->telefono)?>
                 </td>
                 <td>
-                    <?=$proveedor->correo?>
+                    <?=esc($proveedor->correo)?>
                 </td>
                 <td>
                     <?=$proveedor->fecha_creacion?>

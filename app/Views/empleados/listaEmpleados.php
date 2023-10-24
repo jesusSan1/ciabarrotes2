@@ -23,10 +23,10 @@
                     <?php $img = $empleado['foto_perfil'] ? $empleado['foto_perfil'] : 'No tiene foto'?>
                     <img src="<?=$img?>" height="50" alt="" class="imagen">
                 </td>
-                <td><?=$empleado['nombre']?></td>
-                <td><?=$empleado['usuario']?></td>
-                <td><?=$empleado['correo'] ? $empleado['correo'] : 'No tiene correo'?></td>
-                <td><?=$empleado['telefono'] ? $empleado['telefono'] : 'No tiene telefono'?></td>
+                <td><?=esc($empleado['nombre'])?></td>
+                <td><?=esc($empleado['usuario'])?></td>
+                <td><?=$empleado['correo'] ? esc($empleado['correo']) : 'No tiene correo'?></td>
+                <td><?=$empleado['telefono'] ? esc($empleado['telefono']) : 'No tiene telefono'?></td>
                 <td>
                     <?php if ($empleado['habilitado'] == 1): ?>
                     <label class="text-success habilitar"><i class="fa fa-check-circle" aria-hidden="true"></i>
