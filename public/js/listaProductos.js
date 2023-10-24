@@ -1,7 +1,8 @@
-document.querySelectorAll(".eliminar-producto").forEach((e) => {
-  e.addEventListener("click", () => {
-    const tr = e.parentNode.parentNode;
-    const id = tr.children[0].children[0].value;
+document.querySelectorAll(".eliminar-producto").forEach((element) => {
+  element.addEventListener("click", (e) => {
+    e.preventDefault();
+    const tr = element.parentNode.parentNode;
+    const formulario = tr.children[0];
     Swal.fire({
       title: "Eliminar producto",
       text: "¿deseas eliminar el producto?",
@@ -13,31 +14,7 @@ document.querySelectorAll(".eliminar-producto").forEach((e) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        tr.remove();
-        $.ajax({
-          type: "post",
-          url: "eliminar-producto",
-          data: {
-            id,
-          },
-          success: function (response) {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: false,
-              didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-              },
-            });
-            Toast.fire({
-              icon: "success",
-              title: "Eliminado correctamente",
-            });
-          },
-        });
+        formulario.submit();
       }
     });
   });
