@@ -69,6 +69,7 @@ class Proveedores extends BaseController
         $id = $this->request->getPost('id');
         $this->proveedor->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
         $this->bitacora->insert(['accion' => 'Eliminado proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+        return redirect()->back()->with('exito', 'El elemento ha sido eliminado correctamente');
     }
     public function editarProveedor(int $id)
     {

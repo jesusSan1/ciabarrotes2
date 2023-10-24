@@ -1,7 +1,8 @@
 document.querySelectorAll(".eliminar-proveedor").forEach((item) => {
-  item.addEventListener("click", () => {
+  item.addEventListener("click", (e) => {
+    e.preventDefault();
     const tr = item.parentNode.parentNode;
-    const id = tr.children[0].children[0].value;
+    const formulario = tr.children[0];
     Swal.fire({
       title: "Eliminar proveedor",
       text: "¿deseas eliminar el usuario?",
@@ -13,31 +14,7 @@ document.querySelectorAll(".eliminar-proveedor").forEach((item) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        $.ajax({
-          type: "post",
-          url: "eliminarProveedor",
-          data: {
-            id,
-          },
-          success: function (response) {
-            tr.remove();
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: false,
-              didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-              },
-            });
-            Toast.fire({
-              icon: "success",
-              title: "Proveedor eliminado",
-            });
-          },
-        });
+        formulario.submit();
       }
     });
   });

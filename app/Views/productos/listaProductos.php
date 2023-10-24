@@ -49,7 +49,10 @@
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>
-                    <button type="button" class="btn btn-danger eliminar-producto"><i class="fas fa-trash"></i></button>
+                    <?=form_open('eliminar-producto', ['class' => 'form-delete'])?>
+                    <?=form_hidden('id', $producto->id)?>
+                    <button type="submit" class="btn btn-danger eliminar-producto"><i class="fas fa-trash"></i></button>
+                    <?=form_close()?>
                 </td>
                 <?php endif;?>
             </tr>
