@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/check.css">
+<input type="hidden" class="txt_csrfname" name="<?=csrf_token()?>" value="<?=csrf_hash()?>" />
 <div class="table-responsive">
     <table class="table table-striped">
         <thead class="thead-dark">

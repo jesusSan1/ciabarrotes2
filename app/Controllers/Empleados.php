@@ -113,10 +113,12 @@ class Empleados extends BaseController
 
     public function accesoEmpleado()
     {
+        $data['token'] = csrf_hash();
         $id = $this->request->getPost('id');
         $usuarioHabilitado = $this->request->getPost('habilitado');
         $this->usuarios->where('id', $id)->set(['habilitado' => $usuarioHabilitado])->update();
         $this->bitacora->insert(['accion' => 'Cambio de accesos al usuario', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
+        return $this->response->setJson($data);
     }
     public function eliminarEmpleado()
     {

@@ -1,17 +1,23 @@
-async function enviarDatos(id, habilitado) {
+async function enviarDatos(id, habilitado, csrfName, csrfHash) {
   $.ajax({
     type: "post",
     url: "accesoEmpleado",
     data: {
       id,
       habilitado,
+      [csrfName]: csrfHash,
     },
-    success: function (response) {},
+    dataType: "json",
+    success: function (response) {
+      $(".txt_csrfname").val(response.token);
+    },
   });
 }
 
 document.querySelectorAll(".habilitar").forEach((element) => {
   element.addEventListener("change", (e) => {
+    var csrfName = $(".txt_csrfname").attr("name"); // CSRF Token name
+    var csrfHash = $(".txt_csrfname").val(); // CSRF hash
     const tr = e.target.parentNode.parentNode;
     const id = tr.children[0].children[0].value;
     let habilitado;
@@ -19,12 +25,12 @@ document.querySelectorAll(".habilitar").forEach((element) => {
       $(tr).find("td label.habilitar").show();
       $(tr).find("td label.deshabilitar").hide();
       habilitado = 1;
-      enviarDatos(id, habilitado);
+      enviarDatos(id, habilitado, csrfName, csrfHash);
     } else {
       $(tr).find("td label.habilitar").hide();
       $(tr).find("td label.deshabilitar").show();
       habilitado = 0;
-      enviarDatos(id, habilitado);
+      enviarDatos(id, habilitado, csrfName, csrfHash);
     }
   });
 });
