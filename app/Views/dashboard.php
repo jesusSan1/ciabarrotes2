@@ -78,26 +78,26 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="bitacora" data-toggle="collapse" data-target="#collapseZero"
-                    aria-expanded="true" aria-controls="collapseZero">
+                <a class="nav-link collapsed" href="<?=base_url('bitacora')?>" data-toggle="collapse"
+                    data-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
                     <i class="fas fa-book"></i>
                     <span>Bitacora</span>
                 </a>
                 <div id="collapseZero" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="bitacora">bitacora</a>
+                        <?=anchor(base_url('bitacora'), 'Bitacora', ['class' => 'collapse-item'])?>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="configuracion">
+                <a class="nav-link" href="<?=base_url('configuracion')?>">
                     <i class="fas fa-cogs"></i>
                     <span>Configuracion</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="empleados">
+                <a class="nav-link" href="<?=base_url('empleados')?>">
                     <i class="fas fa-users-cog"></i>
                     <span>Empleados</span>
                 </a>
@@ -113,7 +113,7 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="perfil">
+                <a class="nav-link" href="<?=base_url('perfil')?>">
                     <i class="fas fa-user"></i>
                     <span>Perfil de usuario</span>
                 </a>
@@ -128,19 +128,19 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="categorias">
+                <a class="nav-link" href="<?=base_url('categorias')?>">
                     <i class="fas fa-tags"></i>
                     <span>Categorias</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="proveedores">
+                <a class="nav-link" href="<?=base_url('proveedores')?>">
                     <i class="fas fa-truck"></i>
                     <span>Proveedores</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="productos">
+                <a class="nav-link" href="<?=base_url('productos')?>">
                     <i class="fas fa-boxes"></i>
                     <span>Productos</span>
                 </a>
@@ -326,7 +326,7 @@ $name = $conf->findAll();
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy;Novaritek <?=date('Y')?></span>
+                        <span>Copyright &copy;JAX Studios <?=date('Y')?></span>
                     </div>
                 </div>
             </footer>
