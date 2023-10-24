@@ -45,7 +45,11 @@
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>
-                    <button class="btn btn-danger eliminar-proveedor"><i class="fas fa-trash"></i></button>
+                    <?=form_open('eliminarProveedor', ['class' => 'form-delete'])?>
+                    <?=form_hidden('id', $proveedor->id)?>
+                    <button type="submit" class="btn btn-danger eliminar-proveedor"><i
+                            class="fas fa-trash"></i></button>
+                    <?=form_close()?>
                 </td>
                 <?php endif;?>
             </tr>
