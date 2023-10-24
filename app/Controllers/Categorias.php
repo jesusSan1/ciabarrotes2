@@ -56,11 +56,12 @@ class Categorias extends BaseController
     }
     public function editarCategoria()
     {
+        $data['token'] = csrf_hash();
         $id = $this->request->getPost('id');
         $valor = $this->security->sanitizeFilename(trim($this->request->getPost('valor')));
         $this->categoria->where('id', $id)->set(['nombre' => $valor])->update();
         $this->bitacora->insert(['accion' => 'Cambio de nombre en categoria', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-
+        return $this->response->setJson($data);
     }
     protected function listaCategorias()
     {
