@@ -1,3 +1,4 @@
+<input type="hidden" class="txt_csrfname" name="<?=csrf_token()?>" value="<?=csrf_hash()?>" />
 <div class="table-responsive">
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -33,11 +34,13 @@
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>
-                    <?= form_open('eliminarCategoria', ['class' => 'form-delete']) ?>
-                    <?= form_hidden('id', $categorias->id) ?>
+                    <?=form_open('eliminarCategoria', ['class' => 'form-delete'])?>
+                    <?=form_hidden('id', $categorias->id)?>
                     <button type="submit" class="btn btn-danger eliminar-categoria"><i
                             class="fas fa-trash"></i></button>
-                    <?= form_close() ?>
+                    <?=form_close()?>
+                    <button type="button" class="btn btn-secondary cancelar-categoria" style="display:none"><i
+                            class="fas fa-times"></i></button>
                 </td>
                 <?php endif;?>
             </tr>
