@@ -37,8 +37,9 @@ document.querySelectorAll(".habilitar").forEach((element) => {
 
 document.querySelectorAll(".eliminar").forEach((element) => {
   element.addEventListener("click", (e) => {
+    e.preventDefault();
     const tr = element.parentNode.parentNode;
-    const id = tr.children[0].children[0].value;
+    const formulario = tr.children[0];
     Swal.fire({
       title: "Eliminar empleado",
       text: "¿deseas eliminar el empleado?",
@@ -50,31 +51,32 @@ document.querySelectorAll(".eliminar").forEach((element) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        $.ajax({
-          type: "post",
-          url: "eliminarEmpleado",
-          data: {
-            id,
-          },
-          success: function (response) {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: false,
-              didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-              },
-            });
-            Toast.fire({
-              icon: "success",
-              title: "Empleado eliminado correctamente",
-            });
-            tr.remove();
-          },
-        });
+        formulario.submit();
+        // $.ajax({
+        //   type: "post",
+        //   url: "eliminarEmpleado",
+        //   data: {
+        //     id,
+        //   },
+        //   success: function (response) {
+        //     const Toast = Swal.mixin({
+        //       toast: true,
+        //       position: "top-end",
+        //       showConfirmButton: false,
+        //       timer: 3000,
+        //       timerProgressBar: false,
+        //       didOpen: (toast) => {
+        //         toast.addEventListener("mouseenter", Swal.stopTimer);
+        //         toast.addEventListener("mouseleave", Swal.resumeTimer);
+        //       },
+        //     });
+        //     Toast.fire({
+        //       icon: "success",
+        //       title: "Empleado eliminado correctamente",
+        //     });
+        //     tr.remove();
+        //   },
+        // });
       }
     });
   });

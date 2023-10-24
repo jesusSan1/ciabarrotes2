@@ -125,6 +125,6 @@ class Empleados extends BaseController
         $id = $this->request->getPost('id');
         $this->usuarios->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d'), 'habilitado' => 0])->update();
         $this->bitacora->insert(['accion' => 'Eliminacion de usuario', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-
+        return redirect()->back()->with('exito', 'El elemento ha sido eliminado correctamente');
     }
 }

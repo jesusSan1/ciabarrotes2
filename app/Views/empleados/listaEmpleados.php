@@ -53,7 +53,10 @@
                 </td>
                 <td><?=$empleado['fecha_creacion']?></td>
                 <td>
-                    <button type="button" class="btn btn-danger eliminar"><i class="fas fa-trash"></i></button>
+                    <?=form_open('eliminarEmpleado', ['class' => 'form-delete'])?>
+                    <?=form_hidden('id', $empleado['id'])?>
+                    <button type="submit" class="btn btn-danger eliminar"><i class="fas fa-trash"></i></button>
+                    <?=form_close()?>
                 </td>
             </tr>
             <?php endforeach;?>
