@@ -18,9 +18,9 @@
             <?php foreach ($datos->getResult() as $categorias): ?>
             <tr>
                 <td>
-                    <input type="hidden" name="" class="id" value="<?=$categorias->id?>">
-                    <label><?=$categorias->nombre?></label>
-                    <input type="text" name="" id="" class="form-control nombre" value="<?=$categorias->nombre?>"
+                    <input type="hidden" name="" class="id" value="<?=esc($categorias->id)?>">
+                    <label><?=esc($categorias->nombre)?></label>
+                    <input type="text" name="" id="" class="form-control nombre" value="<?=esc($categorias->nombre)?>"
                         style="display: none">
                 </td>
                 <td><?=$categorias->fecha_creacion?></td>

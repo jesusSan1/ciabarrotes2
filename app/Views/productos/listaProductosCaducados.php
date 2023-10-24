@@ -17,13 +17,13 @@
                     <img src="<?=$img?>" alt="Imagen del producto" height="50" class="imagen">
                 </td>
                 <td>
-                    <?=$productoCaducado->nombre?>
+                    <?=esc($productoCaducado->nombre)?>
                 </td>
                 <td>
-                    <?=$productoCaducado->fecha_caducidad?>
+                    <?=esc($productoCaducado->fecha_caducidad)?>
                 </td>
                 <td>
-                    <?=$productoCaducado->dias?>
+                    <?=esc($productoCaducado->dias)?>
                 </td>
                 <td>
                     <?php if ($productoCaducado->estatus == 3): ?>

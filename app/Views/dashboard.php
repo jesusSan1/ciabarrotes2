@@ -55,7 +55,7 @@ $name = $conf->findAll();
                 </div>
                 <?php foreach ($name as $empresa): ?>
                 <div class="sidebar-brand-text mx-3">
-                    <?=$empresa['nombre_empresa'] ? $empresa['nombre_empresa'] : 'Empresa sin nombre'?></div>
+                    <?=$empresa['nombre_empresa'] ? esc($empresa['nombre_empresa']) : 'Empresa sin nombre'?></div>
                 <?php endforeach;?>
             </a>
 

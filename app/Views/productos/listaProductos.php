@@ -26,15 +26,15 @@
                     <img src="<?=$img?>" alt="Imagen del producto" height="50" class="imagen">
                 </td>
                 <td>
-                    <?php $codigoBarras = $producto->codigo_barras ? $producto->codigo_barras : 'No tiene codigo de barras'?>
+                    <?php $codigoBarras = $producto->codigo_barras ? esc($producto->codigo_barras) : 'No tiene codigo de barras'?>
                     <?=$codigoBarras?>
                 </td>
-                <td><?=$producto->nombre?></td>
+                <td><?=esc($producto->nombre)?></td>
                 <td>
-                    <?=$producto->existencia?>
+                    <?=esc($producto->existencia)?>
                 </td>
                 <td>
-                    <?=$producto->precio_venta?>
+                    <?=esc($producto->precio_venta)?>
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>

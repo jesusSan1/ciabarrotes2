@@ -17,7 +17,7 @@
     <?php endif;?>
     <?php foreach ($datosEmpleado as $empleado): ?>
     <form action="updateEmpleado" method="post" autocomplete="off" id="form">
-        <?= csrf_field() ?>
+        <?=csrf_field()?>
         <input type="hidden" name="id" value="<?=$empleado['id']?>">
         <div class="row">
             <div class="col-md-12">
@@ -29,17 +29,17 @@
             <div class="col-md-3">
                 <label>Nombre</label>
                 <input type="text" name="nombre" class="form-control nombre" placeholder="Nombre" required
-                    value="<?=$empleado['nombre']?>">
+                    value="<?=esc($empleado['nombre'])?>">
             </div>
             <div class="col-md-3">
                 <label>Apellido paterno</label>
                 <input type="text" name="apellido" class="form-control apellido" placeholder="Apellido Paterno" required
-                    value="<?=$empleado['apepat']?>">
+                    value="<?=esc($empleado['apepat'])?>">
             </div>
             <div class="col-md-3">
                 <label>Telefono</label>
                 <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono"
-                    value="<?=$empleado['telefono']?>">
+                    value="<?=esc($empleado['telefono'])?>">
             </div>
             <div class="col-md-3">
                 <label>Puesto</label>
@@ -98,7 +98,7 @@
                 <div class="form-group">
                     <label for="">Usuario</label>
                     <input type="text" name="usuario" class="form-control usuario" placeholder="Nombre de usuario"
-                        required value="<?=$empleado['usuario']?>">
+                        required value="<?=esc($empleado['usuario'])?>">
                 </div>
                 <div class="form-group">
                     <label for="">Contraseña</label>
@@ -112,7 +112,7 @@
                 <div class="form-group">
                     <label for="">Correo electronico</label>
                     <input type="email" name="email" class="form-control email" placeholder="Correo electronico"
-                        value="<?=$empleado['correo']?>">
+                        value="<?=esc($empleado['correo'])?>">
                 </div>
                 <div class="form-group">
                     <label for="">Estatus del usuario</label>

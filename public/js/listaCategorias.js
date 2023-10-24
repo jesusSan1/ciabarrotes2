@@ -2,6 +2,8 @@ function mostrarOcultar(tr, param1, param2) {
   tr.children[0].children[1].style.display = param1;
   tr.children[0].children[2].style.display = param2;
 
+  tr.children[2].children[0].style.display = param1;
+  tr.children[2].children[1].style.display = param2;
   tr.children[3].children[0].style.display = param1;
   tr.children[3].children[1].style.display = param2;
   tr.children[4].children[0].style.display = param1;
