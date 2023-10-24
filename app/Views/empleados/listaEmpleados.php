@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/check.css">
+<input type="hidden" class="txt_csrfname" name="<?=csrf_token()?>" value="<?=csrf_hash()?>" />
 <div class="table-responsive">
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -52,7 +53,10 @@
                 </td>
                 <td><?=$empleado['fecha_creacion']?></td>
                 <td>
-                    <button type="button" class="btn btn-danger eliminar"><i class="fas fa-trash"></i></button>
+                    <?=form_open('eliminarEmpleado', ['class' => 'form-delete'])?>
+                    <?=form_hidden('id', $empleado['id'])?>
+                    <button type="submit" class="btn btn-danger eliminar"><i class="fas fa-trash"></i></button>
+                    <?=form_close()?>
                 </td>
             </tr>
             <?php endforeach;?>

@@ -52,7 +52,7 @@ class Categorias extends BaseController
         $id = $this->request->getPost('id');
         $this->categoria->where('id', $id)->set(['eliminado' => 1, 'fecha_eliminado' => date('Y-m-d')])->update();
         $this->bitacora->insert(['accion' => 'Categoria eliminada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
-
+        return redirect()->back()->with('exito', 'El elemento ha sido eliminado correctamente');
     }
     public function editarCategoria()
     {

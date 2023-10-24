@@ -33,10 +33,11 @@
                 </td>
                 <?php if (session()->get('rol_id') == 1): ?>
                 <td>
-                    <button type="button" class="btn btn-danger eliminar-categoria"><i
+                    <?= form_open('eliminarCategoria', ['class' => 'form-delete']) ?>
+                    <?= form_hidden('id', $categorias->id) ?>
+                    <button type="submit" class="btn btn-danger eliminar-categoria"><i
                             class="fas fa-trash"></i></button>
-                    <button type="button" class="btn btn-secondary cancelar-categoria" style="display:none"><i
-                            class="fas fa-times"></i></button>
+                    <?= form_close() ?>
                 </td>
                 <?php endif;?>
             </tr>
