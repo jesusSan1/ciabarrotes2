@@ -29,7 +29,7 @@ class Proveedores extends BaseController
                 ],
                 'telefono' => [
                     'label' => 'telefono',
-                    'rules' => 'required|numeric',
+                    'rules' => 'required|numeric|permit_empty',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
                         'numeric' => 'El {field} debe ser un numero telefonico',
@@ -37,7 +37,7 @@ class Proveedores extends BaseController
                 ],
                 'correo' => [
                     'label' => 'correo electronico',
-                    'rules' => 'valid_email',
+                    'rules' => 'valid_email|permit_empty',
                     'errors' => [
                         'valid_email' => 'El {field} debe ser un {field} valido',
                     ],
