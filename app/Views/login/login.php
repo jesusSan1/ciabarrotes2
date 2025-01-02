@@ -1,4 +1,4 @@
-<?=$this->extend('login\layout')?>
+<?=$this->extend('login/layout')?>
 <?=$this->section('titulo')?>
 Inicio de sesión
 <?=$this->endSection()?>

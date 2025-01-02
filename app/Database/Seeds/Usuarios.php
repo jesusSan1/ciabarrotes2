@@ -17,7 +17,7 @@ class Usuarios extends Seeder
                 'apemat' => 'admin',
                 'genero' => 'hombre',
                 'usuario' => 'admin',
-                'password' => password_hash('Hades145!', PASSWORD_DEFAULT),
+                'password' => password_hash('Admin123!', PASSWORD_DEFAULT),
                 'correo' => 'jjsanru3@gmail.com',
                 'telefono' => '0000000000',
                 'habilitado' => '1',
