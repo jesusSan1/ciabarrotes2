@@ -4,7 +4,8 @@ namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
-class Email extends BaseConfig {
+class Email extends BaseConfig
+{
     public string $fromEmail = '';
     public string $fromName = '';
     public string $recipients = '';
@@ -17,7 +18,7 @@ class Email extends BaseConfig {
     /**
      * The mail sending protocol: mail, sendmail, smtp
      */
-    public string $protocol = 'smtp';
+    public string $protocol = 'mail';
 
     /**
      * The server path to Sendmail.
@@ -27,27 +28,27 @@ class Email extends BaseConfig {
     /**
      * SMTP Server Address
      */
-    public string $SMTPHost = 'in-v3.mailjet.com';
+    public string $SMTPHost = '';
 
     /**
      * SMTP Username
      */
-    public string $SMTPUser = '4eb84cb9f026e80b8623db4e0e6e3cec';
+    public string $SMTPUser = '';
 
     /**
      * SMTP Password
      */
-    public string $SMTPPass = 'b624f47f955c59645fe23b2bbd9a98fd';
+    public string $SMTPPass = '';
 
     /**
      * SMTP Port
      */
-    public int $SMTPPort = 587;
+    public int $SMTPPort = 25;
 
     /**
      * SMTP Timeout (in seconds)
      */
-    public int $SMTPTimeout = 15;
+    public int $SMTPTimeout = 5;
 
     /**
      * Enable persistent SMTP connections
@@ -72,7 +73,7 @@ class Email extends BaseConfig {
     /**
      * Type of mail, either 'text' or 'html'
      */
-    public string $mailType = 'html';
+    public string $mailType = 'text';
 
     /**
      * Character set (utf-8, iso-8859-1, etc.)
