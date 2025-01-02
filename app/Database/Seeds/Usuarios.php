@@ -34,7 +34,7 @@ class Usuarios extends Seeder
                 'apemat' => 'vendedor',
                 'genero' => 'hombre',
                 'usuario' => 'vendedor',
-                'password' => password_hash('Hades145!', PASSWORD_DEFAULT),
+                'password' => password_hash('Vendedor123!', PASSWORD_DEFAULT),
                 'correo' => 'test@test.com',
                 'telefono' => '0000000000',
                 'habilitado' => '1',
