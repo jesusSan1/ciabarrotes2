@@ -1,10 +1,10 @@
 <?php
-use App\Models\ConfiguracionModel;
-use App\Models\Usuarios;
-$conf = new ConfiguracionModel;
-$usuarios = new Usuarios;
-$usuario = $usuarios->where('id', session()->get('id'))->find();
-$name = $conf->findAll();
+    use App\Models\ConfiguracionModel;
+    use App\Models\Usuarios;
+    $conf     = new ConfiguracionModel;
+    $usuarios = new Usuarios;
+    $usuario  = $usuarios->where('id', session()->get('id'))->find();
+    $name     = $conf->findAll();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,25 +18,25 @@ $name = $conf->findAll();
     <meta name="author" content="">
 
     <title>CI Abarrotes 2</title>
-    <?=link_tag('images/shops.png', 'shortcut icon', 'image/x-icon');?>
+    <?php echo link_tag('images/shops.png', 'shortcut icon', 'image/x-icon');?>
 
     <!-- Custom fonts for this template-->
-    <?=link_tag('fontawesome/css/all.css')?>
-    <?=link_tag('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')?>
+    <?php echo link_tag('fontawesome/css/all.css')?>
+    <?php echo link_tag('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')?>
 
     <!-- Custom styles for this template-->
-    <?=link_tag('css/sb-admin-2.min.css')?>
-    <?=link_tag('sweetalert/dist/sweetalert2.min.css')?>
-    <?=link_tag('dataTable/css/datatables.min.css')?>
+    <?php echo link_tag('css/sb-admin-2.min.css')?>
+    <!-- <?php echo link_tag('sweetalert/dist/sweetalert2.min.css')?> -->
+    <?php echo link_tag('dataTable/css/datatables.min.css')?>
     <!-- Bootstrap core JavaScript-->
-    <?=script_tag('popper/popper.min.js')?>
-    <?=script_tag('jquery/jquery-3.6.0.js')?>
-    <?=script_tag('bootstrap/bootstrap.min.js')?>
-    <?=script_tag('sweetalert/dist/sweetalert2.min.js')?>
-    <?=script_tag('fontawesome/js/all.js')?>
-    <?=script_tag('chartjs/chart.min.js')?>
-    <?=script_tag('zoomerang/zoomerang.js')?>
-    <?=script_tag('dataTable/js/datatables.min.js')?>
+    <?php echo script_tag('popper/popper.min.js')?>
+    <?php echo script_tag('jquery/jquery-3.6.0.js')?>
+    <?php echo script_tag('bootstrap/bootstrap.min.js')?>
+    <?php echo script_tag('sweetalert/sweetalert2.js')?>
+    <?php echo script_tag('fontawesome/js/all.js')?>
+    <?php echo script_tag('chartjs/chart.min.js')?>
+    <?php echo script_tag('zoomerang/zoomerang.js')?>
+    <?php echo script_tag('dataTable/js/datatables.min.js')?>
 </head>
 
 <body id="page-top">
@@ -49,14 +49,14 @@ $name = $conf->findAll();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url('dashboard')?>">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('dashboard')?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-store"></i> <!-- Poner aqui el logo u otra cosa -->
                 </div>
                 <?php foreach ($name as $empresa): ?>
                 <div class="sidebar-brand-text mx-3">
-                    <?=$empresa['nombre_empresa'] ? esc($empresa['nombre_empresa']) : 'Empresa sin nombre'?></div>
-                <?php endforeach;?>
+                    <?php echo $empresa['nombre_empresa'] ? esc($empresa['nombre_empresa']) : 'Empresa sin nombre'?></div>
+                <?php endforeach; ?>
             </a>
 
             <!-- Divider -->
@@ -64,7 +64,7 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?=base_url('dashboard')?>">
+                <a class="nav-link" href="<?php echo base_url('dashboard')?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Inicio</span></a>
             </li>
@@ -78,7 +78,7 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="<?=base_url('bitacora')?>" data-toggle="collapse"
+                <a class="nav-link collapsed" href="<?php echo base_url('bitacora')?>" data-toggle="collapse"
                     data-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
                     <i class="fas fa-book"></i>
                     <span>Bitacora</span>
@@ -86,25 +86,25 @@ $name = $conf->findAll();
                 <div id="collapseZero" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <?=anchor(base_url('bitacora'), 'Bitacora', ['class' => 'collapse-item'])?>
+                        <?php echo anchor(base_url('bitacora'), 'Bitacora', ['class' => 'collapse-item'])?>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('configuracion')?>">
+                <a class="nav-link" href="<?php echo base_url('configuracion')?>">
                     <i class="fas fa-cogs"></i>
                     <span>Configuracion</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('empleados')?>">
+                <a class="nav-link" href="<?php echo base_url('empleados')?>">
                     <i class="fas fa-users-cog"></i>
                     <span>Empleados</span>
                 </a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-            <?php endif;?>
+            <?php endif; ?>
             <!-- Heading -->
             <?php if (session()->get('id') != 1): ?>
             <div class="sidebar-heading">
@@ -113,13 +113,13 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('perfil')?>">
+                <a class="nav-link" href="<?php echo base_url('perfil')?>">
                     <i class="fas fa-user"></i>
                     <span>Perfil de usuario</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
-            <?php endif;?>
+            <?php endif; ?>
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -128,19 +128,19 @@ $name = $conf->findAll();
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('categorias')?>">
+                <a class="nav-link" href="<?php echo base_url('categorias')?>">
                     <i class="fas fa-tags"></i>
                     <span>Categorias</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('proveedores')?>">
+                <a class="nav-link" href="<?php echo base_url('proveedores')?>">
                     <i class="fas fa-truck"></i>
                     <span>Proveedores</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url('productos')?>">
+                <a class="nav-link" href="<?php echo base_url('productos')?>">
                     <i class="fas fa-boxes"></i>
                     <span>Productos</span>
                 </a>
@@ -238,7 +238,7 @@ $name = $conf->findAll();
                     <h2>
                         <b>
                             <!--Aqui poner un titulo-->
-                            <?=$this->renderSection('titulo')?>
+                            <?php echo $this->renderSection('titulo')?>
                         </b>
                     </h2>
 
@@ -254,7 +254,7 @@ $name = $conf->findAll();
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
-                                    <?=csrf_field()?>
+                                    <?php echo csrf_field()?>
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
@@ -275,12 +275,12 @@ $name = $conf->findAll();
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?=session()->get('usuario')?>
+                                    <?php echo session()->get('usuario')?>
                                 </span>
                                 <?php foreach ($usuario as $perfil): ?>
-                                <?php $img = $perfil['rol_id'] != 1 ? $perfil['foto_perfil'] : 'images/undraw_profile.svg'?>
-                                <?=img(['src' => $img, 'class' => 'img-profile rounded-circle'])?>
-                                <?php endforeach;?>
+<?php $img = $perfil['rol_id'] != 1 ? $perfil['foto_perfil'] : 'images/undraw_profile.svg'?>
+                                <?php echo img(['src' => $img, 'class' => 'img-profile rounded-circle'])?>
+<?php endforeach; ?>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -291,7 +291,7 @@ $name = $conf->findAll();
                                     Perfil de usuario
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <?php endif;?>
+                                <?php endif; ?>
                                 <a class="dropdown-item" href="salir">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
@@ -314,7 +314,7 @@ $name = $conf->findAll();
 
 
                     <!-- Contenido -->
-                    <?=$this->renderSection('contenido');?>
+                    <?php echo $this->renderSection('contenido');?>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -326,7 +326,7 @@ $name = $conf->findAll();
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy;JAX Studios <?=date('Y')?></span>
+                        <span>Copyright &copy;JAX Studios <?php echo date('Y')?></span>
                     </div>
                 </div>
             </footer>
@@ -343,7 +343,7 @@ $name = $conf->findAll();
         <i class="fas fa-angle-up"></i>
     </a>
     <!-- Custom scripts for all pages-->
-    <?=script_tag('js/sb-admin-2.min.js')?>
+    <?php echo script_tag('js/sb-admin-2.min.js')?>
 </body>
 
 </html>
