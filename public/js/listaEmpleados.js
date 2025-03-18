@@ -1,37 +1,42 @@
 async function enviarDatos(id, habilitado, csrfName, csrfHash) {
-  $.ajax({
-    type: "post",
-    url: "accesoEmpleado",
-    data: {
+  fetch("accesoEmpleado", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       id,
       habilitado,
       [csrfName]: csrfHash,
-    },
-    dataType: "json",
-    success: function (response) {
-      $(".txt_csrfname").val(response.token);
-    },
-  });
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Actualizar el token CSRF en el input hidden
+      const csrfInput = document.querySelector(".txt_csrfname");
+      if (csrfInput) csrfInput.value = data.token;
+    })
+    .catch((error) => console.error("Error al enviar los datos:", error));
 }
 
 document.querySelectorAll(".habilitar").forEach((element) => {
   element.addEventListener("change", (e) => {
-    var csrfName = $(".txt_csrfname").attr("name"); // CSRF Token name
-    var csrfHash = $(".txt_csrfname").val(); // CSRF hash
-    const tr = e.target.parentNode.parentNode;
-    const id = tr.children[0].children[0].value;
-    let habilitado;
-    if (e.target.checked) {
-      $(tr).find("td label.habilitar").show();
-      $(tr).find("td label.deshabilitar").hide();
-      habilitado = 1;
-      enviarDatos(id, habilitado, csrfName, csrfHash);
-    } else {
-      $(tr).find("td label.habilitar").hide();
-      $(tr).find("td label.deshabilitar").show();
-      habilitado = 0;
-      enviarDatos(id, habilitado, csrfName, csrfHash);
-    }
+    const csrfInput = document.querySelector(".txt_csrfname"); // CSRF input
+    const csrfName = csrfInput.name;
+    const csrfHash = csrfInput.value;
+
+    const tr = e.target.closest("tr"); // Encuentra la fila <tr>
+    const id = tr.querySelector("td input").value;
+    let habilitado = e.target.checked ? 1 : 0;
+
+    tr.querySelector("td label.habilitar").style.display = habilitado
+      ? "inline-block"
+      : "none";
+    tr.querySelector("td label.deshabilitar").style.display = habilitado
+      ? "none"
+      : "inline-block";
+
+    enviarDatos(id, habilitado, csrfName, csrfHash);
   });
 });
 
@@ -52,31 +57,6 @@ document.querySelectorAll(".eliminar").forEach((element) => {
     }).then((result) => {
       if (result.isConfirmed) {
         formulario.submit();
-        // $.ajax({
-        //   type: "post",
-        //   url: "eliminarEmpleado",
-        //   data: {
-        //     id,
-        //   },
-        //   success: function (response) {
-        //     const Toast = Swal.mixin({
-        //       toast: true,
-        //       position: "top-end",
-        //       showConfirmButton: false,
-        //       timer: 3000,
-        //       timerProgressBar: false,
-        //       didOpen: (toast) => {
-        //         toast.addEventListener("mouseenter", Swal.stopTimer);
-        //         toast.addEventListener("mouseleave", Swal.resumeTimer);
-        //       },
-        //     });
-        //     Toast.fire({
-        //       icon: "success",
-        //       title: "Empleado eliminado correctamente",
-        //     });
-        //     tr.remove();
-        //   },
-        // });
       }
     });
   });
