@@ -1,14 +1,26 @@
 function mostrarOcultar(tr, param1, param2) {
-  tr.children[0].children[1].style.display = param1;
-  tr.children[0].children[2].style.display = param2;
+  // Verificar que tr tiene suficientes hijos
+  if (!tr || tr.children.length < 5) return;
 
-  tr.children[2].children[0].style.display = param1;
-  tr.children[2].children[1].style.display = param2;
-  tr.children[3].children[0].style.display = param1;
-  tr.children[3].children[1].style.display = param2;
-  tr.children[4].children[0].style.display = param1;
-  tr.children[4].children[1].style.display = param2;
+  const setDisplay = (parent, index1, index2, value1, value2) => {
+    if (parent.children[index1]) parent.children[index1].style.display = value1;
+    if (parent.children[index2]) parent.children[index2].style.display = value2;
+  };
+
+  setDisplay(tr.children[0], 1, 2, param1, param2);
+  setDisplay(tr.children[2], 0, 1, param1, param2);
+  setDisplay(tr.children[3], 0, 1, param1, param2);
+  setDisplay(tr.children[4], 0, 1, param1, param2);
 }
+
+document.querySelectorAll(".editar-categoria").forEach((element) => {
+  element.addEventListener("click", () => {
+    let tr = element.closest("tr"); // Busca el tr más cercano en la jerarquía
+    if (tr) {
+      mostrarOcultar(tr, "none", "block");
+    }
+  });
+});
 
 document.querySelectorAll(".eliminar-categoria").forEach((element) => {
   element.addEventListener("click", (e) => {
@@ -33,54 +45,61 @@ document.querySelectorAll(".eliminar-categoria").forEach((element) => {
 });
 
 document.querySelectorAll(".guardar-categoria").forEach((element) => {
-  element.addEventListener("click", () => {
-    const tr = element.parentNode.parentNode;
+  element.addEventListener("click", async () => {
+    const tr = element.closest("tr"); // Obtiene el <tr> más cercano
     const id = tr.children[0].children[0].value;
     const valor = tr.children[0].children[2].value;
     const label = tr.children[0].children[1];
-    var csrfName = $(".txt_csrfname").attr("name"); // CSRF Token name
-    var csrfHash = $(".txt_csrfname").val(); // CSRF hash
-    $.ajax({
-      type: "post",
-      url: "editarCategoria",
-      data: { id, valor, [csrfName]: csrfHash },
-      dataType: "json",
-      success: function (response) {
-        $(".txt_csrfname").val(response.token);
-        label.innerHTML = valor;
-        //mostrar ocultar
-        mostrarOcultar(tr, "block", "none");
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: false,
-          didOpen: (toast) => {
-            toast.addEventListener("mouseenter", Swal.stopTimer);
-            toast.addEventListener("mouseleave", Swal.resumeTimer);
-          },
-        });
-        Toast.fire({
-          icon: "success",
-          title: "Editado con exito",
-        });
-      },
-    });
-  });
-});
 
-document.querySelectorAll(".editar-categoria").forEach((element) => {
-  element.addEventListener("click", () => {
-    const tr = element.parentNode.parentNode;
-    //ocultar mostrar
-    mostrarOcultar(tr, "none", "block");
+    // Obtener el token CSRF de un input hidden con la clase .txt_csrfname
+    const csrfInput = document.querySelector(".txt_csrfname");
+    const csrfName = csrfInput?.getAttribute("name"); // CSRF Token name
+    const csrfHash = csrfInput?.value; // CSRF hash
+
+    if (!csrfName || !csrfHash) {
+      console.error("No se encontró el token CSRF.");
+      return;
+    }
+
+    try {
+      const response = await fetch("editarCategoria", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, valor, [csrfName]: csrfHash }),
+      });
+
+      const data = await response.json();
+
+      // Actualizar el token CSRF
+      csrfInput.value = data.token;
+
+      // Actualizar la etiqueta con el nuevo valor
+      label.textContent = valor;
+
+      // Mostrar u ocultar elementos
+      mostrarOcultar(tr, "block", "none");
+
+      // Mostrar alerta con SweetAlert2
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title: "Editado con éxito",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+      });
+    } catch (error) {
+      console.error("Error al enviar la solicitud:", error);
+    }
   });
 });
 
 document.querySelectorAll(".cancelar-categoria").forEach((element) => {
   element.addEventListener("click", () => {
-    const tr = element.parentNode.parentNode;
+    const tr = element.closest("tr");
     //mostrar ocultar
     mostrarOcultar(tr, "block", "none");
   });
