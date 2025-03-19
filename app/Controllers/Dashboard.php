@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -13,16 +12,16 @@ class Dashboard extends BaseController
 {
     public function index()
     {
-        $categoria = new CategoriaModel;
-        $usuarios = new Usuarios;
-        $proveedores = new ProveedorModel;
-        $productos = new ProductosModel;
-        $configuracion = new ConfiguracionModel;
+        $categoria     = model(CategoriaModel::class);
+        $usuarios      = model(Usuarios::class);
+        $proveedores   = model(ProveedorModel::class);
+        $productos     = model(ProductosModel::class);
+        $configuracion = model(ConfiguracionModel::class);
         return view('modulos', [
-            'categorias' => $categoria->where('id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
-            'usuarios' => $usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
+            'categorias'  => $categoria->where('id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
+            'usuarios'    => $usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
             'proveedores' => $proveedores->where('id !=', 1)->where('eliminado !=', 1)->selectCount('id')->first(),
-            'productos' => $productos->selectCount('id')->first(),
+            'productos'   => $productos->selectCount('id')->first(),
         ]);
     }
     public function salir()

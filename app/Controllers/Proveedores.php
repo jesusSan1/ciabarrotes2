@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -12,48 +11,48 @@ class Proveedores extends BaseController
 
     public function __construct()
     {
-        $this->proveedor = new ProveedorModel;
-        $this->db = \Config\Database::connect();
+        $this->proveedor = model(ProveedorModel::class);
+        $this->db        = \Config\Database::connect();
     }
 
     public function index()
     {
         if ($this->request->is('post')) {
             $rules = [
-                'nombre' => [
-                    'label' => 'nombre',
-                    'rules' => 'required',
+                'nombre'   => [
+                    'label'  => 'nombre',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
                 'telefono' => [
-                    'label' => 'telefono',
-                    'rules' => 'required|numeric|permit_empty',
+                    'label'  => 'telefono',
+                    'rules'  => 'required|numeric|permit_empty',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
-                        'numeric' => 'El {field} debe ser un numero telefonico',
+                        'numeric'  => 'El {field} debe ser un numero telefonico',
                     ],
                 ],
-                'correo' => [
-                    'label' => 'correo electronico',
-                    'rules' => 'valid_email|permit_empty',
+                'correo'   => [
+                    'label'  => 'correo electronico',
+                    'rules'  => 'valid_email|permit_empty',
                     'errors' => [
                         'valid_email' => 'El {field} debe ser un {field} valido',
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $data = [
-                'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
-                'direccion' => $this->security->sanitizeFilename(trim($this->request->getPost('direccion'))),
-                'telefono' => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
-                'correo' => $this->security->sanitizeFilename(trim($this->request->getPost('correo'))),
+                'nombre'         => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+                'direccion'      => $this->security->sanitizeFilename(trim($this->request->getPost('direccion'))),
+                'telefono'       => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
+                'correo'         => $this->security->sanitizeFilename(trim($this->request->getPost('correo'))),
                 'fecha_creacion' => date('Y-m-d'),
-                'creado_por' => session()->get('id'),
-                'eliminado' => 0,
+                'creado_por'     => session()->get('id'),
+                'eliminado'      => 0,
             ];
             if ($this->proveedor->insert($data)) {
                 $this->bitacora->insert(['accion' => 'creado nuevo proveedor', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
@@ -79,44 +78,38 @@ class Proveedores extends BaseController
     }
     public function updateProveedor()
     {
-        $id = $this->request->getPost('id');
+        $id    = $this->request->getPost('id');
         $rules = [
-            'nombre' => [
-                'label' => 'nombre',
-                'rules' => 'required',
+            'nombre'   => [
+                'label'  => 'nombre',
+                'rules'  => 'required',
                 'errors' => [
                     'required' => 'El {field} debe ser llenado',
                 ],
             ],
             'telefono' => [
-                'label' => 'telefono',
-                'rules' => 'required|numeric',
+                'label'  => 'telefono',
+                'rules'  => 'required|numeric',
                 'errors' => [
                     'required' => 'El {field} debe ser llenado',
-                    'numeric' => 'El {field} debe ser un numero telefonico',
+                    'numeric'  => 'El {field} debe ser un numero telefonico',
                 ],
             ],
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
         }
         $data = [
-            'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+            'nombre'    => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
             'direccion' => $this->security->sanitizeFilename(trim($this->request->getPost('direccion'))),
-            'telefono' => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
-            'correo' => $this->security->sanitizeFilename(trim($this->request->getPost('correo'))),
+            'telefono'  => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
+            'correo'    => $this->security->sanitizeFilename(trim($this->request->getPost('correo'))),
         ];
         if ($this->proveedor->where('id', $id)->set($data)->update()) {
             $this->bitacora->insert(['accion' => 'Informacion de proveedor actualizada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
             return redirect()->back()->with('exito', 'Los datos has sido actualizados con exito')->withInput();
-            // return view('dashboard', [
-            //     'view' => 'proveedor/editarProveedor',
-            //     'datos' => $this->proveedor->where('id', $id)->find(),
-            //     'exito' => 'Datos actualizados correctamente',
-            // ]);
         }
-        ;
     }
     protected function listaProveedores()
     {

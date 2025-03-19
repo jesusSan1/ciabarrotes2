@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -12,8 +11,8 @@ class Categorias extends BaseController
 
     public function __construct()
     {
-        $this->categoria = new CategoriaModel;
-        $this->db = \Config\Database::connect();
+        $this->categoria = model(CategoriaModel::class);
+        $this->db        = \Config\Database::connect();
 
     }
 
@@ -22,21 +21,21 @@ class Categorias extends BaseController
         if ($this->request->is('post')) {
             $rules = [
                 'categoria' => [
-                    'label' => 'categoria',
-                    'rules' => 'required',
+                    'label'  => 'categoria',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'La {field} debe ser llenada',
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $data = [
-                'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('categoria'))),
+                'nombre'         => $this->security->sanitizeFilename(trim($this->request->getPost('categoria'))),
                 'fecha_creacion' => date('Y-m-d'),
-                'creado_por' => session()->get('id'),
-                'eliminado' => 0,
+                'creado_por'     => session()->get('id'),
+                'eliminado'      => 0,
             ];
             if ($this->categoria->insert($data)) {
                 $this->bitacora->insert(['accion' => 'Nueva categoria creada', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
@@ -57,8 +56,8 @@ class Categorias extends BaseController
     public function editarCategoria()
     {
         $data['token'] = csrf_hash();
-        $id = $this->request->getPost('id');
-        $valor = $this->security->sanitizeFilename(trim($this->request->getPost('valor')));
+        $id            = $this->request->getPost('id');
+        $valor         = $this->security->sanitizeFilename(trim($this->request->getPost('valor')));
         $this->categoria->where('id', $id)->set(['nombre' => $valor])->update();
         $this->bitacora->insert(['accion' => 'Cambio de nombre en categoria', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
         return $this->response->setJson($data);

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -11,7 +10,7 @@ class Configuracion extends BaseController
 
     public function __construct()
     {
-        $this->configuracion = new ConfiguracionModel;
+        $this->configuracion = model(ConfiguracionModel::class);
     }
 
     public function index()
@@ -23,9 +22,9 @@ class Configuracion extends BaseController
     public function configurar()
     {
         $data = [
-            'nombre_empresa' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
-            'direccion' => $this->security->sanitizeFilename(trim($this->request->getPost('direccion'))),
-            'telefono' => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
+            'nombre_empresa'     => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+            'direccion'          => $this->security->sanitizeFilename(trim($this->request->getPost('direccion'))),
+            'telefono'           => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
             'correo_electronico' => $this->security->sanitizeFilename(trim($this->request->getPost('correo'))),
         ];
         $this->configuracion->where('id', 1)->set($data)->update();

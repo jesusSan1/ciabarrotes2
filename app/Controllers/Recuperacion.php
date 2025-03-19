@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -13,9 +12,9 @@ class Recuperacion extends BaseController
 
     public function __construct()
     {
-        $this->usuarios = new Usuarios;
-        $this->email = \Config\Services::email();
-        $this->session = \Config\Services::session();
+        $this->usuarios = model(Usuarios::class);
+        $this->email    = \Config\Services::email();
+        $this->session  = \Config\Services::session();
         helper('text');
     }
     public function index()
@@ -26,22 +25,22 @@ class Recuperacion extends BaseController
         if ($this->request->is('post')) {
             $rules = [
                 'correo' => [
-                    'label' => 'correo electronico',
-                    'rules' => 'required|valid_email',
+                    'label'  => 'correo electronico',
+                    'rules'  => 'required|valid_email',
                     'errors' => [
-                        'required' => 'El {field} debe ser llenado',
+                        'required'    => 'El {field} debe ser llenado',
                         'valid_email' => 'Debe tener formato de {field}',
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
-            $correo = $this->request->getPost('correo');
+            $correo       = $this->request->getPost('correo');
             $existeCorreo = $this->usuarios->where('correo', $correo)->first();
             if ($existeCorreo) {
                 $usuarioHabilitado = $existeCorreo['habilitado'];
-                $usuarioEliminado = $existeCorreo['eliminado'];
+                $usuarioEliminado  = $existeCorreo['eliminado'];
                 if ($usuarioHabilitado == 0 || $usuarioEliminado == 1) {
                     return redirect()->back()->with('errors', 'No tienes permitido recuperar la contraseña')->withInput();
                 } else {
@@ -50,7 +49,7 @@ class Recuperacion extends BaseController
                     $this->enviarEmail($existeCorreo['correo'], $token);
                     $sess_data = [
                         'correoExistente' => true,
-                        'correo' => $existeCorreo['correo'],
+                        'correo'          => $existeCorreo['correo'],
                     ];
                     $this->session->set($sess_data);
                     return redirect()->to('verificar-token');
@@ -78,22 +77,22 @@ class Recuperacion extends BaseController
         if ($this->request->is('post')) {
             $rules = [
                 'token' => [
-                    'label' => 'token',
-                    'rules' => 'required',
+                    'label'  => 'token',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return view('login/verificarToken', [
                     'errors' => $this->validation->listErrors(),
                 ]);
             }
-            $token = $this->request->getPost('token');
+            $token                         = $this->request->getPost('token');
             [$n1, $n2, $n3, $n4, $n5, $n6] = $token;
-            $tokenCreado = $n1 . $n2 . $n3 . $n4 . $n5 . $n6;
-            $tokenGuardado = $this->usuarios->where('correo', $this->session->get('correo'))->first();
+            $tokenCreado                   = $n1 . $n2 . $n3 . $n4 . $n5 . $n6;
+            $tokenGuardado                 = $this->usuarios->where('correo', $this->session->get('correo'))->first();
             if ($tokenCreado === $tokenGuardado['token']) {
                 return redirect()->to('crear-password');
             } else {
@@ -107,15 +106,15 @@ class Recuperacion extends BaseController
         if ($this->request->is('post')) {
             $rules = [
                 'password' => [
-                    'label' => 'contraseña',
-                    'rules' => 'required|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/]',
+                    'label'  => 'contraseña',
+                    'rules'  => 'required|regex_match[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/]',
                     'errors' => [
-                        'required' => 'La {field} debe ser llenada',
+                        'required'    => 'La {field} debe ser llenada',
                         'regex_match' => 'La {field} debe tener 8 caracteres minimos, una letra mayuscula, una letra minuscula, un numero y un caracter especial',
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);

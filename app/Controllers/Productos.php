@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -7,7 +6,6 @@ use App\Models\CategoriaModel;
 use App\Models\PresentacionModel;
 use App\Models\ProductosModel;
 use App\Models\ProveedorModel;
-use CodeIgniter\Files\File;
 
 class Productos extends BaseController
 {
@@ -19,27 +17,27 @@ class Productos extends BaseController
 
     public function __construct()
     {
-        $this->db = \Config\Database::connect();
-        $this->productos = new ProductosModel;
-        $this->proveedor = new ProveedorModel;
-        $this->presentacion = new PresentacionModel;
-        $this->categoria = new CategoriaModel;
+        $this->db           = \Config\Database::connect();
+        $this->productos    = model(ProductosModel::class);
+        $this->proveedor    = model(ProveedorModel::class);
+        $this->presentacion = model(PresentacionModel::class);
+        $this->categoria    = model(CategoriaModel::class);
     }
 
     public function index()
     {
         if ($this->request->is('post')) {
             $rules = [
-                'nombre' => [
-                    'label' => 'nombre del producto',
-                    'rules' => 'required',
+                'nombre'            => [
+                    'label'  => 'nombre del producto',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
-                'tiene-caducidad' => [
-                    'label' => 'tiene fecha de caducidad',
-                    'rules' => 'required',
+                'tiene-caducidad'   => [
+                    'label'  => 'tiene fecha de caducidad',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El campo {field} debe ser llenado',
                     ],
@@ -51,41 +49,41 @@ class Productos extends BaseController
                 'valid_date' => 'La {field} debe estar en formato de fecha',
                 ],
                 ], */
-                'existencia' => [
-                    'label' => 'existencia',
-                    'rules' => 'required|numeric',
+                'existencia'        => [
+                    'label'  => 'existencia',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'La {field} debe ser llenada',
-                        'numeric' => 'La {field} debe ser llenada con numeros',
+                        'numeric'  => 'La {field} debe ser llenada con numeros',
                     ],
                 ],
                 'existencia-minima' => [
-                    'label' => 'existencia minima',
-                    'rules' => 'required|numeric',
+                    'label'  => 'existencia minima',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'La {field} debe ser llenada',
-                        'numeric' => 'La {field} debe ser llenada con numeros',
+                        'numeric'  => 'La {field} debe ser llenada con numeros',
                     ],
                 ],
-                'precio-compra' => [
-                    'label' => 'precio de compra',
-                    'rules' => 'required|numeric',
+                'precio-compra'     => [
+                    'label'  => 'precio de compra',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'El {field} debe ser llenada',
-                        'numeric' => 'El {field} debe ser llenada con numeros',
+                        'numeric'  => 'El {field} debe ser llenada con numeros',
                     ],
                 ],
-                'precio-venta' => [
-                    'label' => 'precio de venta',
-                    'rules' => 'required|numeric',
+                'precio-venta'      => [
+                    'label'  => 'precio de venta',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'El {field} debe ser llenada',
-                        'numeric' => 'El {field} debe ser llenada con numeros',
+                        'numeric'  => 'El {field} debe ser llenada con numeros',
                     ],
                 ],
-                'userfile' => [
-                    'label' => 'Imagen del producto',
-                    'rules' => [
+                'userfile'          => [
+                    'label'  => 'Imagen del producto',
+                    'rules'  => [
                         'is_image[userfile]',
                         'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
                     ],
@@ -94,12 +92,12 @@ class Productos extends BaseController
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
             //Subir imagen
             $img = $this->request->getFile('userfile');
-            if ($img->isValid() && !$img->hasMoved()) {
+            if ($img->isValid() && ! $img->hasMoved()) {
                 $imageName = $img->getRandomName();
                 $img->move('uploads/', $imageName);
                 $this->productos->insert($this->datos($imageName));
@@ -112,12 +110,12 @@ class Productos extends BaseController
             }
         }
         return view('productos/index', [
-            'categorias' => $this->categoria->where('eliminado !=', 1)->findAll(),
-            'proveedores' => $this->proveedor->where('eliminado !=', 1)->findAll(),
-            'productos' => $this->listaProductos(),
-            'productosMinimos' => $this->productos->productosExistenciaMinima(),
+            'categorias'         => $this->categoria->where('eliminado !=', 1)->findAll(),
+            'proveedores'        => $this->proveedor->where('eliminado !=', 1)->findAll(),
+            'productos'          => $this->listaProductos(),
+            'productosMinimos'   => $this->productos->productosExistenciaMinima(),
             'productosCaducados' => $this->productos->productosCaducados(),
-            'presentaciones' => $this->presentacion->findAll(),
+            'presentaciones'     => $this->presentacion->findAll(),
         ]);
     }
     public function eliminarProducto()
@@ -130,9 +128,9 @@ class Productos extends BaseController
     public function editarProducto(int $id)
     {
         return view('productos/editarProducto', [
-            'datos' => $this->datosEditar($id),
-            'proveedores' => $this->proveedor->findAll(),
-            'categorias' => $this->categoria->findAll(),
+            'datos'          => $this->datosEditar($id),
+            'proveedores'    => $this->proveedor->findAll(),
+            'categorias'     => $this->categoria->findAll(),
             'presentaciones' => $this->presentacion->findAll(),
         ]);
     }
@@ -140,16 +138,16 @@ class Productos extends BaseController
     {
         if ($this->request->is('post')) {
             $rules = [
-                'nombre' => [
-                    'label' => 'nombre del producto',
-                    'rules' => 'required',
+                'nombre'            => [
+                    'label'  => 'nombre del producto',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
-                'tiene-caducidad' => [
-                    'label' => 'tiene fecha de caducidad',
-                    'rules' => 'required',
+                'tiene-caducidad'   => [
+                    'label'  => 'tiene fecha de caducidad',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El campo {field} debe ser llenado',
                     ],
@@ -162,41 +160,41 @@ class Productos extends BaseController
                 'valid_date' => 'La {field} debe estar en formato de fecha',
                 ],
                 ], */
-                'existencia' => [
-                    'label' => 'existencia',
-                    'rules' => 'required|numeric',
+                'existencia'        => [
+                    'label'  => 'existencia',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'La {field} debe ser llenada',
-                        'numeric' => 'La {field} debe ser llenada con numeros',
+                        'numeric'  => 'La {field} debe ser llenada con numeros',
                     ],
                 ],
                 'existencia-minima' => [
-                    'label' => 'existencia minima',
-                    'rules' => 'required|numeric',
+                    'label'  => 'existencia minima',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'La {field} debe ser llenada',
-                        'numeric' => 'La {field} debe ser llenada con numeros',
+                        'numeric'  => 'La {field} debe ser llenada con numeros',
                     ],
                 ],
-                'precio-compra' => [
-                    'label' => 'precio de compra',
-                    'rules' => 'required|numeric',
+                'precio-compra'     => [
+                    'label'  => 'precio de compra',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'El {field} debe ser llenada',
-                        'numeric' => 'El {field} debe ser llenada con numeros',
+                        'numeric'  => 'El {field} debe ser llenada con numeros',
                     ],
                 ],
-                'precio-venta' => [
-                    'label' => 'precio de venta',
-                    'rules' => 'required|numeric',
+                'precio-venta'      => [
+                    'label'  => 'precio de venta',
+                    'rules'  => 'required|numeric',
                     'errors' => [
                         'required' => 'El {field} debe ser llenada',
-                        'numeric' => 'El {field} debe ser llenada con numeros',
+                        'numeric'  => 'El {field} debe ser llenada con numeros',
                     ],
                 ],
-                'userfile' => [
-                    'label' => 'Imagen del producto',
-                    'rules' => [
+                'userfile'          => [
+                    'label'  => 'Imagen del producto',
+                    'rules'  => [
                         'is_image[userfile]',
                         'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
                     ],
@@ -205,13 +203,13 @@ class Productos extends BaseController
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
-            $id = $this->request->getPost('id');
+            $id        = $this->request->getPost('id');
             $imagenOld = $this->productos->where('id', $id)->first();
-            $img = $this->request->getFile('userfile');
-            if ($img->isValid() && !$img->hasMoved()) {
+            $img       = $this->request->getFile('userfile');
+            if ($img->isValid() && ! $img->hasMoved()) {
                 $imageName = $img->getRandomName();
                 $img->move('uploads/', $imageName);
                 if ($imagenOld['imagen'] != '') {
@@ -240,25 +238,25 @@ class Productos extends BaseController
     protected function datos($ruta)
     {
         return $data = [
-            'codigo_barras' => $this->security->sanitizeFilename(trim($this->request->getPost('codigo-barras'))),
-            'sku' => $this->security->sanitizeFilename(trim($this->request->getPost('sku'))),
-            'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
-            'fecha_caducidad' => $this->request->getPost('fecha-caducidad') == null && $this->request->getPost('tiene-caducidad') == '0' ? '0000-00-00' : $this->request->getPost('fecha-caducidad'),
-            'existencia' => $this->security->sanitizeFilename($this->request->getPost('existencia')),
-            'existencia_minima' => $this->security->sanitizeFilename($this->request->getPost('existencia-minima')),
-            'presentacion' => $this->request->getPost('presentacion') !== "" ? $this->security->sanitizeFilename($this->request->getPost('presentacion')) : "Unidad",
-            'precio_compra' => $this->security->sanitizeFilename($this->request->getPost('precio-compra')),
-            'precio_venta' => $this->security->sanitizeFilename($this->request->getPost('precio-venta')),
+            'codigo_barras'        => $this->security->sanitizeFilename(trim($this->request->getPost('codigo-barras'))),
+            'sku'                  => $this->security->sanitizeFilename(trim($this->request->getPost('sku'))),
+            'nombre'               => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+            'fecha_caducidad'      => $this->request->getPost('fecha-caducidad') == null && $this->request->getPost('tiene-caducidad') == '0' ? '0000-00-00' : $this->request->getPost('fecha-caducidad'),
+            'existencia'           => $this->security->sanitizeFilename($this->request->getPost('existencia')),
+            'existencia_minima'    => $this->security->sanitizeFilename($this->request->getPost('existencia-minima')),
+            'presentacion'         => $this->request->getPost('presentacion') !== "" ? $this->security->sanitizeFilename($this->request->getPost('presentacion')) : "Unidad",
+            'precio_compra'        => $this->security->sanitizeFilename($this->request->getPost('precio-compra')),
+            'precio_venta'         => $this->security->sanitizeFilename($this->request->getPost('precio-venta')),
             'precio_venta_mayoreo' => $this->security->sanitizeFilename($this->request->getPost('precio-venta-mayoreo')),
-            'descuento_venta' => $this->security->sanitizeFilename($this->request->getPost('descuento-venta')),
-            'marca' => $this->security->sanitizeFilename(trim($this->request->getPost('marca'))),
-            'modelo' => $this->security->sanitizeFilename(trim($this->request->getPost('modelo'))),
-            'proveedor_id' => $this->request->getPost('proveedor') !== "" ? $this->request->getPost('proveedor') : 1,
-            'categoria_id' => $this->request->getPost('categoria') !== "" ? $this->request->getPost('categoria') : 1,
-            'imagen' => $ruta,
-            'creado_por' => session()->get('id'),
-            'fecha_creacion' => date('Y-m-d'),
-            'tiene_caducidad' => $this->request->getPost('tiene-caducidad'),
+            'descuento_venta'      => $this->security->sanitizeFilename($this->request->getPost('descuento-venta')),
+            'marca'                => $this->security->sanitizeFilename(trim($this->request->getPost('marca'))),
+            'modelo'               => $this->security->sanitizeFilename(trim($this->request->getPost('modelo'))),
+            'proveedor_id'         => $this->request->getPost('proveedor') !== "" ? $this->request->getPost('proveedor') : 1,
+            'categoria_id'         => $this->request->getPost('categoria') !== "" ? $this->request->getPost('categoria') : 1,
+            'imagen'               => $ruta,
+            'creado_por'           => session()->get('id'),
+            'fecha_creacion'       => date('Y-m-d'),
+            'tiene_caducidad'      => $this->request->getPost('tiene-caducidad'),
         ];
     }
     protected function listaProductos()

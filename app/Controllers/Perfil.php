@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -11,64 +10,64 @@ class Perfil extends BaseController
 
     public function __construct()
     {
-        $this->usuarios = new Usuarios;
+        $this->usuarios = model(Usuarios::class);
     }
 
     public function index()
     {
         if ($this->request->is('post')) {
             $rules = [
-                'nombre' => [
-                    'label' => 'nombre',
-                    'rules' => 'required',
+                'nombre'   => [
+                    'label'  => 'nombre',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
                 'apellido' => [
-                    'label' => 'apellido paterno',
-                    'rules' => 'required',
+                    'label'  => 'apellido paterno',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => 'El {field} debe ser llenado',
                     ],
                 ],
-                'usuario' => [
-                    'label' => 'usuario',
-                    'rules' => 'required|is_unique[usuarios.usuario]',
+                'usuario'  => [
+                    'label'  => 'usuario',
+                    'rules'  => 'required|is_unique[usuarios.usuario]',
                     'errors' => [
-                        'required' => 'El {field} debe ser llenado',
+                        'required'  => 'El {field} debe ser llenado',
                         'is_unique' => 'El {field} ya está ocupado',
                     ],
                 ],
-                'email' => [
-                    'label' => 'correo electronico',
-                    'rules' => 'valid_email|is_unique[usuarios.correo]',
+                'email'    => [
+                    'label'  => 'correo electronico',
+                    'rules'  => 'valid_email|is_unique[usuarios.correo]',
                     'errors' => [
                         'valid_email' => 'El {field} debe ser un {fied} valido',
-                        'is_unique' => 'El {field} ya está ocupado',
+                        'is_unique'   => 'El {field} ya está ocupado',
                     ],
                 ],
                 'telefono' => [
-                    'label' => 'telefono',
-                    'rules' => 'numeric',
+                    'label'  => 'telefono',
+                    'rules'  => 'numeric',
                     'errors' => [
                         'numeric' => 'El {field} debe ser llenado con numeros',
                     ],
                 ],
             ];
-            if (!$this->validate($rules)) {
+            if (! $this->validate($rules)) {
                 return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
             }
-            $id = session()->get('id');
+            $id      = session()->get('id');
             $usuario = $this->usuarios->where('id', $id)->select('password')->find();
             foreach ($usuario as $s) {
                 $data = [
-                    'nombre' => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
-                    'apepat' => $this->security->sanitizeFilename(trim($this->request->getPost('apellido'))),
+                    'nombre'   => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
+                    'apepat'   => $this->security->sanitizeFilename(trim($this->request->getPost('apellido'))),
                     'telefono' => $this->security->sanitizeFilename(trim($this->request->getPost('telefono'))),
-                    'genero' => $this->security->sanitizeFilename($this->request->getPost('sexo')),
-                    'usuario' => $this->security->sanitizeFilename(trim($this->request->getPost('usuario'))),
-                    'correo' => $this->security->sanitizeFilename(trim($this->request->getPost('email'))),
+                    'genero'   => $this->security->sanitizeFilename($this->request->getPost('sexo')),
+                    'usuario'  => $this->security->sanitizeFilename(trim($this->request->getPost('usuario'))),
+                    'correo'   => $this->security->sanitizeFilename(trim($this->request->getPost('email'))),
                     'password' => (empty($this->request->getPost('password')) ? $s['password'] : password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)),
 
                 ];
