@@ -47,15 +47,18 @@ $routes->post('recuperacion', [Recuperacion::class, 'index']);
 
 $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenticacion
     $routes->get('dashboard', [Dashboard::class, 'index']);
+
     $routes->get('categorias', [Categorias::class, 'index']);
     $routes->post('categorias', [Categorias::class, 'index']);
     $routes->post('eliminarCategoria', [Categorias::class, 'eliminarCategoria']);
     $routes->post('editarCategoria', [Categorias::class, 'editarCategoria']);
+
     $routes->get('proveedores', [Proveedores::class, 'index']);
     $routes->post('proveedores', [Proveedores::class, 'index']);
     $routes->post('eliminarProveedor', [Proveedores::class, 'eliminarProveedor']);
     $routes->get('editar-proveedor/(:num)', [[Proveedores::class, 'editarProveedor'], '$1']);
     $routes->post('updateProveedor', [Proveedores::class, 'updateProveedor']);
+
     $routes->get('productos', [Productos::class, 'index']);
     $routes->post('productos', [Productos::class, 'index']);
     $routes->post('eliminar-producto', [Productos::class, 'eliminarProducto']);
@@ -69,7 +72,8 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
 
     $routes->group('', ['filter' => 'admin'], static function ($routes) { //!autenticacion y admin
         $routes->get('configuracion', [Configuracion::class, 'index']);
-        $routes->post('configurar', [Configuracion::class, 'configurar']);
+        $routes->put('configurar', [Configuracion::class, 'configurar']);
+
         $routes->get('empleados', [Empleados::class, 'index']);
         $routes->post('empleados', [Empleados::class, 'inddex']);
         $routes->post('accesoEmpleado', [Empleados::class, 'accesoEmpleado']);
@@ -77,6 +81,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->get('editar-empleado', [Empleados::class, 'editarEmpleado']);
         $routes->post('editar-empleado', [Empleados::class, 'editarEmpleado']);
         $routes->post('updateEmpleado', [Empleados::class, 'updateEmpleado']);
+        
         $routes->get('bitacora', [Bitacora::class, 'index']);
     });
 });

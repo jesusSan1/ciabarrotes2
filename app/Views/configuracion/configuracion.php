@@ -1,9 +1,9 @@
-<?=$this->extend('dashboard')?>
-<?=$this->section('titulo')?>
+<?= $this->extend('dashboard') ?>
+<?= $this->section('titulo') ?>
 Configuración
-<?=$this->endSection()?>
-<?=$this->section('contenido')?>
-<?=link_tag('css/perfil.css')?>
+<?= $this->endSection() ?>
+<?= $this->section('contenido') ?>
+<?= link_tag('css/perfil.css') ?>
 <div class="row">
     <!-- Area Chart -->
     <div class="col-md-12">
@@ -18,48 +18,49 @@ Configuración
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form action="configurar" method="post" novalidate="" autocomplete="off">
-                    <?=csrf_field()?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4><i class="fas fa-building"></i> Datos de la empresa</h4>
-                        </div>
+                <?= form_open(base_url('configurar'), ['novalidate' => '', 'autocomplete' => 'off']) ?>
+                <?= csrf_field() ?>
+                <?= form_hidden('_method', 'PUT')?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4><i class="fas fa-building"></i> Datos de la empresa</h4>
                     </div>
-                    <br>
-                    <?php foreach ($configuraciones as $configuracion): ?>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="nombre" class="form-control" placeholder="Nombre de la empresa"
-                                value="<?=esc($configuracion['nombre_empresa'])?>">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" name="direccion" class="form-control" placeholder="Dirección"
-                                value="<?=esc($configuracion['direccion'])?>">
-                        </div>
+                </div>
+                <br>
+                <?php foreach ($configuraciones as $configuracion): ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre de la empresa"
+                            value="<?= esc($configuracion['nombre_empresa']) ?>">
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="phone" name="telefono" class="form-control" placeholder="Numero de contacto"
-                                value="<?=esc($configuracion['telefono'])?>">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" name="correo" class="form-control" placeholder="Correo electronico"
-                                value="<?=esc($configuracion['correo_electronico'])?>">
-                        </div>
+                    <div class="col-md-6">
+                        <input type="text" name="direccion" class="form-control" placeholder="Dirección"
+                            value="<?= esc($configuracion['direccion']) ?>">
                     </div>
-                    <?php endforeach;?>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 text-center">
-                            <button type="submit" class="btn btn-primary">Guardar datos</button>
-                        </div>
-                        <div class="col-md-4"></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="phone" name="telefono" class="form-control" placeholder="Numero de contacto"
+                            value="<?= esc($configuracion['telefono']) ?>">
                     </div>
-                </form>
+                    <div class="col-md-6">
+                        <input type="email" name="correo" class="form-control" placeholder="Correo electronico"
+                            value="<?= esc($configuracion['correo_electronico']) ?>">
+                    </div>
+                </div>
+                <?php endforeach; ?>
+                <br>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 text-center">
+                        <button type="submit" class="btn btn-primary">Guardar datos</button>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <?= form_close() ?>
             </div>
         </div>
     </div>
 </div>
-<?=$this->endSection()?>
+<?= $this->endSection() ?>
