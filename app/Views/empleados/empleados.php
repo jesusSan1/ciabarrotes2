@@ -31,23 +31,11 @@ Empleados
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div id="home" class="tab-pane active"><br>
-                        <?php if (isset($errors)): ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <h4 class="alert-heading">Errores</h4>
-                            <?=$errors?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                        <?php if (session()->getFlashdata('errors')): ?>
+                        <?=$this->include('errors')?>
                         <?php endif;?>
-                        <?php if (isset($exito)): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <h4 class="alert-heading">Guardado correctamente</h4>
-                            <?=$exito?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                        <?php if (session()->getFlashdata('exito')): ?>
+                        <?=$this->include('exito')?>
                         <?php endif;?>
                         <?=view('empleados/agregarEmpleado')?>
                     </div>
