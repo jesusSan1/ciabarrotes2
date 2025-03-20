@@ -75,7 +75,7 @@ $routes->group('', ['filter' => 'auth'], static function ($routes) { //! autenti
         $routes->put('configurar', [Configuracion::class, 'configurar']);
 
         $routes->get('empleados', [Empleados::class, 'index']);
-        $routes->post('empleados', [Empleados::class, 'inddex']);
+        $routes->post('empleados', [Empleados::class, 'index']);
         $routes->post('accesoEmpleado', [Empleados::class, 'accesoEmpleado']);
         $routes->post('eliminarEmpleado', [Empleados::class, 'eliminarEmpleado']);
         $routes->get('editar-empleado', [Empleados::class, 'editarEmpleado']);
