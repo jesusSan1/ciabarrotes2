@@ -43,5 +43,5 @@ Dashboard
         <?php endforeach;?>
     </div>
 </div>
-<script src="js/modulos.js"></script>
+<?= script_tag('components/modulos.js') ?>
 <?=$this->endSection()?>

@@ -98,52 +98,25 @@
     <div id="general">
         <div class="row">
             <div class="col-md-4">
-                <input type="radio" name="img" class="image" value="images/hombre.png">
-                <label class="custom-control custom-radio">
-                    <span class="custom-control-indicator"></span>
-                    <img src="images/hombre.png" alt="" class="img-fluid" width="150" height="150">
-                </label>
+                <mi-imagen imagen="images/hombre.png"></mi-imagen>
             </div>
             <div class="col-md-4">
-                <input type="radio" name="img" class="image" value="images/nina.png">
-                <label class="custom-control custom-radio">
-                    <input type="radio" name="img" value="checkedValue" class="custom-control-input">
-                    <span class="custom-control-indicator"></span>
-                    <img src="images/nina.png" alt="" class="img-fluid" width="150" height="150">
-                </label>
+                <mi-imagen imagen="images/nina.png"></mi-imagen>
             </div>
             <div class="col-md-4">
-                <input type="radio" name="img" class="image" value="images/profile.png">
-                <label class="custom-control custom-radio">
-                    <input type="radio" name="img" value="checkedValue" class="custom-control-input">
-                    <span class="custom-control-indicator"></span>
-                    <img src="images/profile.png" alt="" class="img-fluid" width="150" height="150">
-                </label>
+                <mi-imagen imagen="images/profile.png"></mi-imagen>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-4">
-                <input type="radio" name="img" class="image" value="images/profile(1).png">
-                <label class="custom-control custom-radio">
-                    <input type="radio" name="img" value="checkedValue" class="custom-control-input">
-                    <span class="custom-control-indicator"></span>
-                    <img src="images/profile(1).png" alt="" class="img-fluid" width="150" height="150">
-                </label>
+                <mi-imagen imagen="images/profile(1).png"></mi-imagen>
             </div>
             <div class="col-md-4">
-                <input type="radio" name="img" class="image" value="images/usuario.png">
-                <label class="custom-control custom-radio">
-                    <input type="radio" name="img" value="checkedValue" class="custom-control-input">
-                    <span class="custom-control-indicator"></span>
-                    <img src="images/usuario.png" alt="" class="img-fluid" width="150" height="150">
-                </label>
+                <mi-imagen imagen="images/usuario.png"></mi-imagen>
             </div>
             <div class="col-md-4">
-                <input type="radio" name="img" class="image" value="images/usuario(1).png">
-                <label class="custom-control custom-radio">
-                    <img src="images/usuario(1).png" alt="" class="img-fluid" width="150" height="150">
-                </label>
+                <mi-imagen imagen="images/usuario(1).png"></mi-imagen>
             </div>
         </div>
     </div>
@@ -159,3 +132,4 @@
     </div>
     <?= form_close() ?>
 </div>
+<?= script_tag('components/images.js') ?>
