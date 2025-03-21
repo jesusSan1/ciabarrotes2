@@ -13,11 +13,11 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <?=form_input(['type' => 'text', 'name' => 'categoria', 'id' => 'categoria', 'class' => 'form-control nombre-categoria', 'placeholder' => 'Nombre de la categoria', 'required' => true, 'value' => old('categoria')])?>
+            <?=form_input(['type' => 'text', 'name' => 'categoria', 'id' => 'categoria', 'class' => session('list.categoria') ? 'form-control nombre-categoria is-invalid' :'form-control nombre-categoria', 'placeholder' => 'Nombre de la categoria', 'required' => true, 'value' => old('categoria')])?>
         </div>
     </div>
     <div class="col-md-6">
-        <?=form_submit('', 'Guardar', ['class' => 'btn btn-primary guardar-categoria'])?>
+        <?=form_submit('', 'Guardar', ['class' => 'btn btn-primary'])?>
     </div>
 </div>
 <?=form_close()?>

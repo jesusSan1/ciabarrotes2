@@ -29,7 +29,7 @@ class Categorias extends BaseController
                 ],
             ];
             if (! $this->validate($rules)) {
-                return redirect()->back()->with('errors', $this->validation->listErrors())->withInput();
+                return redirect()->back()->with('errors', $this->validation->listErrors())->with('list', $this->validation->getErrors())->withInput();
             }
             $data = [
                 'nombre'         => $this->security->sanitizeFilename(trim($this->request->getPost('categoria'))),
