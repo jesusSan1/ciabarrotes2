@@ -78,11 +78,8 @@ class Empleados extends BaseController
                 ],
             ];
             if (! $this->validate($rules)) {
-                return redirect()->back()->withInput()->with('errors', $this->validation->listErrors());
-                // return view('empleados/empleados', [
-                //     'errors'    => $this->validation->listErrors(),
-                //     'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
-                // ]);
+                return redirect()->back()->withInput()->with('errors', $this->validation->listErrors())->with('list', $this->validation->getErrors());
+
             }
             $data = [
                 'nombre'         => $this->security->sanitizeFilename(trim($this->request->getPost('nombre'))),
@@ -101,10 +98,6 @@ class Empleados extends BaseController
             if ($this->usuarios->insert($data)) {
                 $this->bitacora->insert(['accion' => 'creado nuevo usuario', 'fecha' => date("Y-m-d h:i:s"), 'id_usuario' => session()->get('id')]);
                 return redirect()->back()->with('exito', 'El empleado ha sido registrado correctamente');
-                // return view('empleados/empleados', [
-                //     'exito'     => 'Se ha guardado el empleado con exito',
-                //     'empleados' => $this->usuarios->where('rol_id !=', 1)->where('eliminado !=', 1)->findAll(),
-                // ]);
             }
         }
         return view('empleados/empleados', [
